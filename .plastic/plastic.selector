@@ -1,0 +1,4 @@
+repository "if3210-2024-unity-aob@IF3210_2024_Unity_AOB@cloud"
+  path "/"
+    br "/main"
+    co "/main"
