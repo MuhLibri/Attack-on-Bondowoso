@@ -135,10 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1063699181328844479, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3367855848605275895, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.38
@@ -180,8 +176,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8549594779183170638, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
-      propertyPath: m_Mass
-      value: 5
+      propertyPath: m_Drag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
