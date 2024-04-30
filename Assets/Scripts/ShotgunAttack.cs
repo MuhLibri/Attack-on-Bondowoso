@@ -6,7 +6,9 @@ public class ShotgunAttack : MonoBehaviour
 {
     public int ammo;
     public GameObject ammoPrefab;
+    public GameObject muzzlePrefab;
     public Transform shotPoint;
+    public Transform muzzlePoint;
     public float shotForce;
     public float recoilForce;
     public float recoveryTime;
@@ -53,6 +55,9 @@ public class ShotgunAttack : MonoBehaviour
 
     void Shoot()
     {
+        GameObject flash = Instantiate(muzzlePrefab, muzzlePoint.position, muzzlePoint.rotation);
+        flash.transform.SetParent(transform);
+
         GameObject ammo;
         if (ammoShells.Count >= maxAmmoShell)
         {
