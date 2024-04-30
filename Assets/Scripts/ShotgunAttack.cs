@@ -61,8 +61,7 @@ public class ShotgunAttack : MonoBehaviour
         GameObject flash = Instantiate(muzzlePrefab, muzzlePoint.position, muzzlePoint.rotation);
         flash.transform.SetParent(transform);
 
-        audioSource.clip = audioClips[Random.Range(0, audioClips.Count)];
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
         GameObject ammo;
         if (ammoShells.Count >= maxAmmoShell)
