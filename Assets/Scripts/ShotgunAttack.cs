@@ -13,6 +13,7 @@ public class ShotgunAttack : MonoBehaviour
     public float recoilForce;
     public float recoveryTime;
     public float cooldownTime;
+    public List<AudioClip> audioClips;
 
     int maxAmmoShell = 5;
     Queue<GameObject> ammoShells = new Queue<GameObject>();
@@ -20,12 +21,14 @@ public class ShotgunAttack : MonoBehaviour
     Vector3 originalShotgunPosition;
     Quaternion originalShotgunRotation;
     bool isRecoiling = false;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         lastShotTime = -cooldownTime;
         originalShotgunPosition = transform.localPosition;
         originalShotgunRotation = transform.localRotation;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,6 +60,9 @@ public class ShotgunAttack : MonoBehaviour
     {
         GameObject flash = Instantiate(muzzlePrefab, muzzlePoint.position, muzzlePoint.rotation);
         flash.transform.SetParent(transform);
+
+        audioSource.clip = audioClips[Random.Range(0, audioClips.Count)];
+        audioSource.Play();
 
         GameObject ammo;
         if (ammoShells.Count >= maxAmmoShell)
