@@ -20,7 +20,6 @@ public class ProjectileController : MonoBehaviour
     void Update()
     {
         traveledDistance += Time.deltaTime * speed;
-        Debug.Log(traveledDistance);
         if (traveledDistance > maxDistance) Destroy(this.gameObject);
     }
 }
