@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShotgunAttack : MonoBehaviour
 {
     public int ammo;
+    public int projectilesPerShot = 5;
+    [Range(0.01f, 1.0f)]
+    public float accuracy;
     public GameObject ammoPrefab;
     public GameObject projetilePrefab;
     public GameObject muzzlePrefab;
@@ -24,12 +27,19 @@ public class ShotgunAttack : MonoBehaviour
     Quaternion originalShotgunRotation;
     bool isRecoiling = false;
     AudioSource audioSource;
+    float maxShootingAngleX = 40f;
+    float maxShootingAngleY = 40f;
     // Start is called before the first frame update
     void Start()
     {
         lastShotTime = -cooldownTime;
+
         originalShotgunPosition = transform.localPosition;
         originalShotgunRotation = transform.localRotation;
+
+        maxShootingAngleX *= (1.0f - accuracy);
+        maxShootingAngleY *= (1.0f - accuracy);
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -65,7 +75,11 @@ public class ShotgunAttack : MonoBehaviour
 
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
-        Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation);
+        for(int i = 0; i < projectilesPerShot; i++)
+        {
+            Quaternion newRotation = Quaternion.Euler(Random.Range(-maxShootingAngleX, maxShootingAngleX), Random.Range(-maxShootingAngleY, maxShootingAngleY), 0f);
+            Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
+        }
 
         GameObject ammo;
         if (ammoShells.Count >= maxAmmoShell)

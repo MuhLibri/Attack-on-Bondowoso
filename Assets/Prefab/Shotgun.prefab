@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammo: 5
+  projectilesPerShot: 5
+  accuracy: 0.85
   ammoPrefab: {fileID: 2250495595052729822, guid: 5d2b27229475db04993b2ef6ced2077f, type: 3}
   projetilePrefab: {fileID: 2053981212553995505, guid: 502ce0388524b3142ad90e91d7ed00dd, type: 3}
   muzzlePrefab: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
