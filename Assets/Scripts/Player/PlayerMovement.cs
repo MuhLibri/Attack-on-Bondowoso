@@ -42,10 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
         jumpAllowed = onGround;
 
-        Turn();
         Move();
         Jump();
-
+        Turn();
         if(!onGround) {
             gravityScale();
         }
@@ -58,27 +57,38 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("horizontal: " + horizontal + " vertical: " + vertical);
 
         // set the direction
-        direction = new Vector3(horizontal, 0f, vertical);
+        direction = transform.right * horizontal + transform.forward * vertical;
 
         // move the player
-        rb.MovePosition(transform.position + direction * speed);
+        rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         
     }
 
     void Turn() {
-        // turn the player based on where the mouse is
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+    // Create a ray from the camera through the mouse position
+    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        Vector3 lookDirection = new Vector3(mouseX, 0f, mouseY); // z components filled with y axis in mouse
-        
-        if(lookDirection != Vector3.zero){
-            Vector3 mousePos = (transform.position + lookDirection) - transform.position;
-            mousePos.y = 0f;
-            Quaternion newLookDirection = Quaternion.LookRotation(mousePos);
-            rb.MoveRotation(newLookDirection);
+    // Create a Plane object at the player's Y position, with normal pointing up
+    Plane plane = new Plane(Vector3.up, transform.position.y);
 
-        }
+    // Determine where the ray intersects with the plane
+    float enter;
+    if (plane.Raycast(ray, out enter)) {
+        // This is the world position at the mouse cursor
+        Vector3 hitPoint = ray.GetPoint(enter);
+
+        // Create a vector from the player to the hit point
+        Vector3 lookDirection = hitPoint - transform.position;
+
+        // Ensure the look direction is flat
+        lookDirection.y = 0f;
+
+        // Create a quaternion that looks in the direction of the hit point
+        Quaternion newLookDirection = Quaternion.LookRotation(lookDirection);
+
+        // Rotate the player to face the hit point
+        rb.MoveRotation(newLookDirection);
+    }
     }
 
     void Jump() {
