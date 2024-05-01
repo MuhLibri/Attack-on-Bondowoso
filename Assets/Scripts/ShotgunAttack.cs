@@ -6,8 +6,10 @@ public class ShotgunAttack : MonoBehaviour
 {
     public int ammo;
     public GameObject ammoPrefab;
+    public GameObject projetilePrefab;
     public GameObject muzzlePrefab;
     public Transform shotPoint;
+    public Transform projectilePoint;
     public Transform muzzlePoint;
     public float shotForce;
     public float recoilForce;
@@ -62,6 +64,8 @@ public class ShotgunAttack : MonoBehaviour
         flash.transform.SetParent(transform);
 
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
+
+        Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation);
 
         GameObject ammo;
         if (ammoShells.Count >= maxAmmoShell)
