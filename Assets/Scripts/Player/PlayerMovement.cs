@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {   
     public float speed;
+    public float turnSpeed;
     public float jumpForce;
     public float gravityMultiplier;
     public LayerMask groundLayer;
-
 
     bool onGround;
     bool jumpAllowed;
@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+
         // initialize the rigidbody and direction
         rb = GetComponent<Rigidbody>();
         direction = Vector3.zero;
@@ -65,30 +66,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Turn() {
-    // Create a ray from the camera through the mouse position
-    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-    // Create a Plane object at the player's Y position, with normal pointing up
-    Plane plane = new Plane(Vector3.up, transform.position.y);
-
-    // Determine where the ray intersects with the plane
-    float enter;
-    if (plane.Raycast(ray, out enter)) {
-        // This is the world position at the mouse cursor
-        Vector3 hitPoint = ray.GetPoint(enter);
-
-        // Create a vector from the player to the hit point
-        Vector3 lookDirection = hitPoint - transform.position;
-
-        // Ensure the look direction is flat
-        lookDirection.y = 0f;
-
-        // Create a quaternion that looks in the direction of the hit point
-        Quaternion newLookDirection = Quaternion.LookRotation(lookDirection);
-
-        // Rotate the player to face the hit point
-        rb.MoveRotation(newLookDirection);
-    }
+        
     }
 
     void Jump() {
