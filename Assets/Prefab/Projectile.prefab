@@ -199,13 +199,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 2
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 5
   MinDistance: 0
   MaxDistance: 20
   Pan2D: 0
@@ -226,22 +226,22 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.17885573
-      value: 0.14279193
-      inSlope: -0.5313547
-      outSlope: -0.5313547
+      time: 0.3094557
+      value: 0.13830584
+      inSlope: -0.32702956
+      outSlope: -0.32702956
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.3092587
+      inWeight: 0.5239886
+      outWeight: 0.35895085
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -0.29024938
-      outSlope: -0.29024938
+      inSlope: -0.6827845
+      outSlope: -0.6827845
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.20250666
+      inWeight: 0.24520417
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
