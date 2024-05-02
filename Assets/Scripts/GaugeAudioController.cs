@@ -14,10 +14,6 @@ public class ShellDropScript : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("hit");
-            audioSource.Play();
-        }
+        audioSource.Play();
     }
 }
