@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float turnSpeed;
     public float jumpForce;
+    public float sprintMultiplier;
     public float gravityMultiplier;
     public LayerMask groundLayer;
 
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 direction;
     Rigidbody rb;
     CapsuleCollider collider;
+    public Animator playerAnimator;
 
 
 
@@ -22,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
 
-        // initialize the rigidbody and direction
+        // initialize
         rb = GetComponent<Rigidbody>();
         direction = Vector3.zero;
         jumpAllowed = true;
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         groundCheck();
 
         jumpAllowed = onGround;
+        playerAnimator.SetBool("Fall", !onGround);
 
         Move();
         Jump();
@@ -55,13 +58,48 @@ public class PlayerMovement : MonoBehaviour
         // get the input from the player
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        float moveSpeed = speed;
+
         //Debug.Log("horizontal: " + horizontal + " vertical: " + vertical);
 
         // set the direction
         direction = transform.right * horizontal + transform.forward * vertical;
+        
+        // sprint multiplier
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            moveSpeed *= sprintMultiplier;
+            playerAnimator.SetBool("Sprint", true);
+        } else {
+            playerAnimator.SetBool("Sprint", false);
+        }
+
+
+        // set animation parameters
+        playerAnimator.SetBool("Forward", false);
+        playerAnimator.SetBool("Backward", false);
+        playerAnimator.SetBool("Right", false);
+        playerAnimator.SetBool("Left", false);
+
+        if(horizontal > 0) {
+            Debug.Log("Moving Right");
+            playerAnimator.SetBool("Right", true);
+        }
+        else if(horizontal < 0) {
+            Debug.Log("Moving Left");
+            playerAnimator.SetBool("Left", true);
+        }
+        else if(vertical > 0) {
+            Debug.Log("Moving Forward");
+            playerAnimator.SetBool("Forward", true);
+
+        }
+        else if(vertical < 0) {
+            Debug.Log("Moving Backward");
+                playerAnimator.SetBool("Backward", true);
+        }
 
         // move the player
-        rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
         
     }
 
@@ -74,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && jumpAllowed) {
             // add force to the player
             Debug.Log("Jump");
+            playerAnimator.SetTrigger("JumpUp");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
@@ -90,6 +129,6 @@ public class PlayerMovement : MonoBehaviour
                                     distance,
                                     groundLayer);
 
-        Debug.Log("onGround: " + onGround);
+        // Debug.Log("onGround: " + onGround);
     }
 }

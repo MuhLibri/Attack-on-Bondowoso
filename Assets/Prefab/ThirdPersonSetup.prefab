@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389508320233802887}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18942247, y: -0.067146115, z: 0.012985033, w: 0.9795111}
-  m_LocalPosition: {x: 0.683, y: 1.4810001, z: -3.4984982}
+  m_LocalRotation: {x: 0.18942244, y: -0.06714594, z: 0.0129849985, w: 0.9795111}
+  m_LocalPosition: {x: 1.5830002, y: 1.4810002, z: -4.4585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -158,10 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0, y: 0.38, z: 0}
+  ShoulderOffset: {x: 0.9, y: 0.38, z: 0}
   VerticalArmLength: 0.13
   CameraSide: 1
-  CameraDistance: 3.54
+  CameraDistance: 4.5
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -252,6 +252,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3367855848605275895, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6273912723563855614, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
