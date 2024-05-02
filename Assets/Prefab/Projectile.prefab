@@ -135,7 +135,7 @@ MonoBehaviour:
   damage: 10
   speed: 50
   bulletHit: {fileID: 8300000, guid: 50d05b29da57e5f4789cec6022ae2e6d, type: 3}
-  bulletPass: {fileID: 8300000, guid: 50d05b29da57e5f4789cec6022ae2e6d, type: 3}
+  bulletPass: {fileID: 8300000, guid: 49746c9894574544c847c0951ad5aebf, type: 3}
 --- !u!136 &9163083972088610675
 CapsuleCollider:
   m_ObjectHideFlags: 0

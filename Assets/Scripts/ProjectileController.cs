@@ -19,6 +19,9 @@ public class ProjectileController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
         audioSource = GetComponent<AudioSource>();
+
+        audioSource.PlayOneShot(bulletPass);
+        audioSource.loop = true;
     }
 
     // Update is called once per frame
@@ -33,7 +36,9 @@ public class ProjectileController : MonoBehaviour
         if(other.CompareTag("Weapon")) { return; }
         if(other.isTrigger) { return; }
 
+        audioSource.Stop();
         audioSource.PlayOneShot(bulletHit);
+        audioSource.loop = false;
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
