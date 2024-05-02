@@ -82,22 +82,21 @@ public class ShotgunAttack : MonoBehaviour
         }
 
         GameObject ammo;
+        Rigidbody rb;
         if (ammoShells.Count >= maxAmmoShell)
         {
             ammo = ammoShells.Dequeue();
             ammo.transform.localPosition = shotPoint.position;
             ammo.transform.rotation = shotPoint.rotation;
+
+            rb = ammo.GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(0f, 0f, 0f);
+            rb.angularVelocity = new Vector3(0f, 0f, 0f);
         }
         else {
             ammo = Instantiate(ammoPrefab, shotPoint.position, shotPoint.rotation);
-        }
 
-        Rigidbody rb = ammo.GetComponent<Rigidbody>();
-        if(ammoShells.Count >= maxAmmoShell)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            Debug.Log("max");
+            rb = ammo.GetComponent<Rigidbody>();
         }
         ammoShells.Enqueue(ammo);
 
