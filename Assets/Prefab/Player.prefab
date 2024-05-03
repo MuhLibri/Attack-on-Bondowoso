@@ -83,7 +83,7 @@ MonoBehaviour:
   turnSpeed: 0
   jumpForce: 3
   sprintMultiplier: 3
-  gravityMultiplier: 15
+  gravityMultiplier: 25
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
