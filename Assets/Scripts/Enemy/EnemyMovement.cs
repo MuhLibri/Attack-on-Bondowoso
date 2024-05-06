@@ -43,7 +43,6 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate() {
 
         ChaseOrNot();
-        Debug.Log("Chasing: " + chasing);
 
         if(chasing) {
             Chase();
@@ -90,12 +89,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void Chase() {
-        Debug.Log("Chasing");
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if(distanceToPlayer >= attackRadius) {
+            Debug.Log("Chasing Player");
             destinationVar = player.position;
         } else {
+            Debug.Log("Stand Still");
             destinationVar = transform.position;
         }
     }
