@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3367855848605275895}
   - component: {fileID: 8549594779183170638}
   - component: {fileID: 1063699181328844479}
+  - component: {fileID: 5622027734723689693}
   - component: {fileID: 4487868277187646929}
   - component: {fileID: 1769989077495696211}
   m_Layer: 0
@@ -87,6 +88,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  playerAnimator: {fileID: 6273912723563855614}
+--- !u!114 &5622027734723689693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826441887922674357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445e7a6326c81be4bb674def6088f457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerAnimator: {fileID: 6273912723563855614}
 --- !u!114 &4487868277187646929
 MonoBehaviour:
@@ -344,25 +358,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3367855848605275895}
     m_Modifications:
-    - target: {fileID: 1677338912023364, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1896801731341158, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
       propertyPath: m_Name
       value: Roro
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.8739694
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.8739694
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.8739694
       objectReference: {fileID: 0}
     - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -404,18 +402,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
+    - target: {fileID: 95152126842411956, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95152126842411956, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: b6e6160e5452f364698842d8410ce804, type: 3}
-    - target: {fileID: 95152126842411956, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 81952905f7eecaa43bdc888e6206c682, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

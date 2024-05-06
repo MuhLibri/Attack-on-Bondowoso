@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 389508320233802887}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18942244, y: -0.06714594, z: 0.0129849985, w: 0.9795111}
-  m_LocalPosition: {x: 1.5830002, y: 1.4810002, z: -4.4585}
+  m_LocalPosition: {x: 1.583, y: 1.4810001, z: -4.4584985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -64,6 +64,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -215,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee0583c171f09a4782c51c8bf943037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
 --- !u!1001 &4954315748425148264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,10 +272,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3367855848605275895, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6273912723563855614, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
-      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8233349681559907304}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Player
+  m_TagString: SwordTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
