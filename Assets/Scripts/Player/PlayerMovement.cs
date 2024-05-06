@@ -81,20 +81,20 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetBool("Left", false);
 
         if(horizontal > 0) {
-            Debug.Log("Moving Right");
+            // Debug.Log("Moving Right");
             playerAnimator.SetBool("Right", true);
         }
         else if(horizontal < 0) {
-            Debug.Log("Moving Left");
+            // Debug.Log("Moving Left");
             playerAnimator.SetBool("Left", true);
         }
         else if(vertical > 0) {
-            Debug.Log("Moving Forward");
+            // Debug.Log("Moving Forward");
             playerAnimator.SetBool("Forward", true);
 
         }
         else if(vertical < 0) {
-            Debug.Log("Moving Backward");
+            // Debug.Log("Moving Backward");
                 playerAnimator.SetBool("Backward", true);
         }
 

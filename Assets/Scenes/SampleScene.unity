@@ -920,6 +920,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 507206773793170872, guid: 47f90812e21b48f4ebcdc3535aa2fe05, type: 3}
+      propertyPath: attackRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 507206773793170872, guid: 47f90812e21b48f4ebcdc3535aa2fe05, type: 3}
       propertyPath: visionRadius
       value: 50
       objectReference: {fileID: 0}
