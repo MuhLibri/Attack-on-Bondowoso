@@ -22,19 +22,32 @@ public class QuestManager : MonoBehaviour
     void Start()
     {
         currentQuest = quests[questIndex];
+        currentQuest.StartQuest();
+
         questTitleText = questTitle.GetComponent<TextMeshProUGUI>();
         questObjectiveText = questObjective.GetComponent<TextMeshProUGUI>();
         questProgressText = questProgress.GetComponent<TextMeshProUGUI>();
 
         questTitleText.text = currentQuest.questTitle;
         questObjectiveText.text = currentQuest.questObjective;
-        questProgressText.text = currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString();
+        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
     }
 
     // Update is called once per frame
     void Update()
     {
-        questProgressText.text = currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString();
+        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
+
+        if (currentQuest.IsFinished()) {
+            currentQuest.FinishQuest();
+            questIndex++;
+
+            currentQuest = quests[questIndex];
+            currentQuest.StartQuest();
+            questTitleText.text = currentQuest.questTitle;
+            questObjectiveText.text = currentQuest.questObjective;
+            Debug.Log("Objective: " + currentQuest.GetTargetKill());
+        }
     }
 
     public static void AddKilled() {
