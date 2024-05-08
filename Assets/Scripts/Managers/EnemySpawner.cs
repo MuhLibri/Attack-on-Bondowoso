@@ -9,12 +9,14 @@ public class EnemySpawner : MonoBehaviour
     public int maxEnemyCount = 5;
     private int spawned = 0;
     public Transform[] spawnPoints;
+    private GameObject[] enemySpawned;
 
     private float timer;
     private bool spawnStarted = false;
 
     void Start()
     {
+        enemySpawned = new GameObject[maxEnemyCount];
         timer = spawnTime;
     }
 
@@ -38,12 +40,32 @@ public class EnemySpawner : MonoBehaviour
         return spawned == maxEnemyCount;
     }
 
+    public void ResetSpawn() {
+        spawnStarted = false;
+        DestroySpawned();
+        spawned = 0;
+    }
+
+    public void RestartSpawn() {
+        DestroySpawned();
+        spawned = 0;
+    }
+
     void Spawn()
     {
         // Find a random index between zero and one less than the number of spawn points.
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
+        // Create a new enemy
         GameObject newEnemy = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+        // Add new enemy to enemySpawned
+        enemySpawned[spawned] = newEnemy;
+    }
+
+    void DestroySpawned() {
+        for (int i = 0; i < maxEnemyCount; i++) {
+            Destroy(enemySpawned[i]);
+        }
     }
 }

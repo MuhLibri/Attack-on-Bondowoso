@@ -45,6 +45,21 @@ public class Quest : MonoBehaviour
         PlayerGold.GiveGold(reward);
     }
 
+    public void ResetQuest() {
+        killed = 0;
+        for (int i = 0; i < enemySpawners.Length; i++) {
+            enemySpawners[i].ResetSpawn();
+        }
+    }
+
+    // Reset and start the quest
+    public void RestartQuest() {
+        killed = 0;
+        for (int i = 0; i < enemySpawners.Length; i++) {
+            enemySpawners[i].RestartSpawn();
+        }
+    }
+
     public void AddKilled() {
         killed++;
     }

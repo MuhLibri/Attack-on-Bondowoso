@@ -27,15 +27,15 @@ RectTransform:
   m_GameObject: {fileID: 1290400143335125409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.3, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4522613962177512958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7037502, y: 0.5574942}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.100815, y: 16.836617}
-  m_SizeDelta: {x: 563, y: 223}
+  m_AnchoredPosition: {x: -32.288116, y: 3.1427002}
+  m_SizeDelta: {x: 83.3221, y: -37.7186}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7819239640182220366
 CanvasRenderer:
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 226.06532, y: 113.54497}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 228.20001, y: 128.6}
+  m_SizeDelta: {x: 247.7, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1775430054406355557
 CanvasRenderer:
@@ -243,8 +243,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 226.06532, y: 144.54149}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 228.20001, y: 163.10002}
+  m_SizeDelta: {x: 247.7, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2112152998093313015
 CanvasRenderer:
@@ -377,8 +377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 226.06538, y: 87.820755}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 228.2, y: 71}
+  m_SizeDelta: {x: 247.7, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2819206717135709697
 CanvasRenderer:
@@ -605,5 +605,6 @@ MonoBehaviour:
   questProgressText: {fileID: 0}
   quests:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   questIndex: 0
-  currentQuest: {fileID: 0}

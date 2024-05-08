@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,8 @@ public class QuestManager : MonoBehaviour
 
 
     public Quest[] quests;
-    public int questIndex = 0;
+    [SerializeField]
+    private static int questIndex = 0;
     public static Quest currentQuest;
 
     // Start is called before the first frame update
@@ -36,6 +38,9 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Current quest update: " + currentQuest.questTitle);
+        Debug.Log("Current quest index update: " + questIndex);
+
         questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
 
         if (currentQuest.IsFinished()) {
@@ -51,5 +56,20 @@ public class QuestManager : MonoBehaviour
 
     public static void AddKilled() {
         currentQuest.AddKilled();
+    }
+
+    public static int GetQuestIndex() {
+        return questIndex;
+    }
+
+    public void SetCurrentQuest(int questIndex) {
+        currentQuest.ResetQuest();
+        QuestManager.questIndex = questIndex;
+        currentQuest = quests[questIndex];
+        currentQuest.RestartQuest();
+
+        questTitleText.text = currentQuest.questTitle;
+        questObjectiveText.text = currentQuest.questObjective;
+        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
     }
 }
