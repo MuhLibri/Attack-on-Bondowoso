@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TO DO make new way to save game
         if (Input.GetKeyDown(KeyCode.P)) {
             GameData gameData = new GameData(QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
             SaveGame(gameData);
@@ -24,6 +26,7 @@ public class SaveManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.L)) {
             GameData gameData = LoadGame();
+            SceneManager.LoadScene("CobaLibri");
             questManager.SetCurrentQuest(gameData.questIndex);
             PlayerGold.SetGoldAmount(gameData.playerGold);
         }

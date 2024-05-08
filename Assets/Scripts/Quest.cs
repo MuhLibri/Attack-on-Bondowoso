@@ -29,19 +29,16 @@ public class Quest : MonoBehaviour
     }
 
     public void StartQuest() {
-        // TO DO Implement
         for (int i = 0; i < enemySpawners.Length; i++) {
             enemySpawners[i].StartSpawn();
         }
     }
 
     public bool IsFinished() {
-        // TO DO Implement
         return (targetKill == killed) && (targetKill != 0);
     }
 
     public void FinishQuest() {
-        // TO DO Implement
         PlayerGold.GiveGold(reward);
     }
 
@@ -49,14 +46,6 @@ public class Quest : MonoBehaviour
         killed = 0;
         for (int i = 0; i < enemySpawners.Length; i++) {
             enemySpawners[i].ResetSpawn();
-        }
-    }
-
-    // Reset and start the quest
-    public void RestartQuest() {
-        killed = 0;
-        for (int i = 0; i < enemySpawners.Length; i++) {
-            enemySpawners[i].RestartSpawn();
         }
     }
 

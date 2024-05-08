@@ -46,11 +46,6 @@ public class EnemySpawner : MonoBehaviour
         spawned = 0;
     }
 
-    public void RestartSpawn() {
-        DestroySpawned();
-        spawned = 0;
-    }
-
     void Spawn()
     {
         // Find a random index between zero and one less than the number of spawn points.
