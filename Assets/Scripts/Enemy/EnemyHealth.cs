@@ -24,10 +24,12 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!IsDead())
         {
+            Debug.Log("Nyawa: " + currentHealth);
             currentHealth -= damage;
 
             if (IsDead())
             {
+                Debug.Log("Mati");
                 Die();
             }
         }
@@ -40,6 +42,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        QuestManager.AddKilled();
         Destroy(this.gameObject);
     }
 }

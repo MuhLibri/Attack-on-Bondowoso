@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  questBox: {fileID: 0}
 --- !u!1 &5557046868863534000
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  questBox: {fileID: 9106898269069510293, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
 --- !u!114 &507206773793170872
 MonoBehaviour:
   m_ObjectHideFlags: 0

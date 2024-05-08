@@ -19,17 +19,13 @@ public class SwordScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Kena " + other.tag + ": " + other.CompareTag("Enemy"));
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Musuh");
             // Assuming you've set damage on your projectiles
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                Debug.Log("Masuk");
                 enemyHealth.TakeDamage(damage);
-                // Destroy(other.gameObject);
             }
         }
     }
