@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Quest : MonoBehaviour
@@ -15,27 +16,28 @@ public class Quest : MonoBehaviour
     private int killed = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemySpawners = enemySpawner.GetComponents<EnemySpawner>();
+    }
+
+    void Start() {
         targetKill = 0;
         for (int i = 0; i < enemySpawners.Length; i++) {
             targetKill += enemySpawners[i].maxEnemyCount;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void StartQuest() {
         // TO DO Implement
+        for (int i = 0; i < enemySpawners.Length; i++) {
+            enemySpawners[i].StartSpawn();
+        }
     }
 
     public bool IsFinished() {
         // TO DO Implement
-        return targetKill == killed;
+        return (targetKill == killed) && (targetKill != 0);
     }
 
     public void FinishQuest() {

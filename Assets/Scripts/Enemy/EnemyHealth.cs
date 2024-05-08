@@ -14,22 +14,13 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void TakeDamage(float damage)
     {
         if (!IsDead())
         {
-            Debug.Log("Nyawa: " + currentHealth);
             currentHealth -= damage;
-
             if (IsDead())
             {
-                Debug.Log("Mati");
                 Die();
             }
         }

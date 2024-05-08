@@ -46,7 +46,6 @@ public class QuestManager : MonoBehaviour
             currentQuest.StartQuest();
             questTitleText.text = currentQuest.questTitle;
             questObjectiveText.text = currentQuest.questObjective;
-            Debug.Log("Objective: " + currentQuest.GetTargetKill());
         }
     }
 
