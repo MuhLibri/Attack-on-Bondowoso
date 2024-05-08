@@ -76,10 +76,6 @@ crashlytics-build.properties
 
 # Plastic folder
 .plastic/
-Assets/Models/Environment/Lowpoly_Environments/SRP/PT_Nature_Free_URP_12.1.13.unitypackage.meta
-Assets/Models/Environment/Lowpoly_Environments/SRP/PT_Nature_Free_URP_14.0.9.unitypackage.meta
-Assets/Models/Environment/Lowpoly_Environments/SRP/PT_Nature_Free_URP_16.0.5.unitypackage.meta
-Assets/Polytope Studio/Lowpoly_Environments/SRP/PT_Nature_Free_URP_12.1.13.unitypackage.meta
-Assets/Polytope Studio/Lowpoly_Environments/SRP/PT_Nature_Free_URP_14.0.9.unitypackage.meta
-Assets/Polytope Studio/Lowpoly_Environments/SRP/PT_Nature_Free_URP_16.0.5.unitypackage.meta
+
+# Ignore settings file
 ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
