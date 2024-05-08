@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public GameObject LoadSaveMenu;
-    public GameObject MainMenu;
-    public GameObject StatisticsMenu;
-    public GameObject SettingsMenu;
+    public GameObject loadSaveMenu;
+    public GameObject mainMenu;
+    public GameObject statisticsMenu;
+    public GameObject settingsMenu;
 
+    public AudioSource musicSource;
+    public Slider volumeSlider;
 
     public void PlayGame()
     {
@@ -18,33 +21,39 @@ public class Menu : MonoBehaviour
 
     public void ShowSaveStates()
     {
-        LoadSaveMenu.SetActive(true);
-        MainMenu.SetActive(false);
+        loadSaveMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void ShowStatistics()
     {
-        StatisticsMenu.SetActive(true);
-        MainMenu.SetActive(false);
+        statisticsMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void ShowSettings()
     {
-        SettingsMenu.SetActive(true);
-        MainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
-    public void HideMenu()
+    public void ShowMainMenu()
     {
-        MainMenu.SetActive(true);
-        LoadSaveMenu.SetActive(false);
-        StatisticsMenu.SetActive(false);
-        SettingsMenu.SetActive(false);
-
+        mainMenu.SetActive(true);
+        loadSaveMenu.SetActive(false);
+        statisticsMenu.SetActive(false);
+        settingsMenu.SetActive(false);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetVolume(float volume)
+    {
+        Debug.Log("Volume slider value: " + volume);
+        musicSource.volume = volume;
+        Debug.Log("Music volume set to: " + musicSource.volume);
     }
 }
