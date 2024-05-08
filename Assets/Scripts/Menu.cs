@@ -10,8 +10,6 @@ public class Menu : MonoBehaviour
     public GameObject mainMenu;
     public GameObject statisticsMenu;
     public GameObject settingsMenu;
-
-    public AudioSource musicSource;
     public Slider volumeSlider;
 
     public void PlayGame()
@@ -50,10 +48,13 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetVolume(float volume)
+    public void SetGameSessionName(string sessionName)
     {
-        Debug.Log("Volume slider value: " + volume);
-        musicSource.volume = volume;
-        Debug.Log("Music volume set to: " + musicSource.volume);
+        PlayerPrefs.SetString("GameSessionName", sessionName);
+    }
+
+    public void ChangeVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
     }
 }
