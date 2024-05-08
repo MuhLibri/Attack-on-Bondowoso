@@ -6,27 +6,34 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private GameObject sword;
+
     public Animator playerAnimator;
+
 
     // Start is called before the first frame update
     void Start()
-    {
-        sword = GameObject.FindGameObjectWithTag("SwordTag");
+    {        
+        GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
+        foreach (GameObject weapon in weapons)
+        {
+            if (weapon.name == "Sword")
+            {
+                sword = weapon;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         if (Input.GetButtonDown("Fire1"))
         {
             Debug.Log("Attack");
             playerAnimator.SetTrigger("Attack");
         }
-
-        if (sword.activeSelf)
-        {
-            Debug.Log("Sword Equipped");
-            playerAnimator.SetBool("Equip Sword", true);
+        else {
+            playerAnimator.ResetTrigger("Attack");
         }
     }
 }

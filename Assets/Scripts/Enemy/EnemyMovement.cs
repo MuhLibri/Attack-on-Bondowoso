@@ -92,10 +92,10 @@ public class EnemyMovement : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if(distanceToPlayer >= attackRadius) {
-            Debug.Log("Chasing Player");
+            // Debug.Log("Chasing Player");
             destinationVar = player.position;
         } else {
-            Debug.Log("Stand Still");
+            // Debug.Log("Stand Still");
             destinationVar = transform.position;
         }
     }

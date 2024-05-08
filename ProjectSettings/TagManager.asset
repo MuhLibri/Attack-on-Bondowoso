@@ -6,9 +6,10 @@ TagManager:
   tags:
   - Ground
   - Weapon
-  - SwordTag
-  - Enemy
   - Wall
+  - Enemy
+  - SwordTag
+  - RoroModel
   layers:
   - Default
   - TransparentFX

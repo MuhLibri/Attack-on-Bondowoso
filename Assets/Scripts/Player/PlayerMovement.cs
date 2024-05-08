@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool onGround;
     bool jumpAllowed;
+    public bool moveAllowed;
     Vector3 direction;
     Rigidbody rb;
     CapsuleCollider collider;
@@ -99,7 +100,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // move the player
-        rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+        if(moveAllowed) {
+            rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+
+        }
         
     }
 
