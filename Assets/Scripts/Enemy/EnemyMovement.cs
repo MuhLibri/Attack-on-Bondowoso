@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     public float attackRadius = 2f;
     public float patrolRadius = 20f;
     public float patrolDistanceLimit = 5f;
-
+    public Animator enemyAnimator;
 
     float patrolDistance;
     bool chasing;
@@ -21,42 +21,55 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-    void Awake() {
+    void Awake()
+    {
         rbEnemy = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         lastPatrolPosition = transform.position;
         patrolDistance = 0f;
-        
+
         rbEnemy.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
 
         ChaseOrNot();
 
-        if(chasing) {
+        if (chasing)
+        {
+            enemyAnimator.SetBool("isChasing", true);
+            enemyAnimator.SetBool("isPatrolling", false);
+
             Chase();
             patrolDistance = 0f;
-        } else {
+        }
+        else
+        {
+            enemyAnimator.SetBool("isChasing", false);
+            enemyAnimator.SetBool("isPatrolling", true);
+
             patrolDistance += Vector3.Distance(transform.position, lastPatrolPosition);
             lastPatrolPosition = transform.position;
 
-            if(patrolDistance >= patrolDistanceLimit){
+            if (patrolDistance >= patrolDistanceLimit)
+            {
                 patrolDistance = 0f;
                 Patrol();
             }
-            
-            if(transform.position == destinationVar) {
+
+            if (transform.position == destinationVar)
+            {
                 Patrol();
             }
         }
@@ -64,21 +77,27 @@ public class EnemyMovement : MonoBehaviour
         UpdateDestination();
     }
 
-    void UpdateDestination() {
+    void UpdateDestination()
+    {
         agent.destination = destinationVar;
     }
 
-    void ChaseOrNot(){
+    void ChaseOrNot()
+    {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if(distanceToPlayer <= visionRadius) {
+        if (distanceToPlayer <= visionRadius)
+        {
             chasing = true;
-        } else {
+        }
+        else
+        {
             chasing = false;
         }
     }
 
-    void Patrol() {
+    void Patrol()
+    {
         Vector3 randomPos = transform.position + Random.insideUnitSphere * patrolRadius * patrolDistanceLimit;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPos, out hit, patrolRadius, 1);
@@ -88,16 +107,20 @@ public class EnemyMovement : MonoBehaviour
         destinationVar = finalPos;
     }
 
-    void Chase() {
+    void Chase()
+    {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if(distanceToPlayer >= attackRadius) {
+        if (distanceToPlayer >= attackRadius)
+        {
             // Debug.Log("Chasing Player");
             destinationVar = player.position;
-        } else {
+        }
+        else
+        {
             // Debug.Log("Stand Still");
             destinationVar = transform.position;
         }
     }
-    
+
 }

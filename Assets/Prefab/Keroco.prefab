@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4871664029148032909}
   m_Layer: 0
   m_Name: Keroco
-  m_TagString: Weapon
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
