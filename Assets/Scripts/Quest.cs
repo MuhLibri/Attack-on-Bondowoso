@@ -7,11 +7,10 @@ public class Quest : MonoBehaviour
 {
     public string questTitle;
     public string questObjective;
-    public int reward;
+    public int reward = 5000;
     public GameObject enemySpawner;
     private EnemySpawner[] enemySpawners;
 
-    [SerializeField]
     private int targetKill;
     private int killed = 0;
 
@@ -28,24 +27,23 @@ public class Quest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // UnityEngine.Debug.Log("Target: " + targetKill);
     }
 
-    void StartQuest() {
+    public void StartQuest() {
         // TO DO Implement
     }
 
-    bool IsFinished() {
+    public bool IsFinished() {
         // TO DO Implement
         return targetKill == killed;
     }
 
-    void FinishQuest() {
+    public void FinishQuest() {
         // TO DO Implement
+        PlayerGold.GiveGold(reward);
     }
 
     public void AddKilled() {
-        UnityEngine.Debug.Log("Add killed");
         killed++;
     }
 
