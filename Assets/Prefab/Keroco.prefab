@@ -121,7 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  questBox: {fileID: 0}
 --- !u!1 &5557046868863534000
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,9 +134,10 @@ GameObject:
   - component: {fileID: 2406453993655408128}
   - component: {fileID: 507206773793170872}
   - component: {fileID: 3816825728589160369}
+  - component: {fileID: 4871664029148032909}
   m_Layer: 0
   m_Name: Keroco
-  m_TagString: Enemy
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  questBox: {fileID: 9106898269069510293, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
 --- !u!114 &507206773793170872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde15fbd2784aff4c8632afb75093e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRadius: 10
-  attackRadius: 2
+  visionRadius: 50
+  attackRadius: 5
   patrolRadius: 10
   patrolDistanceLimit: 5
 --- !u!195 &3816825728589160369
@@ -237,3 +236,16 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4871664029148032909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557046868863534000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a82825743646fe468ada5e8111f59a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

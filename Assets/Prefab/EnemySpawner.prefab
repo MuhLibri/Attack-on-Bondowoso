@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1809901525228174443}
   - component: {fileID: 1310619517837921443}
+  - component: {fileID: 1094993073448181054}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a2777cccad7bc40b122189b00a8637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 5557046868863534000, guid: 47f90812e21b48f4ebcdc3535aa2fe05, type: 3}
   spawnTime: 2
-  maxEnemyCount: 5
+  maxEnemyCount: 2
   spawnPoints:
   - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1094993073448181054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483251767115310537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a2777cccad7bc40b122189b00a8637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spawnTime: 2
+  maxEnemyCount: 1
+  spawnPoints:
   - {fileID: 0}
