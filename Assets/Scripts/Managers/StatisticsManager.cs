@@ -10,10 +10,13 @@ public class StatisticsManager : MonoBehaviour
     private int shotsHit;
     private float distanceTraveled;
     private float startTime;
+    private string fileFormat = "json";
+    private string folderPath;
 
     private void Start()
     {
         // Load saved statistics data or initialize if it doesn't exist
+        folderPath = Application.persistentDataPath;
         shotsFired = 0;
         shotsHit = 0;
         distanceTraveled = 0f;
@@ -53,7 +56,7 @@ public class StatisticsManager : MonoBehaviour
     private void SaveStatistics()
     {
         // Save statistics data
-        string filePath = Application.persistentDataPath + "/statistics.json";
+        string filePath = $"{folderPath}/statistics.{fileFormat}";
         if (File.Exists(filePath))
         {
             string oldJson = File.ReadAllText(filePath);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -32,9 +33,15 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI difficultyText;
     public TMP_Dropdown difficultyDropdown;
 
+    [SerializeField]
+    private string fileFormat = "json";
+    private string folderPath;
+
     // Methods on scene initialization
     public void Start()
     {
+        folderPath = Application.persistentDataPath;
+        UpdateLoadSave();
         UpdateStatistics();
         UpdateSettings();
     }
@@ -71,10 +78,58 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
+    // Methods for Load Save Menu
+    public void UpdateLoadSave()
+    {
+        try
+        {
+            string[] filePathList = Directory.GetFiles(folderPath, $"*.{fileFormat}");
+            SaveData[] saveDatas = new SaveData[filePathList.Length];
+            for (int i = 0; i < filePathList.Length; i++)
+            {
+                saveDatas[i] = LoadSaveData(filePathList[i]);
+                if (saveDatas[i].name != null)
+                {
+                    if (saveDatas[i].name == "Save1")
+                    {
+                        saveOneText.text = saveDatas[0].name + saveDatas[0].lastSaved;
+                    }
+                    else if (saveDatas[i].name == "Save2")
+                    {
+                        saveTwoText.text = saveDatas[1].name + saveDatas[1].lastSaved;
+                    }
+                    else if (saveDatas[i].name == "Save3")
+                    {
+                        saveThreeText.text = saveDatas[2].name + saveDatas[2].lastSaved;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("An error occurred: " + e.Message);
+        }
+    }
+    public SaveData LoadSaveData(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            Debug.Log("Game loaded from: " + filePath);
+            return data;
+        }
+        else
+        {
+            Debug.LogWarning("No save file found at: " + filePath);
+            return null;
+        }
+    }
+
     // Methods for Statistics Menu
     public void UpdateStatistics()
     {
-        string filePath = Application.persistentDataPath + "/statistics.json";
+        string filePath = $"{folderPath}/statistics.{fileFormat}";
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
