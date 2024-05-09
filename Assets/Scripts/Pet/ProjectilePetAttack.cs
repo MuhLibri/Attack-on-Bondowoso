@@ -5,6 +5,8 @@ using UnityEngine;
 public class ProjectilePetAttack : MonoBehaviour
 {
     public int damage = 10;
+    public string targetTag = "Enemy";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class ProjectilePetAttack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(targetTag))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
