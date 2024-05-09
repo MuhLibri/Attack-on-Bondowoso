@@ -63,6 +63,7 @@ public class QuestManager : MonoBehaviour
         currentQuest.ResetQuest();
         questIndex = loadedQuestIndex;
         currentQuest = quests[questIndex];
+        currentQuest.ResetQuest();
         currentQuest.StartQuest();
 
         questTitleText.text = currentQuest.questTitle;
