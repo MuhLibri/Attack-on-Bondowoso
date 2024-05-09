@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool moveAllowed;
     Vector3 direction;
     Rigidbody rb;
-    CapsuleCollider collider;
+    CapsuleCollider playerCollider;
     public Animator playerAnimator;
     Coroutine speedIncreaseCoroutine;
 
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         direction = Vector3.zero;
         jumpAllowed = true;
-        collider = GetComponent<CapsuleCollider>();
+        playerCollider = GetComponent<CapsuleCollider>();
         speed = defaultSpeed;
 
         rb.freezeRotation = true; // so that the player dont topple over
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void groundCheck(){
-        float distance = collider.height / 2 + 0.5f;
+        float distance = playerCollider.height / 2 + 0.5f;
 
         onGround = Physics.Raycast(transform.position,
                                     Vector3.down,
