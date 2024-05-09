@@ -33,7 +33,9 @@ public class SaveManager : MonoBehaviour
         }
         // TO DO make new way to save game
         if (Input.GetKeyDown(KeyCode.P)) {
-            SaveData saveData = new SaveData(fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+            string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
+            string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
+            SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
             SaveData(saveData);
         }
         
@@ -110,6 +112,8 @@ public class SaveManager : MonoBehaviour
     public void LoadGame(string filePath) {
         SaveData gameData = LoadData(filePath);
         SceneManager.LoadScene("CobaLibri");
+        PlayerPrefs.SetString("PlayerName", gameData.playerName);
+        PlayerPrefs.SetString("Difficulty", gameData.difficulty);
         questManager.SetCurrentQuest(gameData.questIndex);
         PlayerGold.SetGoldAmount(gameData.playerGold);
     }

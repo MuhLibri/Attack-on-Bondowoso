@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class StatisticsManager : MonoBehaviour
 {
-    // Variables to track statistics
     int shotsFired;
     int shotsHit;
     float distanceTraveled;
@@ -18,7 +17,6 @@ public class StatisticsManager : MonoBehaviour
 
     void Start()
     {
-        // Load saved statistics data or initialize if it doesn't exist
         folderPath = Application.persistentDataPath;
         shotsFired = 0;
         shotsHit = 0;
@@ -31,7 +29,6 @@ public class StatisticsManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        // Save statistics data when the game quits
         SaveStatistics();
     }
 
@@ -43,15 +40,13 @@ public class StatisticsManager : MonoBehaviour
 
     public void ShotHit()
     {
-        // Increment shots hit
         shotsHit++;
     }
 
     public void UpdateDistanceTraveled(float distance)
     {
-        // Calculate distance traveled
         distanceTraveled += distance;
-        Debug.Log("Distance Traveled this session: " +  distanceTraveled);
+        // Debug.Log("Distance Traveled this session: " +  distanceTraveled);
     }
 
     public void UpdateGold(int amount)
@@ -74,7 +69,6 @@ public class StatisticsManager : MonoBehaviour
 
     void SaveStatistics()
     {
-        // Save statistics data
         string filePath = $"{folderPath}/Statistics.{fileFormat}";
         if (File.Exists(filePath))
         {

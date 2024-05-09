@@ -52,6 +52,10 @@ public class Menu : MonoBehaviour
     // Methods for Main Menu
     public void PlayGame()
     {
+        string playerName = playerNameText.text.Replace("Player: ", "");
+        string difficulty = difficultyText.text.Replace("Difficulty: ", "");
+        PlayerPrefs.SetString("PlayerName", playerName);
+        PlayerPrefs.SetString("Difficulty", difficulty);
         SceneManager.LoadScene("CobaLibri");
     }
     public void ShowSaveStates()
@@ -128,21 +132,10 @@ public class Menu : MonoBehaviour
             return null;
         }
     }
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SaveManager.SetLoaded();
-    }
     public void Switch()
     {
         SceneManager.LoadScene("CobaLibri");
+        SaveManager.SetLoaded();
     }
 
     // Methods for Statistics Menu
