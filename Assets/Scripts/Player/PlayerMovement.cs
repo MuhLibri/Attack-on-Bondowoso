@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravityMultiplier;
     public LayerMask groundLayer;
 
-    float speed;
+    static float speed;
     bool onGround;
     bool jumpAllowed;
     public bool moveAllowed;
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     Coroutine speedIncreaseCoroutine;
     StatisticsManager statisticsManager;
 
-
+    public static bool twiceMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -182,5 +183,19 @@ public class PlayerMovement : MonoBehaviour
             StopCoroutine(speedIncreaseCoroutine);
         }
         speedIncreaseCoroutine = StartCoroutine(speedIncrease(duration, boostPercentage));
+    }
+
+    public static bool IsTwiceMovement() {
+        return twiceMovement;
+    }
+
+    public static void ActivateTwiceMovement() {
+        twiceMovement = true;
+        speed *= 2;
+    }
+
+    public static void DeactivateTwiceMovement() {
+        twiceMovement = false;
+        speed /= 2;
     }
 }

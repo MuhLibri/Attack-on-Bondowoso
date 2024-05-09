@@ -7,6 +7,7 @@ public class DebugController : MonoBehaviour
     string input = "";
     public static DebugCommand NO_DAMAGE;
     public static DebugCommand ONE_HIT_KILL;
+    public static DebugCommand TWICE_MOVEMENT;
     public List<DebugCommand> commandList;
 
     void Awake() {
@@ -32,9 +33,21 @@ public class DebugController : MonoBehaviour
             }
         });
 
+        TWICE_MOVEMENT = new("twice_movement", "Make the player movement 2 times faster", "twice_movement", () => {
+            if (PlayerMovement.IsTwiceMovement()) {
+                PlayerMovement.DeactivateTwiceMovement();
+                Debug.Log("Twice Movement deactivated");
+            }
+            else {
+                PlayerMovement.ActivateTwiceMovement();
+                Debug.Log("Twice Movement activated");
+            }
+        });
+
         commandList = new List<DebugCommand>{
             NO_DAMAGE,
             ONE_HIT_KILL,
+            TWICE_MOVEMENT,
         };
     }
 
