@@ -33,26 +33,20 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy") || other.CompareTag("Player")) { 
-            if(other.CompareTag("Enemy")) {
-                other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
-                StatisticsManager.Instance.ShotHit();
-            }
-            else if(other.CompareTag("Player")) {
-                other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
-            }
+        if(other.CompareTag("Enemy")) { 
+
+            other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
+            StatisticsManager.Instance.ShotHit();
+            // audioSource.Stop();
+            // audioSource.PlayOneShot(bulletHit);
+            // audioSource.loop = false;
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.localScale = Vector3.zero;
+            
+            Destroy(this.gameObject, bulletHit.length);
+            
         }
-
-        // if(other.isTrigger) { return; }
-
-        audioSource.Stop();
-        audioSource.PlayOneShot(bulletHit);
-        audioSource.loop = false;
-
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        transform.localScale = Vector3.zero;
-        
-        Destroy(this.gameObject, bulletHit.length);
     }
 }

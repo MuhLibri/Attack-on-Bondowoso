@@ -12,8 +12,9 @@ public class PlayerWeaponState : MonoBehaviour
 
     public enum WeaponType {
         None = -1,
-        Sword = 0,
-        Shotgun = 1
+        MachinePistol = 0,
+        Shotgun = 1,
+        Sword = 2
     }
 
     Animator playerAnimator;
@@ -78,6 +79,9 @@ public class PlayerWeaponState : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha2)){
             weaponValue = 1;
         }
+        else if(Input.GetKeyDown(KeyCode.Alpha3)){
+            weaponValue = 2;
+        }
         else if(Input.GetKeyDown(KeyCode.X)){
             weaponValue = -1;
         }
@@ -103,6 +107,10 @@ public class PlayerWeaponState : MonoBehaviour
                 }
                 else if(currentWeapon == WeaponType.Shotgun){
                     playerAnimator.SetLayerWeight(1, 1f);
+                    playerAnimator.SetBool("Equip Sword", false);
+                }
+                else if(currentWeapon == WeaponType.MachinePistol){
+                    playerAnimator.SetLayerWeight(1, 0f);
                     playerAnimator.SetBool("Equip Sword", false);
                 }
             }
@@ -142,7 +150,7 @@ public class PlayerWeaponState : MonoBehaviour
         bool aimingInput = Input.GetButton("Fire2");
         playerAnimator.SetBool("Aim", aiming);
 
-        if (aimingInput && currentWeapon == WeaponType.Shotgun)
+        if (aimingInput && (currentWeapon == WeaponType.Shotgun || currentWeapon == WeaponType.MachinePistol))
         {   
             aiming = aimingInput;
             playerAnimator.SetLayerWeight(2, 1f);
