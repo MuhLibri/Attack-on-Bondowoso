@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
-    public float damage = 10f;
+    public int damage = 25;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,15 @@ public class SwordScript : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage);
+            }
+        }
+        else if (other.CompareTag("Player"))
+        {
+            // Assuming you've set damage on your projectiles
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
             }
         }
     }

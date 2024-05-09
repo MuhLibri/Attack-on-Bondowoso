@@ -1,26 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 100;
-    private float currentHealth;
+    public int maxHealth = 100;
+    private int currentHealth;
+    public List<AudioClip> audioClips;
+
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (!IsDead())
         {
             currentHealth -= damage;
+            audioSource.PlayOneShot(audioClips[0]);
             if (IsDead())
             {
+                audioSource.PlayOneShot(audioClips[1]);
                 Die();
             }
         }

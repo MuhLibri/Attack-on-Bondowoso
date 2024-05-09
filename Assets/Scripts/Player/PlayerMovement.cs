@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider playerCollider;
     public Animator playerAnimator;
     Coroutine speedIncreaseCoroutine;
+    StatisticsManager statisticsManager;
 
 
 
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         speed = defaultSpeed;
 
         rb.freezeRotation = true; // so that the player dont topple over
+        statisticsManager = FindObjectOfType<StatisticsManager>();
     }
 
     // Update is called once per frame
@@ -103,10 +105,14 @@ public class PlayerMovement : MonoBehaviour
 
         // move the player
         if(moveAllowed) {
-            rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
-
+            {
+                Vector3 previousPosition = transform.position;
+                rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+                Vector3 currentPosition = transform.position + direction * moveSpeed * Time.fixedDeltaTime;
+                float distanceThisFrame = Vector3.Distance(currentPosition, previousPosition);
+                statisticsManager.UpdateDistanceTraveled(distanceThisFrame);
+            }
         }
-        
     }
 
     void Turn() {

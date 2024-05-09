@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: 827cf984a1ca97747b604c57ff9d094e
+  - enabled: 1
+    path: Assets/Scenes/CobaLibri.unity
+    guid: c2e1eb626fb30104981e505764b82381
   m_configObjects: {}

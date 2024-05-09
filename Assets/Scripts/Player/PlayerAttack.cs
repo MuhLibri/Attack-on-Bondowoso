@@ -1,39 +1,50 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private GameObject sword;
-
+    public float swordAttackCooldownTime = 1f;
     public Animator playerAnimator;
+    public List<AudioClip> audioClips;
 
+    private float lastAttackTime;
+    private bool audioPlayed = false;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
-    {        
-        GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
-        foreach (GameObject weapon in weapons)
-        {
-            if (weapon.name == "Sword")
-            {
-                sword = weapon;
-            }
-        }
+    {
+        lastAttackTime = Time.time;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Attack 1") && !audioSource.isPlaying && !audioPlayed)
+        {
+            audioSource.PlayOneShot(audioClips[0]);
+            audioPlayed = true;
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Attack");
-            playerAnimator.SetTrigger("Attack");
-
+            if (playerAnimator.GetBool("Equip Sword") == true)
+            {
+                if (Time.time - lastAttackTime > swordAttackCooldownTime)
+                {
+                    lastAttackTime = Time.time;
+                    playerAnimator.SetTrigger("Attack");
+                    audioPlayed = false;
+                }
+            }
+            else
+            {
+                playerAnimator.SetTrigger("Attack");
+            }
         }
-        else {
+        else
+        {
             playerAnimator.ResetTrigger("Attack");
         }
     }

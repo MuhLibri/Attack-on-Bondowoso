@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2406453993655408128}
   - component: {fileID: 507206773793170872}
   - component: {fileID: 4871664029148032909}
+  - component: {fileID: 3126790851019574421}
   m_Layer: 0
   m_Name: Keroco
   m_TagString: Enemy
@@ -84,7 +85,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.65
+  m_Radius: 0.55
   m_Height: 3.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.8, z: 0}
@@ -97,9 +98,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 5557046868863534000}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.65
-  m_Speed: 6
-  m_Acceleration: 8
+  m_Radius: 0.55
+  m_Speed: 8
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -123,6 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  audioClips:
+  - {fileID: 8300000, guid: 6a0c0ac2d86dc81479b6da4d80e0df52, type: 3}
+  - {fileID: 8300000, guid: 1aac388ef21da824eb3fba0814677c22, type: 3}
 --- !u!114 &507206773793170872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,10 +140,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionRadius: 50
-  attackRadius: 5
+  attackRadius: 4
   patrolRadius: 10
   patrolDistanceLimit: 5
+  rotationSpeed: 5
+  attackCooldownTime: 3
   enemyAnimator: {fileID: 3386647410158969942}
+  audioClips:
+  - {fileID: 8300000, guid: 978ccbefb4292e04daae5d4635f2b522, type: 3}
 --- !u!114 &4871664029148032909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +161,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  audioClips: []
+--- !u!82 &3126790851019574421
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557046868863534000}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3434922648001463442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,13 +314,59 @@ PrefabInstance:
     - {fileID: 114380782822982968, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1173177213022252, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3546295954152848171}
+    - targetCorrespondingSourceObject: {fileID: 1173177213022252, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7847342651673853913}
   m_SourcePrefab: {fileID: 100100000, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
 --- !u!95 &3386647410158969942 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95844511793012932, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
   m_PrefabInstance: {fileID: 3434922648001463442}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3436071747325539518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1173177213022252, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
+  m_PrefabInstance: {fileID: 3434922648001463442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3546295954152848171
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436071747325539518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1e896d25e837a2c419844a06e967bbc1, type: 3}
+--- !u!114 &7847342651673853913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436071747325539518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436e564043e72664c8bdf68717bb84a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!4 &3439283385155856590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4927973787200604, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
