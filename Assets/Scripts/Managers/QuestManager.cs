@@ -38,9 +38,6 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Current quest update: " + currentQuest.questTitle);
-        Debug.Log("Current quest index update: " + questIndex);
-
         questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
 
         if (currentQuest.IsFinished()) {
