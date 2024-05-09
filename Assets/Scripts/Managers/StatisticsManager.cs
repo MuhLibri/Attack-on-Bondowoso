@@ -56,7 +56,7 @@ public class StatisticsManager : MonoBehaviour
     private void SaveStatistics()
     {
         // Save statistics data
-        string filePath = $"{folderPath}/statistics.{fileFormat}";
+        string filePath = $"{folderPath}/Statistics.{fileFormat}";
         if (File.Exists(filePath))
         {
             string oldJson = File.ReadAllText(filePath);

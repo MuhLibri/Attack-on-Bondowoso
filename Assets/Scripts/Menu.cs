@@ -92,15 +92,15 @@ public class Menu : MonoBehaviour
                 {
                     if (saveDatas[i].name == "Save1")
                     {
-                        saveOneText.text = saveDatas[0].name + saveDatas[0].lastSaved;
+                        saveOneText.text = "Save Slot 1 - " + saveDatas[0].lastSaved;
                     }
                     else if (saveDatas[i].name == "Save2")
                     {
-                        saveTwoText.text = saveDatas[1].name + saveDatas[1].lastSaved;
+                        saveTwoText.text = "Save Slot 2 - " + saveDatas[1].lastSaved;
                     }
                     else if (saveDatas[i].name == "Save3")
                     {
-                        saveThreeText.text = saveDatas[2].name + saveDatas[2].lastSaved;
+                        saveThreeText.text = "Save Slot 3 - " + saveDatas[2].lastSaved;
                     }
                 }
             }
@@ -125,11 +125,27 @@ public class Menu : MonoBehaviour
             return null;
         }
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SaveManager.SetLoaded();
+    }
+    public void Switch()
+    {
+        SceneManager.LoadScene("CobaLibri");
+    }
 
     // Methods for Statistics Menu
     public void UpdateStatistics()
     {
-        string filePath = $"{folderPath}/statistics.{fileFormat}";
+        string filePath = $"{folderPath}/Statistics.{fileFormat}";
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
@@ -148,7 +164,6 @@ public class Menu : MonoBehaviour
     }
     public string FormatTime(float timeInSeconds)
     {
-        // Convert time from seconds to hours, minutes, and seconds
         int hours = Mathf.FloorToInt(timeInSeconds / 3600);
         int minutes = Mathf.FloorToInt((timeInSeconds % 3600) / 60);
         int seconds = Mathf.FloorToInt(timeInSeconds % 60);
