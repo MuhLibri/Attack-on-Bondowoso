@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,11 +11,13 @@ public class EnemyMovement : MonoBehaviour
     public float rotationSpeed = 5f;
     public float attackCooldownTime = 3f;
     public Animator enemyAnimator;
+    public List<AudioClip> audioClips;
 
     private float lastAttackTime;
     private Transform player;
     private NavMeshAgent agent;
     private Vector3 lastPatrolPosition;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -23,6 +26,7 @@ public class EnemyMovement : MonoBehaviour
         lastPatrolPosition = transform.position;
         agent.updateRotation = false;
         lastAttackTime = Time.time;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -75,6 +79,7 @@ public class EnemyMovement : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldownTime)
         {
             enemyAnimator.SetBool("isAttacking", false);
+            audioSource.PlayOneShot(audioClips[0]);
             lastAttackTime = Time.time;
         }
     }
