@@ -26,6 +26,7 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI playtimeText;
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI killText;
+    public TextMeshProUGUI saveText;
 
     // Objects in Settings Menu
     public TextMeshProUGUI playerNameText;
@@ -159,6 +160,7 @@ public class Menu : MonoBehaviour
             float playtime = statisticsData.playtime;
             int gold = statisticsData.gold;
             int kill = statisticsData.kill;
+            int save = statisticsData.save;
 
             float accuracy = (shotsFired > 0) ? ((float)shotsHit / shotsFired) * 100 : 0f;
             accuracyText.text = "Accuracy: " + accuracy.ToString("F1") + "%";
@@ -166,6 +168,7 @@ public class Menu : MonoBehaviour
             playtimeText.text = "Playtime: " + FormatTime(playtime);
             goldText.text = "Gold: " + gold.ToString();
             killText.text = "Kill: " + kill.ToString();
+            saveText.text = "Save: " + save.ToString();
         }
     }
     public string FormatTime(float timeInSeconds)

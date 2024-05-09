@@ -12,12 +12,14 @@ public class SaveManager : MonoBehaviour
     public GameObject questBox;
     private QuestManager questManager;
     private static bool isLoaded = false;
+    StatisticsManager statisticsManager;
 
     // Start is called before the first frame update
     void Start()
     {
         folderPath = Application.persistentDataPath;
         questManager = questBox.GetComponent<QuestManager>();
+        statisticsManager = GetComponent<StatisticsManager>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,8 @@ public class SaveManager : MonoBehaviour
 
         Debug.Log("Game saved to: " + filePath);
         Debug.Log("Gold: " + PlayerGold.GetGoldAmount() + ", Quest ke " + (QuestManager.GetQuestIndex() + 1));
+
+        statisticsManager.SaveCount();
     }
 
     public static SaveData LoadData(string filePath) {
