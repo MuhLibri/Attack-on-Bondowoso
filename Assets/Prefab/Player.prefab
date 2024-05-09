@@ -124,6 +124,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthSlider: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 6a0c0ac2d86dc81479b6da4d80e0df52, type: 3}
+  - {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
 --- !u!114 &4487868277187646929
 MonoBehaviour:
   m_ObjectHideFlags: 0

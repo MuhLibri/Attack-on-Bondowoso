@@ -8,8 +8,10 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Slider healthSlider;
+    public List<AudioClip> audioClips;
 
-    Animator playerAnimator;
+    private Animator playerAnimator;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -17,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,8 +34,10 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= damage;
             healthSlider.value = currentHealth;
+            audioSource.PlayOneShot(audioClips[0]);
             if (IsDead())
             {
+                audioSource.PlayOneShot(audioClips[1]);
                 Die();
             }
         }
