@@ -29,6 +29,7 @@ public class ShotgunAttack : MonoBehaviour
     AudioSource audioSource;
     float maxShootingAngleX = 40f;
     float maxShootingAngleY = 40f;
+    StatisticsManager statisticsManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +42,7 @@ public class ShotgunAttack : MonoBehaviour
         maxShootingAngleY *= (1.0f - accuracy);
 
         audioSource = GetComponent<AudioSource>();
+        statisticsManager = FindObjectOfType<StatisticsManager>();
     }
 
     // Update is called once per frame
@@ -104,6 +106,7 @@ public class ShotgunAttack : MonoBehaviour
         lastShotTime = Time.time;
 
         Recoil();
+        statisticsManager.ShotFired(projectilesPerShot);
     }
 
     void Recoil()

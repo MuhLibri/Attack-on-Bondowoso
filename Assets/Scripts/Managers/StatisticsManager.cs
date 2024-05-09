@@ -29,15 +29,10 @@ public class StatisticsManager : MonoBehaviour
         SaveStatistics();
     }
 
-    private void Update()
+    public void ShotFired(int bullets)
     {
-        UpdateDistanceTraveled();
-    }
-
-    public void ShotFired()
-    {
-        // Increment total shots fired
-        shotsFired++;
+        shotsFired += bullets;
+        Debug.Log("Shots fired this session: " + shotsFired);
     }
 
     public void ShotHit()
@@ -46,11 +41,11 @@ public class StatisticsManager : MonoBehaviour
         shotsHit++;
     }
 
-    private void UpdateDistanceTraveled()
+    public void UpdateDistanceTraveled(float distance)
     {
         // Calculate distance traveled
-        float distanceThisFrame = Vector3.Distance(transform.position, transform.position); // Replace transform.position with actual player position
-        distanceTraveled += distanceThisFrame;
+        distanceTraveled += distance;
+        Debug.Log("Distance Traveled this session: " +  distanceTraveled);
     }
 
     private void SaveStatistics()
