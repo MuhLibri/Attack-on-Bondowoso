@@ -586,6 +586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roro
       objectReference: {fileID: 0}
+    - target: {fileID: 1896801731341158, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
+      propertyPath: m_TagString
+      value: RoroModel
+      objectReference: {fileID: 0}
     - target: {fileID: 4080208459921836, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

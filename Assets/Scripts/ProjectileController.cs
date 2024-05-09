@@ -33,8 +33,16 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Weapon")) { return; }
-        if(other.isTrigger) { return; }
+        if(other.CompareTag("Enemy") || other.CompareTag("Player")) { 
+            if(other.CompareTag("Enemy")) {
+                other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
+            }
+            else if(other.CompareTag("Player")) {
+                other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
+            }
+        }
+
+        // if(other.isTrigger) { return; }
 
         audioSource.Stop();
         audioSource.PlayOneShot(bulletHit);

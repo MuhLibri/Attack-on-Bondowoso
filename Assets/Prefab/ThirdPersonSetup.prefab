@@ -772,10 +772,6 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 236181210259729810}
-    - target: {fileID: 6216615768703159852, guid: 1970cd2b019465946a598b1e55afb5b9, type: 3}
-      propertyPath: m_TagString
-      value: RoroModel
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

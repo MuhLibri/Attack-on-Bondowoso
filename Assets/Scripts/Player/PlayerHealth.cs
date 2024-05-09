@@ -22,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>();
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
-        currentHealth = maxHealth;
         audioSource = GetComponent<AudioSource>();
     }
 
