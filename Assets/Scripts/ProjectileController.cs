@@ -36,6 +36,7 @@ public class ProjectileController : MonoBehaviour
         if(other.CompareTag("Enemy") || other.CompareTag("Player")) { 
             if(other.CompareTag("Enemy")) {
                 other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
+                StatisticsManager.Instance.ShotHit();
             }
             else if(other.CompareTag("Player")) {
                 other.GetComponent<PlayerHealth>().TakeDamage((int)damage);

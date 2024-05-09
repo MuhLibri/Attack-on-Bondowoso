@@ -15,6 +15,25 @@ public class StatisticsManager : MonoBehaviour
     string fileFormat = "json";
     string folderPath;
 
+    private static StatisticsManager instance;
+
+    public static StatisticsManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<StatisticsManager>();
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("StatisticsManager");
+                    instance = singletonObject.AddComponent<StatisticsManager>();
+                }
+            }
+            return instance;
+        }
+    }
+
     void Start()
     {
         folderPath = Application.persistentDataPath;
@@ -41,6 +60,7 @@ public class StatisticsManager : MonoBehaviour
     public void ShotHit()
     {
         shotsHit++;
+        Debug.Log("Shots Hit this session: " + shotsHit);
     }
 
     public void UpdateDistanceTraveled(float distance)

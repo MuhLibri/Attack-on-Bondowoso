@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider playerCollider;
     public Animator playerAnimator;
     Coroutine speedIncreaseCoroutine;
-    StatisticsManager statisticsManager;
 
     public static bool twiceMovement;
 
@@ -36,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
         speed = defaultSpeed;
 
         rb.freezeRotation = true; // so that the player dont topple over
-        statisticsManager = GetComponent<StatisticsManager>();
     }
 
     // Update is called once per frame
@@ -125,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
                 Vector3 currentPosition = transform.position + direction * moveSpeed * Time.fixedDeltaTime;
                 float distanceThisFrame = Vector3.Distance(currentPosition, previousPosition);
-                statisticsManager.UpdateDistanceTraveled(distanceThisFrame);
+                StatisticsManager.Instance.UpdateDistanceTraveled(distanceThisFrame);
             }
         }
     }

@@ -10,14 +10,12 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime;
     private bool audioPlayed = false;
     private AudioSource audioSource;
-    StatisticsManager statisticsManager;
 
     // Start is called before the first frame update
     void Start()
     {
         lastAttackTime = Time.time;
         audioSource = GetComponent<AudioSource>();
-        statisticsManager = GetComponent<StatisticsManager>();
     }
 
     // Update is called once per frame
@@ -43,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 playerAnimator.SetTrigger("Attack");
-                statisticsManager.ShotFired(5);
+                StatisticsManager.Instance.ShotFired(5);
             }
         }
         else

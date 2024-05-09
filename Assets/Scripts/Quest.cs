@@ -14,7 +14,6 @@ public class Quest : MonoBehaviour
 
     private int targetKill;
     private int killed = 0;
-    StatisticsManager statisticsManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -27,7 +26,6 @@ public class Quest : MonoBehaviour
         for (int i = 0; i < enemySpawners.Length; i++) {
             targetKill += enemySpawners[i].maxEnemyCount;
         }
-        statisticsManager = GetComponent<StatisticsManager>();
     }
 
     public void StartQuest() {
@@ -42,7 +40,7 @@ public class Quest : MonoBehaviour
 
     public void FinishQuest() {
         PlayerGold.GiveGold(reward);
-        statisticsManager.UpdateGold(reward);
+        StatisticsManager.Instance.UpdateGold(reward);
     }
 
     public void ResetQuest() {
@@ -54,7 +52,7 @@ public class Quest : MonoBehaviour
 
     public void AddKilled() {
         killed++;
-        statisticsManager.KillCount();
+        StatisticsManager.Instance.KillCount();
     }
 
     public int GetTargetKill() {
