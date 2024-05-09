@@ -135,4 +135,14 @@ public class SaveManager : MonoBehaviour
             insideSaveZone = false;
         }        
     }
+
+    private void OnGUI()
+    {
+        if (insideSaveZone)
+        {
+            float y = 60;
+            GUI.Box(new Rect(0, y, Screen.width/2 - 40, 30), "Tekan P untuk save, Tekan L untuk load");
+            GUI.backgroundColor = new Color(0, 0, 0, 1);
+        }
+    }
 }
