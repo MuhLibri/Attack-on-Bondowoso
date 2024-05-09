@@ -5,11 +5,15 @@ using UnityEngine;
 public class SwordScript : MonoBehaviour
 {
     public int damage = 25;
+    public string exceptionTag;
+    public Animator animator;
+
+    private float lastAttackTime;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        lastAttackTime = Time.time;
     }
 
     // Update is called once per frame
@@ -20,22 +24,30 @@ public class SwordScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (exceptionTag == "Player" && other.CompareTag("Enemy"))
         {
-            // Assuming you've set damage on your projectiles
-            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            if ((animator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Attack 1")) && (Time.time - lastAttackTime > 0.2))
             {
-                enemyHealth.TakeDamage(damage);
+                lastAttackTime = Time.time;
+                // Assuming you've set damage on your projectiles
+                EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                }
             }
         }
-        else if (other.CompareTag("Player"))
+        else if (exceptionTag == "Enemy" && other.CompareTag("Player"))
         {
-            // Assuming you've set damage on your projectiles
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (animator.GetBool("isAttacking") && (Time.time - lastAttackTime > 1.5))
             {
-                playerHealth.TakeDamage(damage);
+                lastAttackTime = Time.time;
+                // Assuming you've set damage on your projectiles
+                PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damage);
+                }
             }
         }
     }

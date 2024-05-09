@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 1858233065389102076}
   m_Layer: 0
   m_Name: Sword_3
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,7 +788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436e564043e72664c8bdf68717bb84a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25
+  exceptionTag: 
+  animator: {fileID: 95844511793012932}
 --- !u!1 &1180969847049706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,7 +2940,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4927973787200604}
   - component: {fileID: 95844511793012932}
-  - component: {fileID: 114380782822982968}
   m_Layer: 0
   m_Name: Keroco
   m_TagString: Untagged
@@ -2988,21 +2989,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &114380782822982968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668188202801692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c09876e585a3ea4f8ae2064a762ba39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRoot: {fileID: 0}
-  itemGroups: []
-  disabledGraySkeleton: {fileID: 0}
 --- !u!1 &1672909316657688
 GameObject:
   m_ObjectHideFlags: 0

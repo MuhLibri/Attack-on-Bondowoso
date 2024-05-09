@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3816825728589160369}
   - component: {fileID: 2406453993655408128}
   - component: {fileID: 507206773793170872}
-  - component: {fileID: 4871664029148032909}
   - component: {fileID: 3126790851019574421}
   m_Layer: 0
   m_Name: Keroco
@@ -124,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   audioClips:
   - {fileID: 8300000, guid: 6a0c0ac2d86dc81479b6da4d80e0df52, type: 3}
   - {fileID: 8300000, guid: 1aac388ef21da824eb3fba0814677c22, type: 3}
@@ -149,21 +149,6 @@ MonoBehaviour:
   enemyAnimator: {fileID: 3386647410158969942}
   audioClips:
   - {fileID: 8300000, guid: 978ccbefb4292e04daae5d4635f2b522, type: 3}
---- !u!114 &4871664029148032909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5557046868863534000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a82825743646fe468ada5e8111f59a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  audioClips: []
-  enemyAnimator: {fileID: 0}
 --- !u!82 &3126790851019574421
 AudioSource:
   m_ObjectHideFlags: 0
@@ -312,8 +297,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114380782822982968, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
+    - target: {fileID: 1858233065389102076, guid: ce745d5250f5dac4798675f3a5a91b68, type: 3}
+      propertyPath: exceptionTag
+      value: Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

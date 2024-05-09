@@ -187,8 +187,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.43
-  m_Height: 3.07
+  m_Radius: 0.5
+  m_Height: 3.3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &3977052244442726904
@@ -630,9 +630,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95152126842411956, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
+    - target: {fileID: 1308691936316864658, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6273912723563855614}
+    - target: {fileID: 1308691936316864658, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
+      propertyPath: exceptionTag
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3746677425473476737, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
       propertyPath: m_IsActive
