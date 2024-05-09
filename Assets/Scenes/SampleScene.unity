@@ -139,10 +139,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 690068746166345514, guid: c541022b93a436b44b12399d3cd84a06, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 709207267617512705, guid: c541022b93a436b44b12399d3cd84a06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 155.93
@@ -502,6 +498,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5829926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4810002
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.458496
+      objectReference: {fileID: 0}
     - target: {fileID: 8651325829579627254, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
       propertyPath: m_Name
       value: ThirdPersonSetup
@@ -509,7 +517,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5744727700625653213, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1803416826}
   m_SourcePrefab: {fileID: 100100000, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
 --- !u!1 &662790486
 GameObject:
@@ -523,7 +534,7 @@ GameObject:
   - component: {fileID: 662790488}
   - component: {fileID: 662790487}
   - component: {fileID: 662790490}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1358,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1282028886}
-  m_Father: {fileID: 1902108758}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -1626,9 +1637,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682777bbcbb5789429b6875a49b80f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  maxHealth: 100
   currentHealth: 50
-  healthSlider: {fileID: 1902108759}
+  healthSlider: {fileID: 0}
+  audioClips: []
+  deathCam: {fileID: 0}
 --- !u!1 &1812116406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,9 +1672,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1902108758}
-  m_Father: {fileID: 1120245062}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2052,3 +2064,5 @@ SceneRoots:
   - {fileID: 1556159313}
   - {fileID: 495507963}
   - {fileID: 779825555}
+  - {fileID: 1356393978}
+  - {fileID: 1812116407}
