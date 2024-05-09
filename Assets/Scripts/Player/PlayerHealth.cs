@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     private Animator playerAnimator;
     private AudioSource audioSource;
 
+    // For Cheat No Damage
+    private static bool noDamage = false;
+
     void Start()
     {
         playerAnimator = GetComponentInChildren<Animator>();
@@ -31,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!IsDead())
+        if (!IsDead() && !noDamage)
         {
             currentHealth -= damage;
             healthSlider.value = currentHealth;
@@ -67,5 +70,17 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Destroy(this.gameObject, 3f);
+    }
+
+    public static bool IsNoDamage() {
+        return noDamage;
+    }
+
+    public static void ActivateNoDamage() {
+        noDamage = true;
+    }
+
+    public static void DeactivateNoDamage() {
+        noDamage = false;
     }
 }

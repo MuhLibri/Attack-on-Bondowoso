@@ -17,6 +17,14 @@ public class DebugController : MonoBehaviour
     void Awake() {
         NO_DAMAGE = new("no_damage", "make the player can't die", "no_damage", () => {
             Debug.Log("Ngga bisa mati cuy");
+            if (PlayerHealth.IsNoDamage()) {
+                PlayerHealth.DeactivateNoDamage();
+                Debug.Log("No Damage deactivated");
+            }
+            else {
+                PlayerHealth.ActivateNoDamage();
+                Debug.Log("No Damage activated");
+            }
         });
 
         commandList = new List<DebugCommand>{
