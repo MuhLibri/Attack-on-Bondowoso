@@ -54,6 +54,7 @@ public class Quest : MonoBehaviour
 
     public void AddKilled() {
         killed++;
+        statisticsManager.KillCount();
     }
 
     public int GetTargetKill() {
