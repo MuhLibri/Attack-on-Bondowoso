@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerWeaponState : MonoBehaviour
 { 
     /* for documentation purposes:
-        1 = sword
-        2 = shotgun
+        0 = sword
+        1 = shotgun
     
     */
 
@@ -15,11 +15,12 @@ public class PlayerWeaponState : MonoBehaviour
         Sword = 0,
         Shotgun = 1
     }
-    Animator playerAnimator;
 
+    Animator playerAnimator;
     GameObject[] weapons;
     bool aiming;
     WeaponType currentWeapon;
+    WeaponType? previousWeapon;
     GameObject currentWeaponObject;
     PlayerMovement playerMovement;
     GameObject roroModel;
@@ -35,7 +36,7 @@ public class PlayerWeaponState : MonoBehaviour
         damageOrbCount = 0;
         roroModel = GameObject.FindGameObjectWithTag("RoroModel");
         onAttack = roroModel.GetComponent<OnAttack>();
-
+        previousWeapon = null;
         currentWeapon = WeaponType.None;
         playerAnimator = GetComponentInChildren<Animator>();
         weapons = GameObject.FindGameObjectsWithTag("Weapon");
@@ -67,41 +68,53 @@ public class PlayerWeaponState : MonoBehaviour
     }
 
     void WeaponChangeInput(){
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        int scrollSign = (int) Mathf.Sign(scrollInput);
+        int weaponValue = (int) currentWeapon;
+
         if(Input.GetKeyDown(KeyCode.Alpha1)){
-            currentWeapon = WeaponType.Sword;
-            currentWeaponObject = GetWeaponWithName("Sword");
+            weaponValue = 0;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2)){
-            currentWeapon = WeaponType.Shotgun;
-            currentWeaponObject = GetWeaponWithName("Shotgun");
+            weaponValue = 1;
         }
         else if(Input.GetKeyDown(KeyCode.X)){
-            currentWeapon = WeaponType.None;
-            currentWeaponObject = null;
+            weaponValue = -1;
         }
+        else if(scrollInput != 0) {
+            weaponValue += scrollSign;
+            weaponValue = weaponValue % weapons.Length;
+        }  
+
+        previousWeapon = currentWeapon;
+        currentWeapon = (WeaponType) weaponValue;
+        currentWeaponObject = GetWeaponWithName(currentWeapon.ToString());
     }
 
     void WeaponStateUpdate(){
-        if(currentWeapon != WeaponType.None){
-            ActivateWeapon();
-            DeactivateOtherWeapons();
-            
-            if (currentWeapon == WeaponType.Sword){
-                playerAnimator.SetLayerWeight(1, 0f);
-                playerAnimator.SetBool("Equip Sword", true);
-            }
-            else if(currentWeapon == WeaponType.Shotgun){
-                playerAnimator.SetLayerWeight(1, 1f);
-                playerAnimator.SetBool("Equip Sword", false);
-            }
-        }
-        else{ // if no weapon is selected
-            foreach(GameObject weapon in weapons){
-                weapon.SetActive(false);
+        if(currentWeapon != previousWeapon){
+            if(currentWeapon != WeaponType.None){
+                ActivateWeapon();
+                DeactivateOtherWeapons();
+                
+                if (currentWeapon == WeaponType.Sword){
+                    playerAnimator.SetLayerWeight(1, 0f);
+                    playerAnimator.SetBool("Equip Sword", true);
+                }
+                else if(currentWeapon == WeaponType.Shotgun){
+                    playerAnimator.SetLayerWeight(1, 1f);
+                    playerAnimator.SetBool("Equip Sword", false);
+                }
             }
 
-            playerAnimator.SetLayerWeight(1, 0f);
-            playerAnimator.SetBool("Equip Sword", false);
+            else { // if no weapon is selected
+                foreach(GameObject weapon in weapons){
+                    weapon.SetActive(false);
+                }
+
+                playerAnimator.SetLayerWeight(1, 0f);
+                playerAnimator.SetBool("Equip Sword", false);
+            }
         }
     }
 
