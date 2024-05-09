@@ -7,11 +7,11 @@ using System;
 
 public class SaveManager : MonoBehaviour
 {
-    [SerializeField]
-    private string fileFormat = "json";
-    private string folderPath;
+    public static string fileFormat = "json";
+    private static string folderPath;
     public GameObject questBox;
     private QuestManager questManager;
+    private static bool isLoaded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,11 @@ public class SaveManager : MonoBehaviour
     void Update()
     {
         string fileName = "Save1";
+        if (isLoaded) {
+            isLoaded = false;
+            string filePath = $"{folderPath}/{fileName}.{fileFormat}";
+            LoadGame(filePath);
+        }
         // TO DO make new way to save game
         if (Input.GetKeyDown(KeyCode.P)) {
             SaveData saveData = new SaveData(fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
@@ -32,10 +37,7 @@ public class SaveManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.L)) {
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
-            SaveData gameData = LoadData(filePath);
-            SceneManager.LoadScene("CobaLibri");
-            questManager.SetCurrentQuest(gameData.questIndex);
-            PlayerGold.SetGoldAmount(gameData.playerGold);
+            LoadGame(filePath);
         }
 
         if (Input.GetKeyDown(KeyCode.N)) {
@@ -51,7 +53,7 @@ public class SaveManager : MonoBehaviour
         // Convert game data to JSON
         string json = JsonUtility.ToJson(data);
 
-        // Define the file path (change this to your desired file path)
+        // Path to the save.json
         string filePath = $"{folderPath}/{data.name}.{fileFormat}";
         Debug.Log("Path: " + filePath);
 
@@ -62,16 +64,11 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Gold: " + PlayerGold.GetGoldAmount() + ", Quest ke " + (QuestManager.GetQuestIndex() + 1));
     }
 
-    public SaveData LoadData(string filePath) {
-        // Check if the file exists
+    public static SaveData LoadData(string filePath) {
         if (File.Exists(filePath))
         {
-            // Read JSON from file
             string json = File.ReadAllText(filePath);
-
-            // Convert JSON to game data object
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-
             Debug.Log("Game loaded from: " + filePath);
 
             return data;
@@ -83,14 +80,15 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public SaveData[] LoadAllData() {        
+    public static SaveData[] LoadAllData() {        
         try
         {
-            // Get all file names in the directory
+            folderPath = Application.persistentDataPath;
+            // Get all the save.json file path
             string[] filePathList = Directory.GetFiles(folderPath, $"*.{fileFormat}");
             SaveData[] saveDatas = new SaveData[filePathList.Length];
 
-            // Print the file names
+            // Assign each saveData to saveDatas
             for (int i = 0; i < filePathList.Length; i++)
             {
                 saveDatas[i] = LoadData(filePathList[i]);
@@ -103,5 +101,16 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("An error occurred: " + e.Message);
             return null;
         }        
+    }
+
+    public void LoadGame(string filePath) {
+        SaveData gameData = LoadData(filePath);
+        SceneManager.LoadScene("CobaLibri");
+        questManager.SetCurrentQuest(gameData.questIndex);
+        PlayerGold.SetGoldAmount(gameData.playerGold);
+    }
+
+    public static void SetLoaded() {
+        isLoaded = true;
     }
 }
