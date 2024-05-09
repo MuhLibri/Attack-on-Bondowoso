@@ -7,6 +7,7 @@ public class PlayerGold : MonoBehaviour
 {
     [SerializeField]
     private static int goldAmount = 0;
+    private static bool motherlode = false;
 
     public static int GetGoldAmount() {
         return goldAmount;
@@ -25,6 +26,18 @@ public class PlayerGold : MonoBehaviour
 
     // Take gold from player on input amount
     public static void TakeGold(int amount) {
-        goldAmount -= amount;
+        goldAmount -= !motherlode? amount : 0;
+    }
+
+    public static bool IsMotherlode() {
+        return motherlode;
+    }
+
+    public static void ActivateMotherlode() {
+        motherlode = true;
+    }
+
+    public static void DeactivateMotherlode() {
+        motherlode = false;
     }
 }

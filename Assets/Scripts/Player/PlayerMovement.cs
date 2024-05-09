@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator playerAnimator;
     Coroutine speedIncreaseCoroutine;
 
-    public static bool twiceMovement;
+    public static bool twiceSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -183,17 +183,17 @@ public class PlayerMovement : MonoBehaviour
         speedIncreaseCoroutine = StartCoroutine(speedIncrease(duration, boostPercentage));
     }
 
-    public static bool IsTwiceMovement() {
-        return twiceMovement;
+    public static bool IsTwiceSpeed() {
+        return twiceSpeed;
     }
 
-    public static void ActivateTwiceMovement() {
-        twiceMovement = true;
+    public static void ActivateTwiceSpeed() {
+        twiceSpeed = true;
         speed *= 2;
     }
 
-    public static void DeactivateTwiceMovement() {
-        twiceMovement = false;
+    public static void DeactivateTwiceSpeed() {
+        twiceSpeed = false;
         speed /= 2;
     }
 }

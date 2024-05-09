@@ -40,7 +40,7 @@ public class QuestManager : MonoBehaviour
     {
         questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
 
-        if (currentQuest.IsFinished()) {
+        if (questIndex < quests.Length && currentQuest.IsFinished()) {
             currentQuest.FinishQuest();
             questIndex++;
 
@@ -69,5 +69,9 @@ public class QuestManager : MonoBehaviour
         questTitleText.text = currentQuest.questTitle;
         questObjectiveText.text = currentQuest.questObjective;
         questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
+    }
+
+    public static void SkipCurrentQuest() {
+        currentQuest.SkipQuest();
     }
 }

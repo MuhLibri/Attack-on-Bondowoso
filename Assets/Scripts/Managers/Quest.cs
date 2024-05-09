@@ -43,6 +43,11 @@ public class Quest : MonoBehaviour
         StatisticsManager.Instance.UpdateGold(reward);
     }
 
+    public void SkipQuest() {
+        ResetQuest();
+        killed = targetKill;
+    }
+
     public void ResetQuest() {
         killed = 0;
         for (int i = 0; i < enemySpawners.Length; i++) {

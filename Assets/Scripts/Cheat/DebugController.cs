@@ -7,7 +7,9 @@ public class DebugController : MonoBehaviour
     string input = "";
     public static DebugCommand NO_DAMAGE;
     public static DebugCommand ONE_HIT_KILL;
-    public static DebugCommand TWICE_MOVEMENT;
+    public static DebugCommand MOTHERLODE;
+    public static DebugCommand TWICE_SPEED;
+    public static DebugCommand SKIP;
     public List<DebugCommand> commandList;
 
     void Awake() {
@@ -33,21 +35,39 @@ public class DebugController : MonoBehaviour
             }
         });
 
-        TWICE_MOVEMENT = new("twice_movement", "Make the player movement 2 times faster", "twice_movement", () => {
-            if (PlayerMovement.IsTwiceMovement()) {
-                PlayerMovement.DeactivateTwiceMovement();
-                Debug.Log("Twice Movement deactivated");
+        MOTHERLODE = new("motherlode", "Make the player gold unlimited", "motherlode", () => {
+            if (PlayerGold.IsMotherlode()) {
+                PlayerGold.DeactivateMotherlode();
+                Debug.Log("Motherlode deactivated");
             }
             else {
-                PlayerMovement.ActivateTwiceMovement();
-                Debug.Log("Twice Movement activated");
+                PlayerGold.ActivateMotherlode();
+                Debug.Log("Motherlode activated");
             }
+        });
+
+        TWICE_SPEED = new("twice_speed", "Make the player movement 2 times faster", "twice_speed", () => {
+            if (PlayerMovement.IsTwiceSpeed()) {
+                PlayerMovement.DeactivateTwiceSpeed();
+                Debug.Log("Twice Speed deactivated");
+            }
+            else {
+                PlayerMovement.ActivateTwiceSpeed();
+                Debug.Log("Twice Speed activated");
+            }
+        });
+
+        SKIP = new("skip", "Skip current quest", "skip", () => {
+            QuestManager.SkipCurrentQuest();
+            Debug.Log("Skip quest activated");
         });
 
         commandList = new List<DebugCommand>{
             NO_DAMAGE,
             ONE_HIT_KILL,
-            TWICE_MOVEMENT,
+            MOTHERLODE,
+            TWICE_SPEED,
+            SKIP
         };
     }
 
