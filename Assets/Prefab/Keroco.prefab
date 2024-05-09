@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  audioClips:
+  - {fileID: 8300000, guid: 6a0c0ac2d86dc81479b6da4d80e0df52, type: 3}
+  - {fileID: 8300000, guid: 1aac388ef21da824eb3fba0814677c22, type: 3}
 --- !u!114 &507206773793170872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  audioClips: []
 --- !u!82 &3126790851019574421
 AudioSource:
   m_ObjectHideFlags: 0
