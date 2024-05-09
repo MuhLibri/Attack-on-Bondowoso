@@ -31,7 +31,14 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (IsAttacking())
+        if ((GetComponent<EnemyHealth>().currentHealth <= 0) || (player == null))
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetBool("isChasing", false);
+            enemyAnimator.SetBool("isPatrolling", false);
+            agent.ResetPath();
+        }
+        else if (IsAttacking())
         {
             Attack();
         }
@@ -39,16 +46,9 @@ public class EnemyMovement : MonoBehaviour
         {
             Chase();
         }
-        else if (player != null)
-        {
-            Patrol();
-        }
         else
         {
-            enemyAnimator.SetBool("isAttacking", false);
-            enemyAnimator.SetBool("isChasing", false);
-            enemyAnimator.SetBool("isPatrolling", false);
-            agent.ResetPath();
+            Patrol();
         }
     }
 

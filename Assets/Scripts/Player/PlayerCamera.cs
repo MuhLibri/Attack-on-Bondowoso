@@ -18,17 +18,14 @@ public class PlayerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * xSensitivity * Time.fixedDeltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * ySensitivity * Time.fixedDeltaTime;
+        if (GetComponent<PlayerHealth>().currentHealth > 0)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * xSensitivity * Time.fixedDeltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * ySensitivity * Time.fixedDeltaTime;
 
-        // xRotate -= mouseY;
-        // xRotate = Mathf.Clamp(xRotate, -90f, 90f);
-        // commented because its rotating all the player componentsup or down
-        // it should be just the gun
+            yRotate += mouseX;
 
-        yRotate += mouseX;
-
-        transform.rotation = Quaternion.Euler(0, yRotate, 0);
-
+            transform.rotation = Quaternion.Euler(0, yRotate, 0);
+        }
     }
 }

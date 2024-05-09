@@ -1,4 +1,4 @@
-using System.Collections;
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Slider healthSlider;
     public List<AudioClip> audioClips;
+    public CinemachineVirtualCamera deathCam;
 
     private Animator playerAnimator;
     private AudioSource audioSource;
@@ -38,6 +39,8 @@ public class PlayerHealth : MonoBehaviour
             if (IsDead())
             {
                 audioSource.PlayOneShot(audioClips[1]);
+                playerAnimator.SetTrigger("Dead");
+                deathCam.m_Lens.FieldOfView = 100;
                 Die();
             }
         }
@@ -63,6 +66,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 3f);
     }
 }

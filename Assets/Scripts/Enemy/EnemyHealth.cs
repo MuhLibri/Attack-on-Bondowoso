@@ -4,8 +4,9 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public List<AudioClip> audioClips;
+    public Animator enemyAnimator;
 
     private AudioSource audioSource;
 
@@ -25,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
             if (IsDead())
             {
                 audioSource.PlayOneShot(audioClips[1]);
+                enemyAnimator.SetTrigger("isDead");
                 Die();
             }
         }
@@ -38,6 +40,6 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         QuestManager.AddKilled();
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 3f);
     }
 }

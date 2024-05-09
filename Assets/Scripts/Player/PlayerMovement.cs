@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{   
+{
     public float defaultSpeed = 5;
     public float turnSpeed;
     public float jumpForce;
@@ -41,25 +41,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void FixedUpdate() {
-        //Debug.Log("FixedUpdate");
-        groundCheck();
+    void FixedUpdate()
+    {
+        if (GetComponent<PlayerHealth>().currentHealth > 0)
+        {
+            groundCheck();
 
-        jumpAllowed = onGround;
-        playerAnimator.SetBool("Fall", !onGround);
+            jumpAllowed = onGround;
+            playerAnimator.SetBool("Fall", !onGround);
 
-        Move();
-        Jump();
-        Turn();
-        if(!onGround) {
-            gravityScale();
+            Move();
+            Jump();
+            Turn();
+
+            if (!onGround)
+            {
+                gravityScale();
+            }
         }
     }
 
-    void Move() {
+    void Move()
+    {
         // get the input from the player
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -69,12 +75,15 @@ public class PlayerMovement : MonoBehaviour
 
         // set the direction
         direction = transform.right * horizontal + transform.forward * vertical;
-        
+
         // sprint multiplier
-        if(Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             moveSpeed *= sprintMultiplier;
             playerAnimator.SetBool("Sprint", true);
-        } else {
+        }
+        else
+        {
             playerAnimator.SetBool("Sprint", false);
         }
 
@@ -85,26 +94,31 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetBool("Right", false);
         playerAnimator.SetBool("Left", false);
 
-        if(horizontal > 0) {
+        if (horizontal > 0)
+        {
             // Debug.Log("Moving Right");
             playerAnimator.SetBool("Right", true);
         }
-        else if(horizontal < 0) {
+        else if (horizontal < 0)
+        {
             // Debug.Log("Moving Left");
             playerAnimator.SetBool("Left", true);
         }
-        else if(vertical > 0) {
+        else if (vertical > 0)
+        {
             // Debug.Log("Moving Forward");
             playerAnimator.SetBool("Forward", true);
 
         }
-        else if(vertical < 0) {
+        else if (vertical < 0)
+        {
             // Debug.Log("Moving Backward");
-                playerAnimator.SetBool("Backward", true);
+            playerAnimator.SetBool("Backward", true);
         }
 
         // move the player
-        if(moveAllowed) {
+        if (moveAllowed)
+        {
             {
                 Vector3 previousPosition = transform.position;
                 rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
@@ -115,13 +129,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Turn() {
-        
+    void Turn()
+    {
+
     }
 
-    void Jump() {
+    void Jump()
+    {
         // take input
-        if (Input.GetKey(KeyCode.Space) && jumpAllowed) {
+        if (Input.GetKey(KeyCode.Space) && jumpAllowed)
+        {
             // add force to the player
             Debug.Log("Jump");
             playerAnimator.SetTrigger("JumpUp");
@@ -129,11 +146,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void gravityScale() {
+    void gravityScale()
+    {
         rb.AddForce(Vector3.down * gravityMultiplier, ForceMode.Acceleration);
     }
 
-    void groundCheck(){
+    void groundCheck()
+    {
         float distance = playerCollider.height / 2 + 0.5f;
 
         onGround = Physics.Raycast(transform.position,
@@ -144,9 +163,10 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("onGround: " + onGround);
     }
 
-    IEnumerator speedIncrease(float duration, int boostPercentage) {
-        
-        speed = speed + (speed *  (boostPercentage / 100));
+    IEnumerator speedIncrease(float duration, int boostPercentage)
+    {
+
+        speed = speed + (speed * (boostPercentage / 100));
         Debug.Log("Speed Increased to: " + speed);
         Debug.Log("Speed Increase Percentage: " + boostPercentage);
         yield return new WaitForSeconds(duration);
@@ -155,8 +175,10 @@ public class PlayerMovement : MonoBehaviour
         speedIncreaseCoroutine = null;
     }
 
-    public void startSpeedIncrease(float duration, int boostPercentage) {
-        if(speedIncreaseCoroutine != null) {
+    public void startSpeedIncrease(float duration, int boostPercentage)
+    {
+        if (speedIncreaseCoroutine != null)
+        {
             StopCoroutine(speedIncreaseCoroutine);
         }
         speedIncreaseCoroutine = StartCoroutine(speedIncrease(duration, boostPercentage));
