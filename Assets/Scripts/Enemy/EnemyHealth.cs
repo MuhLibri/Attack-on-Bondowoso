@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public Animator enemyAnimator;
 
     private AudioSource audioSource;
+    private static bool oneHitKill = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +20,26 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!IsDead())
-        {
-            currentHealth -= damage;
-            audioSource.PlayOneShot(audioClips[0]);
-            if (IsDead())
+        if (!oneHitKill) {
+            if (!IsDead())
             {
-                audioSource.PlayOneShot(audioClips[1]);
-                enemyAnimator.SetTrigger("isDead");
-                Die();
+                currentHealth -= damage;
+                audioSource.PlayOneShot(audioClips[0]);
+                if (IsDead())
+                {
+                    audioSource.PlayOneShot(audioClips[1]);
+                    enemyAnimator.SetTrigger("isDead");
+                    Die();
+                }
             }
+        }
+        else {
+            Debug.Log("One hit kill Mati");
+            currentHealth -= currentHealth;
+            audioSource.PlayOneShot(audioClips[0]);
+            audioSource.PlayOneShot(audioClips[1]);
+            enemyAnimator.SetTrigger("isDead");
+            Die();
         }
     }
 
@@ -41,5 +52,17 @@ public class EnemyHealth : MonoBehaviour
     {
         QuestManager.AddKilled();
         Destroy(this.gameObject, 3f);
+    }
+
+    public static bool IsOneHitKil() {
+        return oneHitKill;
+    }
+
+    public static void ActivateOneHitKill() {
+        oneHitKill = true;
+    }
+
+    public static void DeactivateOneHitKill() {
+        oneHitKill = false;
     }
 }

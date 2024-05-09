@@ -6,17 +6,11 @@ public class DebugController : MonoBehaviour
     bool showConsole;
     string input = "";
     public static DebugCommand NO_DAMAGE;
+    public static DebugCommand ONE_HIT_KILL;
     public List<DebugCommand> commandList;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     void Awake() {
         NO_DAMAGE = new("no_damage", "make the player can't die", "no_damage", () => {
-            Debug.Log("Ngga bisa mati cuy");
             if (PlayerHealth.IsNoDamage()) {
                 PlayerHealth.DeactivateNoDamage();
                 Debug.Log("No Damage deactivated");
@@ -27,8 +21,20 @@ public class DebugController : MonoBehaviour
             }
         });
 
+        ONE_HIT_KILL = new("one_hit_kill", "make the enemy died in one hit", "one_hit_kill", () => {
+            if (EnemyHealth.IsOneHitKil()) {
+                EnemyHealth.DeactivateOneHitKill();
+                Debug.Log("One Hit Kill deactivated");
+            }
+            else {
+                EnemyHealth.ActivateOneHitKill();
+                Debug.Log("One Hit Kill activated");
+            }
+        });
+
         commandList = new List<DebugCommand>{
             NO_DAMAGE,
+            ONE_HIT_KILL,
         };
     }
 
