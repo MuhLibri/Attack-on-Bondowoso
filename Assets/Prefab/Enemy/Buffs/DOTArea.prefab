@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5235739908927968213}
-  - component: {fileID: 6845211359653133049}
+  - component: {fileID: 3732747951032527768}
   - component: {fileID: -5363554497239957255}
   m_Layer: 0
   m_Name: DOTArea
@@ -33,8 +33,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6845211359653133049
-BoxCollider:
+--- !u!135 &3732747951032527768
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30, y: 5, z: 30}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5363554497239957255
 MonoBehaviour:
   m_ObjectHideFlags: 0
