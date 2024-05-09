@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,118 +7,101 @@ public class EnemyMovement : MonoBehaviour
     public float attackRadius = 2f;
     public float patrolRadius = 20f;
     public float patrolDistanceLimit = 5f;
+    public float rotationSpeed = 5f;
     public Animator enemyAnimator;
 
-    float patrolDistance;
-    bool chasing;
-    Transform player;
-    Rigidbody rbEnemy;
-    NavMeshAgent agent;
-    Vector3 destinationVar;
-    Vector3 lastPatrolPosition;
-
-    void Start()
-    {
-
-    }
+    private Transform player;
+    private NavMeshAgent agent;
+    private Vector3 lastPatrolPosition;
 
     void Awake()
     {
-        rbEnemy = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         agent = GetComponent<NavMeshAgent>();
         lastPatrolPosition = transform.position;
-        patrolDistance = 0f;
-
-        rbEnemy.freezeRotation = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        agent.updateRotation = false;
     }
 
     void FixedUpdate()
     {
-
-        ChaseOrNot();
-
-        if (chasing)
+        if (IsAttacking())
         {
-            enemyAnimator.SetBool("isChasing", true);
-            enemyAnimator.SetBool("isPatrolling", false);
-
+            Attack();
+        }
+        else if (IsChasing())
+        {
             Chase();
-            patrolDistance = 0f;
         }
         else
         {
-            enemyAnimator.SetBool("isChasing", false);
-            enemyAnimator.SetBool("isPatrolling", true);
-
-            patrolDistance += Vector3.Distance(transform.position, lastPatrolPosition);
-            lastPatrolPosition = transform.position;
-
-            if (patrolDistance >= patrolDistanceLimit)
-            {
-                patrolDistance = 0f;
-                Patrol();
-            }
-
-            if (transform.position == destinationVar)
-            {
-                Patrol();
-            }
+            Patrol();
         }
-
-        UpdateDestination();
     }
 
-    void UpdateDestination()
+    bool IsAttacking()
     {
-        agent.destination = destinationVar;
+        if (player == null) return false;
+        return Vector3.Distance(transform.position, player.position) <= attackRadius;
     }
 
-    void ChaseOrNot()
+    bool IsChasing()
     {
+        if (player == null) return false;
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= visionRadius)
-        {
-            chasing = true;
-        }
-        else
-        {
-            chasing = false;
-        }
+        return distanceToPlayer <= visionRadius && distanceToPlayer > attackRadius;
     }
 
-    void Patrol()
+    void Attack()
     {
-        Vector3 randomPos = transform.position + Random.insideUnitSphere * patrolRadius * patrolDistanceLimit;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomPos, out hit, patrolRadius, 1);
-        Vector3 finalPos = hit.position;
-        Debug.Log(finalPos);
-
-        destinationVar = finalPos;
+        // Set animation bools
+        enemyAnimator.SetBool("isAttacking", true);
+        enemyAnimator.SetBool("isChasing", false);
+        enemyAnimator.SetBool("isPatrolling", false);
+        // Rotate towards the player
+        RotateTowards(player.position);
+        // Reset agent path
+        agent.ResetPath();
     }
 
     void Chase()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        // Set animation bools
+        enemyAnimator.SetBool("isAttacking", false);
+        enemyAnimator.SetBool("isChasing", true);
+        enemyAnimator.SetBool("isPatrolling", false);
+        // Continue chasing the player
+        agent.SetDestination(player.position);
+        // Rotate towards the player
+        RotateTowards(player.position);
+    }
 
-        if (distanceToPlayer >= attackRadius)
+    void Patrol()
+    {
+        // Set animation bools
+        enemyAnimator.SetBool("isAttacking", false);
+        enemyAnimator.SetBool("isChasing", false);
+        enemyAnimator.SetBool("isPatrolling", true);
+        if (Vector3.Distance(transform.position, lastPatrolPosition) >= patrolDistanceLimit)
         {
-            // Debug.Log("Chasing Player");
-            destinationVar = player.position;
-        }
-        else
-        {
-            // Debug.Log("Stand Still");
-            destinationVar = transform.position;
+            Vector2 randomDirection = Random.insideUnitCircle.normalized * patrolRadius;
+            Vector3 randomPos = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPos, out hit, patrolRadius, 1))
+            {
+                lastPatrolPosition = hit.position;
+                agent.SetDestination(lastPatrolPosition);
+            }
         }
     }
 
+    void RotateTowards(Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+    }
 }

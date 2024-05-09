@@ -3,41 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SaveManager : MonoBehaviour
 {
+    [SerializeField]
+    private string fileFormat = "json";
+    private string folderPath;
     public GameObject questBox;
     private QuestManager questManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        folderPath = Application.persistentDataPath;
         questManager = questBox.GetComponent<QuestManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        string fileName = "Save1";
         // TO DO make new way to save game
         if (Input.GetKeyDown(KeyCode.P)) {
-            GameData gameData = new GameData(QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
-            SaveGame(gameData);
+            SaveData saveData = new SaveData(fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+            SaveData(saveData);
         }
         
         if (Input.GetKeyDown(KeyCode.L)) {
-            GameData gameData = LoadGame();
+            string filePath = $"{folderPath}/{fileName}.{fileFormat}";
+            SaveData gameData = LoadData(filePath);
             SceneManager.LoadScene("CobaLibri");
             questManager.SetCurrentQuest(gameData.questIndex);
             PlayerGold.SetGoldAmount(gameData.playerGold);
         }
+
+        if (Input.GetKeyDown(KeyCode.N)) {
+            SaveData[] saveDatas = LoadAllData();
+
+            foreach (SaveData saveData in saveDatas) {
+                Debug.Log($"Name: {saveData.name}, Last Saved: {saveData.lastSaved}");
+            }
+        }
     }
 
-    public void SaveGame(GameData data) {
+    public void SaveData(SaveData data) {
         // Convert game data to JSON
         string json = JsonUtility.ToJson(data);
 
         // Define the file path (change this to your desired file path)
-        string filePath = Application.persistentDataPath + "/savegame.json";
+        string filePath = $"{folderPath}/{data.name}.{fileFormat}";
         Debug.Log("Path: " + filePath);
 
         // Write JSON to file
@@ -47,10 +62,7 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Gold: " + PlayerGold.GetGoldAmount() + ", Quest ke " + (QuestManager.GetQuestIndex() + 1));
     }
 
-    public GameData LoadGame() {
-        // Define the file path
-        string filePath = Application.persistentDataPath + "/savegame.json";
-
+    public SaveData LoadData(string filePath) {
         // Check if the file exists
         if (File.Exists(filePath))
         {
@@ -58,7 +70,7 @@ public class SaveManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
 
             // Convert JSON to game data object
-            GameData data = JsonUtility.FromJson<GameData>(json);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             Debug.Log("Game loaded from: " + filePath);
 
@@ -69,5 +81,27 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("No save file found at: " + filePath);
             return null;
         }
+    }
+
+    public SaveData[] LoadAllData() {        
+        try
+        {
+            // Get all file names in the directory
+            string[] filePathList = Directory.GetFiles(folderPath, $"*.{fileFormat}");
+            SaveData[] saveDatas = new SaveData[filePathList.Length];
+
+            // Print the file names
+            for (int i = 0; i < filePathList.Length; i++)
+            {
+                saveDatas[i] = LoadData(filePathList[i]);
+            }
+
+            return saveDatas;
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("An error occurred: " + e.Message);
+            return null;
+        }        
     }
 }

@@ -5,36 +5,33 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth;
     public Slider healthSlider;
 
     Animator playerAnimator;
-    bool isDead;
 
-    
     void Start()
     {
         playerAnimator = GetComponentInChildren<Animator>();
-        healthSlider.maxValue = startingHealth;
-        healthSlider.value = currentHealth;
-        
-        isDead = false;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(int damage)
     {
-        if (!isDead)
+        if (!IsDead())
         {
             currentHealth -= damage;
             healthSlider.value = currentHealth;
-            if (currentHealth <= 0)
+            if (IsDead())
             {
                 Die();
             }
@@ -43,19 +40,24 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        if (!isDead)
+        if (!IsDead())
         {
             currentHealth += healAmount;
-            if (currentHealth > startingHealth)
+            if (currentHealth > maxHealth)
             {
-                currentHealth = startingHealth;
+                currentHealth = maxHealth;
             }
             healthSlider.value = currentHealth;
         }
     }
 
-    public void Die()
+    public bool IsDead()
     {
-        isDead = true;
+        return (currentHealth <= 0f);
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 }

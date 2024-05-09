@@ -31,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.Log("Attack");
             playerAnimator.SetTrigger("Attack");
+
         }
         else {
             playerAnimator.ResetTrigger("Attack");

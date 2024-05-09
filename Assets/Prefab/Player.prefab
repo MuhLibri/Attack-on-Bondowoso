@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8549594779183170638}
   - component: {fileID: 1063699181328844479}
   - component: {fileID: 5622027734723689693}
+  - component: {fileID: 4493585201830270424}
   - component: {fileID: 4487868277187646929}
   - component: {fileID: 8758222384721981059}
   - component: {fileID: -7616656585528540702}
@@ -81,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b12d4ef1fc8ba4fa8fbb5e69d6fc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  defaultSpeed: 5
   turnSpeed: 0
   jumpForce: 3
   sprintMultiplier: 3
@@ -104,6 +105,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 6273912723563855614}
+--- !u!114 &4493585201830270424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826441887922674357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682777bbcbb5789429b6875a49b80f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 0}
 --- !u!114 &4487868277187646929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eab6eeed65db0141b8ff5e660182b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orbCountMax: 15
 --- !u!114 &-7616656585528540702
 MonoBehaviour:
   m_ObjectHideFlags: 0
