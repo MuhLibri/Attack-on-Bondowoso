@@ -12,9 +12,10 @@ public class MachinePistolAttack : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public ParticleSystem bulletShell;
     public List<AudioClip> audioClips;
+    public Animator playerAnimator;
     float lastShotTime;
     AudioSource audioSource;
-    
+
     void Start()
     {
         lastShotTime = -cooldownTime;
@@ -24,22 +25,25 @@ public class MachinePistolAttack : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Time.time - lastShotTime >= cooldownTime)
+        if (Time.time - lastShotTime >= cooldownTime)
         {
-            if (Input.GetButton("Fire1"))
-            {   
+            if (Input.GetButton("Fire1") && (playerAnimator.GetBool("Aim") == true))
+            {
                 muzzleFlash.Play();
                 bulletShell.Play();
                 Shoot();
-            } else {
+            }
+            else
+            {
                 muzzleFlash.Stop();
                 bulletShell.Stop();
-            
+
             }
         }
     }
 
-    void Shoot() {
+    void Shoot()
+    {
         GameObject projectile = Instantiate(projectilePrefab, projectilePoint.position, projectilePoint.rotation);
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 

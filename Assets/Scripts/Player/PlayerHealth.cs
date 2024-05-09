@@ -68,18 +68,26 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerAttack>().enabled = false;
+        GetComponent<PlayerWeaponState>().enabled = false;
+        GetComponent<PlayerGold>().enabled = false;
+        GetComponent<PlayerCamera>().enabled = false;
         Destroy(this.gameObject, 3f);
     }
 
-    public static bool IsNoDamage() {
+    public static bool IsNoDamage()
+    {
         return noDamage;
     }
 
-    public static void ActivateNoDamage() {
+    public static void ActivateNoDamage()
+    {
         noDamage = true;
     }
 
-    public static void DeactivateNoDamage() {
+    public static void DeactivateNoDamage()
+    {
         noDamage = false;
     }
 }

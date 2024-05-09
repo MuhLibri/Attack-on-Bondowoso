@@ -19,6 +19,7 @@ public class ShotgunAttack : MonoBehaviour
     public float recoveryTime;
     public float cooldownTime;
     public List<AudioClip> audioClips;
+    public Animator playerAnimator;
 
     int maxAmmoShell = 5;
     Queue<GameObject> ammoShells = new Queue<GameObject>();
@@ -46,9 +47,9 @@ public class ShotgunAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - lastShotTime >= cooldownTime)
+        if (Time.time - lastShotTime >= cooldownTime)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && (playerAnimator.GetBool("Aim") == true))
             {
                 Shoot();
             }
@@ -65,7 +66,7 @@ public class ShotgunAttack : MonoBehaviour
                 transform.localRotation = originalShotgunRotation;
             }
         }
-        
+
     }
 
     void Shoot()
@@ -75,7 +76,7 @@ public class ShotgunAttack : MonoBehaviour
 
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
-        for(int i = 0; i < projectilesPerShot; i++)
+        for (int i = 0; i < projectilesPerShot; i++)
         {
             Quaternion newRotation = Quaternion.Euler(Random.Range(-maxShootingAngleX, maxShootingAngleX), Random.Range(-maxShootingAngleY, maxShootingAngleY), 0f);
             Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
@@ -93,7 +94,8 @@ public class ShotgunAttack : MonoBehaviour
             rb.velocity = new Vector3(0f, 0f, 0f);
             rb.angularVelocity = new Vector3(0f, 0f, 0f);
         }
-        else {
+        else
+        {
             ammo = Instantiate(ammoPrefab, shotPoint.position, shotPoint.rotation);
 
             rb = ammo.GetComponent<Rigidbody>();
