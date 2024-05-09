@@ -8,8 +8,10 @@ public class EnemyMovement : MonoBehaviour
     public float patrolRadius = 20f;
     public float patrolDistanceLimit = 5f;
     public float rotationSpeed = 5f;
+    public float attackCooldownTime = 3f;
     public Animator enemyAnimator;
 
+    private float lastAttackTime;
     private Transform player;
     private NavMeshAgent agent;
     private Vector3 lastPatrolPosition;
@@ -20,6 +22,7 @@ public class EnemyMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         lastPatrolPosition = transform.position;
         agent.updateRotation = false;
+        lastAttackTime = Time.time;
     }
 
     void FixedUpdate()
@@ -32,9 +35,16 @@ public class EnemyMovement : MonoBehaviour
         {
             Chase();
         }
-        else
+        else if (player != null)
         {
             Patrol();
+        }
+        else
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetBool("isChasing", false);
+            enemyAnimator.SetBool("isPatrolling", false);
+            agent.ResetPath();
         }
     }
 
@@ -61,6 +71,12 @@ public class EnemyMovement : MonoBehaviour
         RotateTowards(player.position);
         // Reset agent path
         agent.ResetPath();
+        // Check if enough time has passed since the last attack
+        if (Time.time - lastAttackTime >= attackCooldownTime)
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+            lastAttackTime = Time.time;
+        }
     }
 
     void Chase()

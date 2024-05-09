@@ -5,35 +5,37 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private GameObject sword;
-
+    public float swordAttackCooldownTime = 1f;
     public Animator playerAnimator;
 
+    private float lastAttackTime;
 
     // Start is called before the first frame update
     void Start()
-    {        
-        GameObject[] weapons = GameObject.FindGameObjectsWithTag("Weapon");
-        foreach (GameObject weapon in weapons)
-        {
-            if (weapon.name == "Sword")
-            {
-                sword = weapon;
-            }
-        }
+    {
+        lastAttackTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
-    {   
-
+    {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Attack");
-            playerAnimator.SetTrigger("Attack");
-
+            if (playerAnimator.GetBool("Equip Sword") == true)
+            {
+                if (Time.time - lastAttackTime > swordAttackCooldownTime)
+                {
+                    lastAttackTime = Time.time;
+                    playerAnimator.SetTrigger("Attack");
+                }
+            }
+            else
+            {
+                playerAnimator.SetTrigger("Attack");
+            }
         }
-        else {
+        else
+        {
             playerAnimator.ResetTrigger("Attack");
         }
     }
