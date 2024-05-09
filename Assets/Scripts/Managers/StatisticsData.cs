@@ -8,12 +8,14 @@ public class StatisticsData
     public int shotsHit;
     public float distance;
     public float playtime;
+    public int gold;
 
-    public StatisticsData(int shotsFired, int shotsHit, float distance, float playtime)
+    public StatisticsData(int shotsFired, int shotsHit, float distance, float playtime, int gold)
     {
         this.shotsFired = shotsFired;
         this.shotsHit = shotsHit;
         this.distance = distance;
         this.playtime = playtime;
+        this.gold = gold;
     }
 }

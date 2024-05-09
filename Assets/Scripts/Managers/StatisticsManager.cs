@@ -6,14 +6,15 @@ using UnityEngine;
 public class StatisticsManager : MonoBehaviour
 {
     // Variables to track statistics
-    private int shotsFired;
-    private int shotsHit;
-    private float distanceTraveled;
-    private float startTime;
-    private string fileFormat = "json";
-    private string folderPath;
+    int shotsFired;
+    int shotsHit;
+    float distanceTraveled;
+    float startTime;
+    int goldEarned; 
+    string fileFormat = "json";
+    string folderPath;
 
-    private void Start()
+    void Start()
     {
         // Load saved statistics data or initialize if it doesn't exist
         folderPath = Application.persistentDataPath;
@@ -23,7 +24,7 @@ public class StatisticsManager : MonoBehaviour
         startTime = Time.time;
     }
 
-    private void OnApplicationQuit()
+    void OnApplicationQuit()
     {
         // Save statistics data when the game quits
         SaveStatistics();
@@ -48,7 +49,13 @@ public class StatisticsManager : MonoBehaviour
         Debug.Log("Distance Traveled this session: " +  distanceTraveled);
     }
 
-    private void SaveStatistics()
+    public void UpdateGold(int amount)
+    {
+        goldEarned += amount;
+        Debug.Log("Gold Earned this session: " +  goldEarned);
+    }
+
+    void SaveStatistics()
     {
         // Save statistics data
         string filePath = $"{folderPath}/Statistics.{fileFormat}";
@@ -61,19 +68,21 @@ public class StatisticsManager : MonoBehaviour
             int oldShotsHit = oldStatisticsData.shotsHit;
             float oldDistance = oldStatisticsData.distance;
             float oldPlaytime = oldStatisticsData.playtime;
+            int oldGold = oldStatisticsData.gold;
 
             int newShotsFired = oldShotsFired + shotsFired;
             int newShotsHit = oldShotsHit + shotsHit;
             float newDistance = oldDistance + distanceTraveled;
             float newPlaytime = oldPlaytime + (Time.time - startTime);
+            int newGold = oldGold + goldEarned;
 
-            StatisticsData newStatisticsData = new StatisticsData(newShotsFired, newShotsHit, newDistance, newPlaytime);
+            StatisticsData newStatisticsData = new StatisticsData(newShotsFired, newShotsHit, newDistance, newPlaytime, newGold);
             string newJson = JsonUtility.ToJson(newStatisticsData);
             File.WriteAllText(filePath, newJson);
         } 
         else
         {
-            StatisticsData statisticsData = new StatisticsData(shotsFired, shotsHit, distanceTraveled, Time.time - startTime);
+            StatisticsData statisticsData = new StatisticsData(shotsFired, shotsHit, distanceTraveled, Time.time - startTime, goldEarned);
             string json = JsonUtility.ToJson(statisticsData);
             File.WriteAllText(filePath, json);
         }

@@ -49,7 +49,7 @@ public class Menu : MonoBehaviour
     // Methods for Main Menu
     public void PlayGame()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("CobaLibri");
     }
     public void ShowSaveStates()
     {

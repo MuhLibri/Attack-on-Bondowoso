@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         speed = defaultSpeed;
 
         rb.freezeRotation = true; // so that the player dont topple over
-        statisticsManager = FindObjectOfType<StatisticsManager>();
+        statisticsManager = GetComponent<StatisticsManager>();
     }
 
     // Update is called once per frame
