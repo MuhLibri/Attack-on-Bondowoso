@@ -20,26 +20,15 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!oneHitKill) {
-            if (!IsDead())
-            {
-                currentHealth -= damage;
-                audioSource.PlayOneShot(audioClips[0]);
-                if (IsDead())
-                {
-                    audioSource.PlayOneShot(audioClips[1]);
-                    enemyAnimator.SetTrigger("isDead");
-                    Die();
-                }
-            }
-        }
-        else {
-            Debug.Log("One hit kill Mati");
-            currentHealth -= currentHealth;
+        if (!IsDead()) {
+            currentHealth -= !oneHitKill? damage : currentHealth;
             audioSource.PlayOneShot(audioClips[0]);
-            audioSource.PlayOneShot(audioClips[1]);
-            enemyAnimator.SetTrigger("isDead");
-            Die();
+            if (IsDead())
+            {
+                audioSource.PlayOneShot(audioClips[1]);
+                enemyAnimator.SetTrigger("isDead");
+                Die();
+            }
         }
     }
 

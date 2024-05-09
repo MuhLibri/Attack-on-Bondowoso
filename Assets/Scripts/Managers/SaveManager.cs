@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 
 public class SaveManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class SaveManager : MonoBehaviour
     public GameObject questBox;
     private QuestManager questManager;
     private static bool isLoaded = false;
+    private bool insideSaveZone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +32,16 @@ public class SaveManager : MonoBehaviour
             LoadGame(filePath);
         }
         // TO DO make new way to save game
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P) && insideSaveZone) {
+            Debug.Log("Saving in save zone");
             string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
             string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
             SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
             SaveData(saveData);
         }
         
-        if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.L) && insideSaveZone) {
+            Debug.Log("Loading in save zone");
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
             LoadGame(filePath);
         }
@@ -118,5 +122,17 @@ public class SaveManager : MonoBehaviour
 
     public static void SetLoaded() {
         isLoaded = true;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            insideSaveZone = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
+            insideSaveZone = false;
+        }        
     }
 }
