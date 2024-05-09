@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {   
-    public float speed;
+    public float defaultSpeed = 5;
     public float turnSpeed;
     public float jumpForce;
     public float sprintMultiplier;
     public float gravityMultiplier;
     public LayerMask groundLayer;
 
+    float speed;
     bool onGround;
     bool jumpAllowed;
     public bool moveAllowed;
@@ -18,18 +19,19 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     CapsuleCollider collider;
     public Animator playerAnimator;
+    Coroutine speedIncreaseCoroutine;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
         // initialize
         rb = GetComponent<Rigidbody>();
         direction = Vector3.zero;
         jumpAllowed = true;
         collider = GetComponent<CapsuleCollider>();
+        speed = defaultSpeed;
 
         rb.freezeRotation = true; // so that the player dont topple over
     }
@@ -134,5 +136,23 @@ public class PlayerMovement : MonoBehaviour
                                     groundLayer);
 
         // Debug.Log("onGround: " + onGround);
+    }
+
+    IEnumerator speedIncrease(float duration, int boostPercentage) {
+        
+        speed = speed + (speed *  (boostPercentage / 100));
+        Debug.Log("Speed Increased to: " + speed);
+        Debug.Log("Speed Increase Percentage: " + boostPercentage);
+        yield return new WaitForSeconds(duration);
+        speed = defaultSpeed;
+        Debug.Log("Speed Decreased to: " + speed);
+        speedIncreaseCoroutine = null;
+    }
+
+    public void startSpeedIncrease(float duration, int boostPercentage) {
+        if(speedIncreaseCoroutine != null) {
+            StopCoroutine(speedIncreaseCoroutine);
+        }
+        speedIncreaseCoroutine = StartCoroutine(speedIncrease(duration, boostPercentage));
     }
 }

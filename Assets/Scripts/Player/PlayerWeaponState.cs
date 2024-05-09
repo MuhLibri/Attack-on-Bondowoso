@@ -24,12 +24,15 @@ public class PlayerWeaponState : MonoBehaviour
     PlayerMovement playerMovement;
     GameObject roroModel;
     OnAttack onAttack;
+    int damageOrbCount;
+    public int orbCountMax = 15;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        damageOrbCount = 0;
         roroModel = GameObject.FindGameObjectWithTag("RoroModel");
         onAttack = roroModel.GetComponent<OnAttack>();
 
@@ -146,6 +149,17 @@ public class PlayerWeaponState : MonoBehaviour
         }
         else{
             playerMovement.moveAllowed = true;
+        }
+    }
+
+    public void DamageBoost(int percentage) {
+        if(damageOrbCount <= orbCountMax) {
+            damageOrbCount += 1;
+            if(currentWeapon == WeaponType.Sword) {
+                SwordScript swordScript = currentWeaponObject.GetComponent<SwordScript>();
+                swordScript.damage += swordScript.damage * percentage / 100;
+                Debug.Log("Damage Boosted to: " + swordScript.damage.ToString("F2"));
+            }
         }
     }
 }
