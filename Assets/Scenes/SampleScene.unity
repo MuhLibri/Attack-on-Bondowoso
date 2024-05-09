@@ -494,37 +494,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5332903152745963991, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: moveAllowed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332903152745963991, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 65
-      objectReference: {fileID: 0}
     - target: {fileID: 7665480471461191616, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.5829926
-      objectReference: {fileID: 0}
-    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.4810002
-      objectReference: {fileID: 0}
-    - target: {fileID: 8113188362194076516, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.458496
-      objectReference: {fileID: 0}
     - target: {fileID: 8651325829579627254, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
       propertyPath: m_Name
       value: ThirdPersonSetup
-      objectReference: {fileID: 0}
-    - target: {fileID: 8835262034251264688, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
-      propertyPath: currentHealth
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
