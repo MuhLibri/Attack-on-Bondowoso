@@ -153,14 +153,14 @@ public class PlayerMovement : MonoBehaviour
 
     void groundCheck()
     {
-        float distance = playerCollider.height / 2 + 0.5f;
+        float distance = playerCollider.height / 2 + 1f;
 
         onGround = Physics.Raycast(transform.position,
                                     Vector3.down,
                                     distance,
                                     groundLayer);
 
-        // Debug.Log("onGround: " + onGround);
+        Debug.Log("onGround: " + onGround);
     }
 
     IEnumerator speedIncrease(float duration, int boostPercentage)
