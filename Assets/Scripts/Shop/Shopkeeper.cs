@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shopkeeper : MonoBehaviour
 {
     public GameObject uiShop;
+    public GameObject shopAlert;
     private bool isActiveShop = false;
     private GameObject player;
     private void Update()
@@ -16,31 +17,42 @@ public class Shopkeeper : MonoBehaviour
                 uiShop.SetActive(true);
                 uiShop.GetComponent<UI_Shop>().player = player;
                 isActiveShop = true;
-                player.GetComponent<PlayerCamera>().enabled = false;
-                player.GetComponent<PlayerMovement>().enabled = false;
-                player.GetComponent<PlayerAttack>().enabled = false;
-                player.GetComponent<PlayerWeaponState>().enabled = false;
-                player.GetComponent<StatisticsManager>().enabled = false;
-                Cursor.lockState = CursorLockMode.None;
+
             }
             else
             {
                 uiShop.SetActive(false);
                 uiShop.GetComponent<UI_Shop>().player = null;
                 isActiveShop = false;
-                player.GetComponent<PlayerCamera>().enabled = true;
-                player.GetComponent<PlayerMovement>().enabled = true;
-                player.GetComponent<PlayerAttack>().enabled = true;
-                player.GetComponent<PlayerWeaponState>().enabled = true;
-                player.GetComponent<StatisticsManager>().enabled = true;
-                Cursor.lockState = CursorLockMode.Locked;
+
             }
+        }
+        if (isActiveShop && player != null)
+        {
+            player.GetComponent<PlayerCamera>().enabled = false;
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<PlayerAttack>().enabled = false;
+            player.GetComponent<PlayerWeaponState>().enabled = false;
+            player.GetComponent<StatisticsManager>().enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            shopAlert.gameObject.SetActive(false);
+        }
+        else
+        {
+            player.GetComponent<PlayerCamera>().enabled = true;
+            player.GetComponent<PlayerMovement>().enabled = true;
+            player.GetComponent<PlayerAttack>().enabled = true;
+            player.GetComponent<PlayerWeaponState>().enabled = true;
+            player.GetComponent<StatisticsManager>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            shopAlert.gameObject.SetActive(true);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+            shopAlert.gameObject.SetActive(true);
             player = other.gameObject;
         }
     }
@@ -49,6 +61,7 @@ public class Shopkeeper : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            shopAlert.gameObject.SetActive(false);
             player = null;
         }
     }
