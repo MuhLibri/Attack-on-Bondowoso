@@ -30,6 +30,8 @@ public class UI_Shop : MonoBehaviour
         CreateShopItem(ShopList.ShopItem.PetAttack);
         PlayerGold.GiveGold(100);
         goldText.SetText(PlayerGold.GetGoldAmount().ToString());
+
+        gameObject.SetActive(false);
     }
 
     private void CreateShopItem(ShopList.ShopItem shopItem)
