@@ -91,6 +91,7 @@ public class ShotgunAttack : MonoBehaviour
             GameObject projectile = Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
             projectile.GetComponent<ProjectileController>().damage = damage;
             projectile.GetComponent<ProjectileController>().ownerTag = owner.tag;
+            if(owner.CompareTag("Player")) projectile.GetComponent<ProjectileController>().isShotgunBullet = true;
         }
 
         GameObject ammo;

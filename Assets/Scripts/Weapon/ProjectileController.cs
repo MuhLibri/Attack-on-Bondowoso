@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
     public AudioClip bulletHit;
     public AudioClip bulletPass;
     public string ownerTag;
+    public bool isShotgunBullet = false;
 
     private float traveledDistance;
     private AudioSource audioSource;
@@ -34,8 +35,10 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(ownerTag == "Player" && other.CompareTag("Enemy")) { 
-
+        if(ownerTag == "Player" && other.CompareTag("Enemy")) {
+            if(isShotgunBullet) damage = damage * (2 - 0.005f*(traveledDistance * traveledDistance)); // 2-0.005x^2
+            if (damage < 0) damage = 0;
+            Debug.Log("Damage dealt: " + damage);
             other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
             // audioSource.Stop();
             // audioSource.PlayOneShot(bulletHit);
