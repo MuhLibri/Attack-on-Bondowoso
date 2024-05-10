@@ -67,7 +67,7 @@ public class GameOver : MonoBehaviour
             countdownText.text = Mathf.CeilToInt(timer).ToString();
             yield return null;
         }
-        ShowMenu();
+        ShowEnding();
     }
 
     public void RestartGame()
@@ -77,10 +77,10 @@ public class GameOver : MonoBehaviour
         SceneManager.LoadScene(mainScene);
     }
 
-    public void ShowMenu()
+    public void ShowEnding()
     {
         StatisticsManager.Instance.SaveStatistics();
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Ending");
     }
 
     public string FormatTime(float timeInSeconds)
