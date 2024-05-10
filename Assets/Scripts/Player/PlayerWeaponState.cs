@@ -22,6 +22,7 @@ public class PlayerWeaponState : MonoBehaviour
     List<GameObject> weapons;
     Transform[] allChildren;
     public bool aiming;
+    public bool zooming;
     WeaponType currentWeapon;
     WeaponType? previousWeapon;
     GameObject currentWeaponObject;
@@ -32,8 +33,6 @@ public class PlayerWeaponState : MonoBehaviour
     public int orbCountMax = 15;
     public int petDamageCount;
     public int petDamageBoostPercentage;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -69,9 +68,7 @@ public class PlayerWeaponState : MonoBehaviour
         AimingCheck();
         WeaponChangeInput();
         WeaponStateUpdate();
-
         ResrictMovement();
-
         petDamageBoost();
     }
 
@@ -188,15 +185,24 @@ public class PlayerWeaponState : MonoBehaviour
     void AimingCheck()
     {
         bool aimingInput = Input.GetButton("Fire2");
+        bool hipFireInput = Input.GetButton("Fire1");
 
         if (aimingInput && (currentWeapon == WeaponType.Shotgun || currentWeapon == WeaponType.MachinePistol))
         {
             aiming = true;
+            zooming = true;
+            playerAnimator.SetLayerWeight(2, 1f);
+        }
+        else if (hipFireInput && (currentWeapon == WeaponType.Shotgun || currentWeapon == WeaponType.MachinePistol))
+        {
+            aiming = true;
+            zooming = false;
             playerAnimator.SetLayerWeight(2, 1f);
         }
         else
         {
             aiming = false;
+            zooming = false;
             playerMovement.moveAllowed = true;
             playerAnimator.SetLayerWeight(2, 0f);
         }

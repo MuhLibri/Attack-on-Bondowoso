@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
             audioPlayed = true;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (playerAnimator.GetBool("Equip Sword") == true)
             {

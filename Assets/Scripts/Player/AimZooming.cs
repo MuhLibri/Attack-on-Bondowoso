@@ -21,8 +21,8 @@ public class AimZooming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float targetFOV = playerWeaponState.aiming ? zoomVerticalFOV : verticalFOV;
+        float targetFOV = playerWeaponState.zooming ? zoomVerticalFOV : verticalFOV;
         vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, targetFOV, fovChangeSpeed * Time.deltaTime);
     }
-    
+
 }
