@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour
     public Animator playerAnimator;
     Coroutine speedIncreaseCoroutine;
 
+    // For Twice Speed Cheat
     public static bool twiceSpeed;
+    private static float normalSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GetComponent<PlayerHealth>().currentHealth > 0)
         {
-            groundCheck();
+            GroundCheck();
 
             jumpAllowed = onGround;
             playerAnimator.SetBool("Fall", !onGround);
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (!onGround)
             {
-                gravityScale();
+                GravityScale();
             }
         }
     }
@@ -161,12 +163,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void gravityScale()
+    void GravityScale()
     {
         rb.AddForce(Vector3.down * gravityMultiplier, ForceMode.Acceleration);
     }
 
-    void groundCheck()
+    void GroundCheck()
     {
         float distance = playerCollider.height / 2 + 0.5f;
 
@@ -180,8 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SpeedIncrease(float duration, int boostPercentage)
     {
-
-        speed += (speed * (boostPercentage / 100f));
+        speed = defaultSpeed + defaultSpeed * (boostPercentage / 100f);
         Debug.Log("Speed Increased to: " + speed);
         Debug.Log("Speed Increase Percentage: " + boostPercentage);
         yield return new WaitForSeconds(duration);
@@ -190,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         speedIncreaseCoroutine = null;
     }
 
-    public void startSpeedIncrease(float duration, int boostPercentage)
+    public void StartSpeedIncrease(float duration, int boostPercentage)
     {
         if (speedIncreaseCoroutine != null)
         {
@@ -216,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
 
     public static void ActivateTwiceSpeed()
     {
+        normalSpeed = speed;
         twiceSpeed = true;
         speed *= 2;
     }
@@ -223,6 +225,6 @@ public class PlayerMovement : MonoBehaviour
     public static void DeactivateTwiceSpeed()
     {
         twiceSpeed = false;
-        speed /= 2;
+        speed = normalSpeed;
     }
 }
