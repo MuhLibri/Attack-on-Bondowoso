@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField]
+    private string mainScene = "CobaLibri";
     // Objects in Main Menu
     public GameObject mainMenu;
     public GameObject loadSaveMenu;
@@ -39,6 +41,7 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private string fileFormat = "json";
     private string folderPath;
+    private SaveData[] saveDatas;
 
     // Methods on scene initialization
     public void Start()
@@ -56,7 +59,7 @@ public class Menu : MonoBehaviour
         string difficulty = difficultyText.text.Replace("Difficulty: ", "");
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.SetString("Difficulty", difficulty);
-        SceneManager.LoadScene("CobaLibri");
+        SceneManager.LoadScene(mainScene);
     }
     public void ShowSaveStates()
     {
@@ -88,54 +91,40 @@ public class Menu : MonoBehaviour
     // Methods for Load Save Menu
     public void UpdateLoadSave()
     {
-        try
-        {
-            string[] filePathList = Directory.GetFiles(folderPath, $"*.{fileFormat}");
-            SaveData[] saveDatas = new SaveData[filePathList.Length];
-            for (int i = 0; i < filePathList.Length; i++)
-            {
-                saveDatas[i] = LoadSaveData(filePathList[i]);
-                if (saveDatas[i].name != null)
-                {
-                    if (saveDatas[i].name == "Save1")
-                    {
-                        saveOneText.text = "Save Slot 1 - " + saveDatas[0].lastSaved;
-                    }
-                    else if (saveDatas[i].name == "Save2")
-                    {
-                        saveTwoText.text = "Save Slot 2 - " + saveDatas[1].lastSaved;
-                    }
-                    else if (saveDatas[i].name == "Save3")
-                    {
-                        saveThreeText.text = "Save Slot 3 - " + saveDatas[2].lastSaved;
-                    }
-                }
+        saveDatas = SaveManager.LoadAllData();
+
+        foreach (SaveData saveData in saveDatas) {
+            if (saveData.saveSlot == 1) {
+                saveOneText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
+            }
+            else if (saveData.saveSlot == 2) {
+                saveTwoText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
+            }
+            else if (saveData.saveSlot == 3) {
+                saveThreeText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
         }
-        catch (Exception e)
-        {
-            Debug.LogWarning("An error occurred: " + e.Message);
+    }
+
+    public void LoadSlot1() {
+        if (saveOneText.text != "-") {
+            SceneManager.LoadScene(mainScene);
+            SaveManager.SetLoaded("Save1");
         }
     }
-    public SaveData LoadSaveData(string filePath)
-    {
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
-            Debug.Log("Game loaded from: " + filePath);
-            return data;
-        }
-        else
-        {
-            Debug.LogWarning("No save file found at: " + filePath);
-            return null;
+
+    public void LoadSlot2() {
+        if (saveTwoText.text != "-") {
+            SceneManager.LoadScene(mainScene);
+            SaveManager.SetLoaded("Save2");
         }
     }
-    public void Switch()
-    {
-        SceneManager.LoadScene("CobaLibri");
-        SaveManager.SetLoaded();
+
+    public void LoadSlot3() {
+        if (saveThreeText.text != "-") {
+            SceneManager.LoadScene(mainScene);
+            SaveManager.SetLoaded("Save3");
+        }
     }
 
     // Methods for Statistics Menu

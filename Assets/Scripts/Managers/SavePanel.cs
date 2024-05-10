@@ -15,17 +15,16 @@ public class SavePanel : MonoBehaviour
     void Start()
     {
         SaveData[] saveDatas = SaveManager.LoadAllData();
-        Debug.Log("Banyak: " + saveDatas.Length);
 
-        for (int i = 0; i < saveDatas.Length; i++) {
-            if (i == 0) {
-                saveOneText.text = $"{saveDatas[i].name} - {saveDatas[i].lastSaved}";
+        foreach (SaveData saveData in saveDatas) {
+            if (saveData.saveSlot == 1) {
+                saveOneText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
-            else if (i == 1) {
-                saveTwoText.text = $"{saveDatas[i].name} - {saveDatas[i].lastSaved}";
+            else if (saveData.saveSlot == 2) {
+                saveTwoText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
-            else if (i == 2) {
-                saveThreeText.text = $"{saveDatas[i].name} - {saveDatas[i].lastSaved}";
+            else if (saveData.saveSlot == 3) {
+                saveThreeText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
         }
     }
@@ -41,9 +40,9 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 1, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
         SaveManager.SaveData(saveData);
-        saveOneText.text = $"{saveData.name} - {saveData.lastSaved}";
+        saveOneText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }
 
     public void SaveToSlot2() {
@@ -51,9 +50,9 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 2, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
         SaveManager.SaveData(saveData);
-        saveTwoText.text = $"{saveData.name} - {saveData.lastSaved}";
+        saveTwoText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }
 
     public void SaveToSlot3() {
@@ -61,8 +60,8 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 3, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
         SaveManager.SaveData(saveData);
-        saveThreeText.text = $"{saveData.name} - {saveData.lastSaved}";
+        saveThreeText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }
 }

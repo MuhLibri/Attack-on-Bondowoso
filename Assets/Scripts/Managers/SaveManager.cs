@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 
 public class SaveManager : MonoBehaviour
 {
+    private static string fileName = "Save1";
     public static string fileFormat = "json";
     private static string folderPath;
     public GameObject questBox;
@@ -27,23 +28,8 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string fileName = "Save1";
         if (isLoaded) {
             isLoaded = false;
-            string filePath = $"{folderPath}/{fileName}.{fileFormat}";
-            LoadGame(filePath);
-        }
-        // // TO DO make new way to save game
-        // if (Input.GetKeyDown(KeyCode.P) && insideSaveZone) {
-        //     Debug.Log("Saving in save zone");
-        //     string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
-        //     string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        //     SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
-        //     SaveData(saveData);
-        // }
-        
-        if (Input.GetKeyDown(KeyCode.L) && insideSaveZone) {
-            Debug.Log("Loading in save zone");
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
             LoadGame(filePath);
         }
@@ -55,14 +41,6 @@ public class SaveManager : MonoBehaviour
             savePanel.SetActive(!savePanel.activeSelf);
             Cursor.lockState = savePanel.activeSelf? CursorLockMode.None : CursorLockMode.Locked;
         }
-
-        if (Input.GetKeyDown(KeyCode.N)) {
-            SaveData[] saveDatas = LoadAllData();
-
-            foreach (SaveData saveData in saveDatas) {
-                Debug.Log($"Name: {saveData.name}, Last Saved: {saveData.lastSaved}");
-            }
-        }
     }
 
     public static void SaveData(SaveData data) {
@@ -70,7 +48,7 @@ public class SaveManager : MonoBehaviour
         string json = JsonUtility.ToJson(data);
 
         // Path to the save.json
-        string filePath = $"{folderPath}/{data.name}.{fileFormat}";
+        string filePath = $"{folderPath}/{data.saveDataName}.{fileFormat}";
         Debug.Log("Path: " + filePath);
 
         // Write JSON to file
@@ -122,6 +100,7 @@ public class SaveManager : MonoBehaviour
     }
 
     public void LoadGame(string filePath) {
+        // TO DO load Main
         SaveData gameData = LoadData(filePath);
         SceneManager.LoadScene("CobaLibri");
         PlayerPrefs.SetString("PlayerName", gameData.playerName);
@@ -130,8 +109,9 @@ public class SaveManager : MonoBehaviour
         PlayerGold.SetGoldAmount(gameData.playerGold);
     }
 
-    public static void SetLoaded() {
+    public static void SetLoaded(string fileName) {
         isLoaded = true;
+        SaveManager.fileName = fileName;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -151,7 +131,7 @@ public class SaveManager : MonoBehaviour
         if (insideSaveZone && !savePanel.activeSelf)
         {
             float y = 60;
-            GUI.Box(new Rect(0, y, Screen.width/2 - 40, 30), "Tekan P untuk save, Tekan L untuk load");
+            GUI.Box(new Rect(0, y, Screen.width/2 - 40, 30), "Press Tab button to save you progress");
             GUI.backgroundColor = new Color(0, 0, 0, 1);
         }
     }
