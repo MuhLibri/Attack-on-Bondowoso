@@ -39,6 +39,7 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private string fileFormat = "json";
     private string mainScene;
+    private string openingCutscene;
     private string folderPath;
     private SaveData[] saveDatas;
 
@@ -46,6 +47,7 @@ public class Menu : MonoBehaviour
     public void Start()
     {
         mainScene = "Main";
+        openingCutscene = "Opening";
         folderPath = Application.persistentDataPath;
         UpdateLoadSave();
         UpdateStatistics();
@@ -60,7 +62,7 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.SetString("Difficulty", difficulty);
         QuestManager.ResetQuestManager();
-        SceneManager.LoadScene(mainScene);
+        SceneManager.LoadScene(openingCutscene);
     }
 
     public void ShowSaveStates()
@@ -95,35 +97,45 @@ public class Menu : MonoBehaviour
     {
         saveDatas = SaveManager.LoadAllData();
 
-        foreach (SaveData saveData in saveDatas) {
-            if (saveData.saveSlot == 1) {
+        foreach (SaveData saveData in saveDatas)
+        {
+            if (saveData.saveSlot == 1)
+            {
                 saveOneText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
-            else if (saveData.saveSlot == 2) {
+            else if (saveData.saveSlot == 2)
+            {
                 saveTwoText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
-            else if (saveData.saveSlot == 3) {
+            else if (saveData.saveSlot == 3)
+            {
                 saveThreeText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
             }
         }
     }
 
-    public void LoadSlot1() {
-        if (saveOneText.text != "-") {
+    public void LoadSlot1()
+    {
+        if (saveOneText.text != "-")
+        {
             SceneManager.LoadScene(mainScene);
             SaveManager.SetLoaded("Save1");
         }
     }
 
-    public void LoadSlot2() {
-        if (saveTwoText.text != "-") {
+    public void LoadSlot2()
+    {
+        if (saveTwoText.text != "-")
+        {
             SceneManager.LoadScene(mainScene);
             SaveManager.SetLoaded("Save2");
         }
     }
 
-    public void LoadSlot3() {
-        if (saveThreeText.text != "-") {
+    public void LoadSlot3()
+    {
+        if (saveThreeText.text != "-")
+        {
             SceneManager.LoadScene(mainScene);
             SaveManager.SetLoaded("Save3");
         }

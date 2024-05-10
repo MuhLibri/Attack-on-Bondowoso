@@ -24,7 +24,7 @@ public class OrbSpeed : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
-            playerMovement.startSpeedIncrease(duration, speedPercentage);
+            playerMovement.StartSpeedIncrease(duration, speedPercentage);
             Destroy(this.gameObject);
         }
     }
