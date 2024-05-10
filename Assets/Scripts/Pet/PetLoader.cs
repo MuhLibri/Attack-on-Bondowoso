@@ -27,7 +27,6 @@ public class PetLoader : MonoBehaviour
 
     public void SpawnPetAttack() {
         for (int i = 0; i < petAttackCount; i++) {
-            Debug.Log("Pet a ke: " + i);
             GameObject pet = Instantiate(petAttack, new Vector3(), new Quaternion());
             pet.GetComponent<PetAttackMovement>().owner = player;
             pet.transform.position = player.transform.position + player.transform.forward * 3;
@@ -36,9 +35,7 @@ public class PetLoader : MonoBehaviour
     }
 
     public void SpawnPetHeal() {
-        Debug.Log("n pet: " + petHealCount);
         for (int i = 0; i < petHealCount; i++) {
-            Debug.Log("Pet h ke: " + i);
             GameObject pet = Instantiate(petHeal, new Vector3(300f, 10f, 200f), new Quaternion());
             pet.GetComponent<PetMovement>().owner = player;
             pet.GetComponent<NavMeshAgent>().Warp(pet.transform.position);

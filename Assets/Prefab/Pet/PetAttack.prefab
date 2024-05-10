@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopRadius: 8
-  sprintSpeed: 0
+  sprintSpeed: 25
   owner: {fileID: 0}
 --- !u!1 &7173858770866097161
 GameObject:

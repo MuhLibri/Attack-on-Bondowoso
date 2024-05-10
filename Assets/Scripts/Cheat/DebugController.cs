@@ -67,19 +67,18 @@ public class DebugController : MonoBehaviour
         });
 
         FULL_HP_PET = new("full_hp_pet", "Make the pet unkillable", "full_hp_pet", () => {
-            // TO DO Implement
-            if (PlayerHealth.IsNoDamage()) {
-                PlayerHealth.DeactivateNoDamage();
+            if (PetHealth.IsFullHpPet()) {
+                PetHealth.DeactivateFullHpPet();
                 Debug.Log("Full Hp Pet deactivated");
             }
             else {
-                PlayerHealth.ActivateNoDamage();
+                PetHealth.ActivateFullHpPet();
                 Debug.Log("Full Hp Pet activated");
             }            
         });
 
         KILL_PET = new("kill_pet", "Instantly kill all pet", "kill_pet", () => {
-            // TO DO Implement
+            PetHealth.KillPet();
             Debug.Log("Kill Pet activated");
         });
 
