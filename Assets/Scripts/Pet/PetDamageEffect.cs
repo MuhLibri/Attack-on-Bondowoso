@@ -11,7 +11,6 @@ public class PetDamageEffect : MonoBehaviour
     {
         PetDamageMovement petDamageMovement = GetComponent<PetDamageMovement>();
         owner = petDamageMovement.owner;
-        
     }
 
     void Awake()
