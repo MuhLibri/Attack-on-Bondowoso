@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
             if (IsDead())
             {
                 audioSource.PlayOneShot(audioClips[1]);
+                playerAnimator.SetLayerWeight(2, 0f);
                 playerAnimator.SetTrigger("Dead");
                 deathCam.m_Lens.FieldOfView = 100;
                 Die();
