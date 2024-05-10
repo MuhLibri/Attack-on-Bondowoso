@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -14,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
 
     private AudioSource audioSource;
     private static bool oneHitKill = false;
+    private bool isMarkedForQuest = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,10 @@ public class EnemyHealth : MonoBehaviour
         orbs[2] = orbSpeed;
         currentHealth = maxHealth;
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void MarkForQuest() {
+        isMarkedForQuest = true;
     }
 
     public void TakeDamage(int damage)
@@ -52,7 +58,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        QuestManager.AddKilled();
+        if (isMarkedForQuest) {
+            QuestManager.AddKilled();
+        }
         if (IsOrbDrop()) {
             GameObject chosenOrb = RandomizeOrb();
             Instantiate(chosenOrb, transform.position, transform.rotation);
@@ -61,10 +69,15 @@ public class EnemyHealth : MonoBehaviour
     }
 
     bool IsOrbDrop() {
-        System.Random random = new System.Random();
-        int randomNumber = random.Next(0, 2);
+        if (!orbDamage.IsUnityNull()) {
+            System.Random random = new System.Random();
+            int randomNumber = random.Next(0, 2);
 
-        return randomNumber == 0 ? true : false;
+            return randomNumber == 0 ? true : false;
+        }
+        else {
+            return false;
+        }
     }
 
     GameObject RandomizeOrb() {

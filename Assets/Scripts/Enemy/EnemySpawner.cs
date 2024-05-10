@@ -53,7 +53,8 @@ public class EnemySpawner : MonoBehaviour
 
         // Create a new enemy
         GameObject newEnemy = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-
+        // Mark this enemy for quest
+        newEnemy.GetComponent<EnemyHealth>().MarkForQuest();
         // Add new enemy to enemySpawned
         enemySpawned[spawned] = newEnemy;
     }
