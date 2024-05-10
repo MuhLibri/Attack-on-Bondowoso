@@ -48,7 +48,7 @@ public class GameOver : MonoBehaviour
         int kill = statisticsData.kill;
         int save = statisticsData.save;
 
-        float accuracy = (shotsFired > 0) ? ((float)shotsHit / shotsFired) * 100 : 0f;
+        float accuracy = (shotsFired > 0) ? Mathf.Min(((float)shotsHit / shotsFired) * 100, 100) : 0f;
         sessionAccuracy.text = "Accuracy: " + accuracy.ToString("F1") + "%";
         sessionDistance.text = "Distance: " + distance.ToString("F1") + " kilometer";
         sessionPlaytime.text = "Playtime: " + FormatTime(playtime);

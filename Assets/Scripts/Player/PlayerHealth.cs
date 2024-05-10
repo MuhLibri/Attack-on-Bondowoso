@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
     public Slider healthSlider;
     public List<AudioClip> audioClips;
@@ -103,16 +103,16 @@ public class PlayerHealth : MonoBehaviour
         switch (difficulty)
         {
             case "Easy":
-                maxHealth = 1000;
-                break;
-            case "Medium":
                 maxHealth = 500;
                 break;
-            case "Hard":
+            case "Medium":
                 maxHealth = 250;
                 break;
+            case "Hard":
+                maxHealth = 125;
+                break;
             default:
-                maxHealth = 1000;
+                maxHealth = 500;
                 break;
         }
     }
