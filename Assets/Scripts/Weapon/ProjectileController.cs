@@ -59,7 +59,18 @@ public class ProjectileController : MonoBehaviour
             transform.localScale = Vector3.zero;
             
             Destroy(this.gameObject, bulletHit.length);
+        }
+        if(other.CompareTag("Pet")) {
+            other.GetComponent<PetHealth>().TakeDamage((int)damage);
+            // audioSource.Stop();
+            // audioSource.PlayOneShot(bulletHit);
+            // audioSource.loop = false;
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.localScale = Vector3.zero;
             
+            Destroy(this.gameObject, bulletHit.length);
         }
     }
 }

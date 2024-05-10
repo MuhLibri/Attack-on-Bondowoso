@@ -38,16 +38,28 @@ public class SwordScript : MonoBehaviour
                 }
             }
         }
-        else if (exceptionTag == "Enemy" && other.CompareTag("Player"))
+        else if (exceptionTag == "Enemy")
         {
             if (animator.GetBool("isAttacking") && (Time.time - lastAttackTime > 1.5))
             {
-                lastAttackTime = Time.time;
-                // Assuming you've set damage on your projectiles
-                PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    playerHealth.TakeDamage(damage);
+                if(other.CompareTag("Player")) {
+                    lastAttackTime = Time.time;
+                    // Assuming you've set damage on your projectiles
+                    PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+                    if (playerHealth != null)
+                    {
+                        playerHealth.TakeDamage(damage);
+                    }
+                
+                }
+                else if(other.CompareTag("Pet")) {
+                    lastAttackTime = Time.time;
+                    // Assuming you've set damage on your projectiles
+                    PetHealth petHealth = other.GetComponent<PetHealth>();
+                    if (petHealth != null)
+                    {
+                        petHealth.TakeDamage(damage);
+                    }
                 }
             }
         }

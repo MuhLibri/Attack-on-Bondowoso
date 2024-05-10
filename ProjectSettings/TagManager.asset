@@ -11,6 +11,7 @@ TagManager:
   - SwordTag
   - RoroModel
   - SaveZone
+  - Pet
   layers:
   - Default
   - TransparentFX

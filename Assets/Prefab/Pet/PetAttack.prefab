@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5190388632148859673}
   m_Layer: 0
   m_Name: PetAttack
-  m_TagString: Untagged
+  m_TagString: Pet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
