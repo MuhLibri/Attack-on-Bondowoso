@@ -38,12 +38,16 @@ public class EnemyMovement : MonoBehaviour
             enemyAnimator.SetBool("isPatrolling", false);
             agent.ResetPath();
         }
-        else if (IsAttacking())
+        else if (IsUsingShotgun() && IsTooCloseToPlayer())
+        {
+            RunAway();
+        }
+        else if (IsAttacking() && !IsRunningAway())
         {
             Attack();
         }
         else if (IsChasing())
-        {   
+        {
             Chase();
         }
         else
@@ -79,7 +83,8 @@ public class EnemyMovement : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldownTime)
         {
             enemyAnimator.SetBool("isAttacking", false);
-            if(audioClips.Count > 0){
+            if (audioClips.Count > 0)
+            {
                 audioSource.PlayOneShot(audioClips[0]);
             }
             lastAttackTime = Time.time;
@@ -125,6 +130,47 @@ public class EnemyMovement : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+    }
+
+    bool IsUsingShotgun()
+    {
+        return GetComponentInChildren<ShotgunAttack>() != null;
+    }
+
+    bool IsTooCloseToPlayer()
+    {
+        if (player == null) return false;
+        return Vector3.Distance(transform.position, player.position) <= attackRadius * 0.5f;
+    }
+
+    public bool IsRunningAway()
+    {
+        return (enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Walk") || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Male_Sword_Walk"));
+    }
+
+    void RunAway()
+    {
+        // Calculate the direction away from the player
+        Vector3 runDirection = transform.position - player.position;
+        runDirection.y = 0; // Ensure no vertical movement
+
+        // Normalize the direction to get a unit vector
+        runDirection.Normalize();
+
+        // Calculate the destination point where the enemy should run to
+        Vector3 runDestination = transform.position + runDirection * patrolRadius;
+
+        // Check if the destination is valid on the NavMesh
+        if (NavMesh.SamplePosition(runDestination, out NavMeshHit hit, patrolRadius, 1))
+        {
+            // Set the destination for the NavMeshAgent to run away
+            agent.SetDestination(hit.position);
+
+            // Set animation bools
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetBool("isChasing", false);
+            enemyAnimator.SetBool("isPatrolling", true);
         }
     }
 }
