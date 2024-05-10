@@ -90,6 +90,7 @@ public class ShotgunAttack : MonoBehaviour
             Quaternion newRotation = Quaternion.Euler(Random.Range(-maxShootingAngleX, maxShootingAngleX), Random.Range(-maxShootingAngleY, maxShootingAngleY), 0f);
             GameObject projectile = Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
             projectile.GetComponent<ProjectileController>().damage = damage;
+            projectile.GetComponent<ProjectileController>().ownerTag = owner.tag;
         }
 
         GameObject ammo;

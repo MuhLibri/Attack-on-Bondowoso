@@ -9,6 +9,7 @@ public class ProjectileController : MonoBehaviour
     public float speed = 100f;
     public AudioClip bulletHit;
     public AudioClip bulletPass;
+    public string ownerTag;
 
     private float traveledDistance;
     private AudioSource audioSource;
@@ -33,7 +34,7 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy")) { 
+        if(ownerTag == "Player" && other.CompareTag("Enemy")) { 
 
             other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
             // audioSource.Stop();
@@ -47,30 +48,33 @@ public class ProjectileController : MonoBehaviour
             Destroy(this.gameObject, bulletHit.length);
             StatisticsManager.Instance.ShotHit();
         }
-         if(other.CompareTag("Player")) { 
+        else if(ownerTag == "Enemy"){
+            if(other.CompareTag("Player")) { 
 
-            other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
-            // audioSource.Stop();
-            // audioSource.PlayOneShot(bulletHit);
-            // audioSource.loop = false;
+                other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
+                // audioSource.Stop();
+                // audioSource.PlayOneShot(bulletHit);
+                // audioSource.loop = false;
 
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            transform.localScale = Vector3.zero;
-            
-            Destroy(this.gameObject, bulletHit.length);
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                transform.localScale = Vector3.zero;
+                
+                Destroy(this.gameObject, bulletHit.length);
+            }
+            if(other.CompareTag("Pet")) {
+                other.GetComponent<PetHealth>().TakeDamage((int)damage);
+                // audioSource.Stop();
+                // audioSource.PlayOneShot(bulletHit);
+                // audioSource.loop = false;
+
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                transform.localScale = Vector3.zero;
+                
+                Destroy(this.gameObject, bulletHit.length);
+            }
         }
-        if(other.CompareTag("Pet")) {
-            other.GetComponent<PetHealth>().TakeDamage((int)damage);
-            // audioSource.Stop();
-            // audioSource.PlayOneShot(bulletHit);
-            // audioSource.loop = false;
-
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            transform.localScale = Vector3.zero;
-            
-            Destroy(this.gameObject, bulletHit.length);
-        }
+        
     }
 }

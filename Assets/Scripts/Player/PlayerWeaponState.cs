@@ -21,7 +21,7 @@ public class PlayerWeaponState : MonoBehaviour
     Animator playerAnimator;
     List<GameObject> weapons;
     Transform[] allChildren;
-    bool aiming;
+    public bool aiming;
     WeaponType currentWeapon;
     WeaponType? previousWeapon;
     GameObject currentWeaponObject;

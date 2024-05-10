@@ -6,6 +6,7 @@ public class MachinePistolAttack : MonoBehaviour
 {
     public float accuracy;
     public int defaultDamage = 10;
+    public GameObject owner;
     public int damage = 10;
     public GameObject projectilePrefab;
     public Transform projectilePoint;
@@ -48,6 +49,9 @@ public class MachinePistolAttack : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab, projectilePoint.position, projectilePoint.rotation);
         projectile.GetComponent<ProjectileController>().damage = damage;
+        projectile.GetComponent<ProjectileController>().ownerTag = owner.tag;
+
+
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();

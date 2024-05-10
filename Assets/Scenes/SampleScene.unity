@@ -494,6 +494,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5749860765257239276, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7665480471461191616, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -505,7 +509,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 389508320233802887, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1265727275}
   m_SourcePrefab: {fileID: 100100000, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
 --- !u!1 &662790486
 GameObject:
@@ -989,7 +996,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 77.67
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1239,6 +1246,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -97.305, z: 0}
+--- !u!1 &1265727272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 389508320233802887, guid: 1ff1cfbdb5a373849abf7275c93ca18d, type: 3}
+  m_PrefabInstance: {fileID: 574272617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1265727275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265727272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545569a5d62839f44bc9e1ed493918e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1803416818}
+  verticalFOV: 70
+  zoomVerticalFOV: 40
 --- !u!1 &1282028885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +1864,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1409760728203251230, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.1427002
+      objectReference: {fileID: 0}
     - target: {fileID: 2366736185175236932, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
       propertyPath: quests.Array.data[0]
       value: 
