@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class StatisticsManager : MonoBehaviour
 {
-    int shotsFired;
-    int shotsHit;
-    float distanceTraveled;
-    float startTime;
-    int goldEarned;
-    int killCount;
-    int saveCount;
-    string fileFormat = "json";
-    string folderPath;
+    public int shotsFired;
+    public int shotsHit;
+    public float distanceTraveled;
+    public float startTime;
+    public int goldEarned;
+    public int killCount;
+    public int saveCount;
+    public string fileFormat = "json";
+    public string folderPath;
 
     private static StatisticsManager instance;
-
     public static StatisticsManager Instance
     {
         get
@@ -26,8 +25,7 @@ public class StatisticsManager : MonoBehaviour
                 instance = FindObjectOfType<StatisticsManager>();
                 if (instance == null)
                 {
-                    GameObject singletonObject = new GameObject("StatisticsManager");
-                    instance = singletonObject.AddComponent<StatisticsManager>();
+                    Debug.LogError("StatisticsManager instance not found in the scene.");
                 }
             }
             return instance;

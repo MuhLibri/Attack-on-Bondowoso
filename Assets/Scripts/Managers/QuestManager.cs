@@ -14,6 +14,8 @@ public class QuestManager : MonoBehaviour
     public TextMeshProUGUI questObjectiveText;
     public TextMeshProUGUI questProgressText;
 
+    bool climaxPlayed = false;
+    bool gameOverShown = false;
 
     public Quest[] quests;
     [SerializeField]
@@ -23,7 +25,6 @@ public class QuestManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // CutsceneManager.Instance.PlayOpening();
         currentQuest = quests[questIndex];
         currentQuest.StartQuest();
 
@@ -39,9 +40,10 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
+        questProgressText.text = currentQuest.GetTargetKill() != 0 ? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
 
-        if (questIndex < quests.Length && currentQuest.IsFinished()) {
+        if (questIndex < quests.Length && currentQuest.IsFinished())
+        {
             currentQuest.FinishQuest();
             questIndex++;
 
@@ -51,15 +53,16 @@ public class QuestManager : MonoBehaviour
             questObjectiveText.text = currentQuest.questObjective;
         }
 
-        if (questIndex == quests.Length - 2)
+        if (questIndex == quests.Length - 2 && !climaxPlayed)
         {
-            // CutsceneManager.Instance.PlayClimax();
+            CutsceneManager.Instance.PlayClimax();
+            climaxPlayed = true;
         }
 
-        if (questIndex == quests.Length - 1)
+        if (questIndex == quests.Length - 1 && !gameOverShown)
         {
-            // CutsceneManager.Instance.PlayEnding();
             GameOver.Instance.ShowGameOver();
+            gameOverShown = true;
         }
     }
 
