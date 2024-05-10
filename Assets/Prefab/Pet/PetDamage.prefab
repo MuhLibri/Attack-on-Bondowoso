@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8003591036395817529}
   - component: {fileID: 3681773269995880733}
   - component: {fileID: 6538290682966608522}
+  - component: {fileID: 6566333132438037180}
   m_Layer: 0
   m_Name: PetDamage
   m_TagString: Untagged
@@ -122,6 +123,18 @@ MonoBehaviour:
   stopRadius: 15
   runRadius: 10
   owner: {fileID: 0}
+--- !u!114 &6566333132438037180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231428472499208691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861eae0cd73d7094ba26d584a45a51e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2989362416868324354
 PrefabInstance:
   m_ObjectHideFlags: 0
