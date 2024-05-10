@@ -23,6 +23,7 @@ public class QuestManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // CutsceneManager.Instance.PlayOpening();
         currentQuest = quests[questIndex];
         currentQuest.StartQuest();
 
@@ -50,8 +51,14 @@ public class QuestManager : MonoBehaviour
             questObjectiveText.text = currentQuest.questObjective;
         }
 
+        if (questIndex == quests.Length - 2)
+        {
+            // CutsceneManager.Instance.PlayClimax();
+        }
+
         if (questIndex == quests.Length - 1)
         {
+            // CutsceneManager.Instance.PlayEnding();
             GameOver.Instance.ShowGameOver();
         }
     }
