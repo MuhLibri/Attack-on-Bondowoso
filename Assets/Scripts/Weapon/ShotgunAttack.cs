@@ -116,6 +116,7 @@ public class ShotgunAttack : MonoBehaviour
         lastShotTime = Time.time;
 
         Recoil();
+        StatisticsManager.Instance.ShotFired(projectilesPerShot);
     }
 
     void Recoil()

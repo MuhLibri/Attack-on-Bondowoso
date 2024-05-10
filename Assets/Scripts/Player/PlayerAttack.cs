@@ -41,7 +41,6 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 playerAnimator.SetTrigger("Attack");
-                StatisticsManager.Instance.ShotFired(5);
             }
         }
         else

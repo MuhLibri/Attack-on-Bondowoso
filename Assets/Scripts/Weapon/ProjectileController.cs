@@ -36,7 +36,6 @@ public class ProjectileController : MonoBehaviour
         if(other.CompareTag("Enemy")) { 
 
             other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
-            StatisticsManager.Instance.ShotHit();
             // audioSource.Stop();
             // audioSource.PlayOneShot(bulletHit);
             // audioSource.loop = false;
@@ -46,7 +45,7 @@ public class ProjectileController : MonoBehaviour
             transform.localScale = Vector3.zero;
             
             Destroy(this.gameObject, bulletHit.length);
-            
+            StatisticsManager.Instance.ShotHit();
         }
          if(other.CompareTag("Player")) { 
 

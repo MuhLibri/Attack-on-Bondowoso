@@ -59,5 +59,6 @@ public class MachinePistolAttack : MonoBehaviour
 
         rb.AddForce(direction * shotForce, ForceMode.VelocityChange);
         lastShotTime = Time.time;
+        StatisticsManager.Instance.ShotFired(1);
     }
 }
