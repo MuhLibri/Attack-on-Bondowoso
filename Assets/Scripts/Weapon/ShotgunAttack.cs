@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShotgunAttack : MonoBehaviour
 {
+    public GameObject owner;
+    
     public int ammo;
     public int projectilesPerShot = 5;
     [Range(0.01f, 1.0f)]
@@ -49,7 +51,11 @@ public class ShotgunAttack : MonoBehaviour
     {
         if (Time.time - lastShotTime >= cooldownTime)
         {
-            if (Input.GetButtonDown("Fire1") && (playerAnimator.GetBool("Aim") == true))
+            if (Input.GetButtonDown("Fire1") && owner.CompareTag("Player"))
+            {
+                Shoot();
+            }
+            else if (owner.CompareTag("Enemy") && owner.GetComponent<EnemyMovement>().IsAttacking())
             {
                 Shoot();
             }

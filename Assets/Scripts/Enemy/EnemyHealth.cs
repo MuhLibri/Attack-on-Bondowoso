@@ -22,10 +22,15 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!IsDead()) {
             currentHealth -= !oneHitKill? damage : currentHealth;
-            audioSource.PlayOneShot(audioClips[0]);
+            if(audioClips.Count > 0){
+                audioSource.PlayOneShot(audioClips[0]);
+            }
+            
             if (IsDead())
             {
-                audioSource.PlayOneShot(audioClips[1]);
+                if(audioClips.Count > 1){
+                    audioSource.PlayOneShot(audioClips[1]);
+                }
                 enemyAnimator.SetTrigger("isDead");
                 Die();
             }

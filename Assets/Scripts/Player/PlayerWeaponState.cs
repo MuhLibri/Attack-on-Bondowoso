@@ -18,7 +18,8 @@ public class PlayerWeaponState : MonoBehaviour
     }
 
     Animator playerAnimator;
-    GameObject[] weapons;
+    List<GameObject> weapons;
+    Transform[] allChildren;
     bool aiming;
     WeaponType currentWeapon;
     WeaponType? previousWeapon;
@@ -40,9 +41,16 @@ public class PlayerWeaponState : MonoBehaviour
         previousWeapon = null;
         currentWeapon = WeaponType.None;
         playerAnimator = GetComponentInChildren<Animator>();
-        weapons = GameObject.FindGameObjectsWithTag("Weapon");
         aiming = false;
         playerMovement = GetComponent<PlayerMovement>();
+
+        weapons = new List<GameObject>();
+        allChildren = transform.GetComponentsInChildren<Transform>();
+        foreach(Transform child in allChildren){
+            if(child.tag == "Weapon"){
+                weapons.Add(child.gameObject);
+            }
+        }
 
         WeaponStateUpdate();
 
@@ -87,7 +95,7 @@ public class PlayerWeaponState : MonoBehaviour
         }
         else if(scrollInput != 0) {
             weaponValue += scrollSign;
-            weaponValue = weaponValue % weapons.Length;
+            weaponValue = weaponValue % weapons.Count;
         }  
 
         previousWeapon = currentWeapon;

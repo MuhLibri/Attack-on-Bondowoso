@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
             Attack();
         }
         else if (IsChasing())
-        {
+        {   
             Chase();
         }
         else
@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    bool IsAttacking()
+    public bool IsAttacking()
     {
         if (player == null) return false;
         return Vector3.Distance(transform.position, player.position) <= attackRadius;
@@ -79,7 +79,9 @@ public class EnemyMovement : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldownTime)
         {
             enemyAnimator.SetBool("isAttacking", false);
-            audioSource.PlayOneShot(audioClips[0]);
+            if(audioClips.Count > 0){
+                audioSource.PlayOneShot(audioClips[0]);
+            }
             lastAttackTime = Time.time;
         }
     }

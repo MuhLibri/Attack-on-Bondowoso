@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1100217247135398611}
   m_Layer: 0
   m_Name: KepalaKeroco
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
+  audioClips: []
+  enemyAnimator: {fileID: 4075058093763895821}
 --- !u!114 &706055068651059823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +119,10 @@ MonoBehaviour:
   attackRadius: 15
   patrolRadius: 20
   patrolDistanceLimit: 10
+  rotationSpeed: 5
+  attackCooldownTime: 3
   enemyAnimator: {fileID: 4075058093763895821}
+  audioClips: []
 --- !u!195 &1100217247135398611
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -128,9 +134,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.58
   m_Speed: 10
-  m_Acceleration: 8
+  m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 720
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -139,6 +145,84 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1001 &402160552216731129
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4166148535104014669}
+    m_Modifications:
+    - target: {fileID: 4429041849948673487, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_Name
+      value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069536366176765873, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 965314194722340191}
+    - target: {fileID: 6069536366176765873, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: accuracy
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069536366176765873, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: cooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069536366176765873, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: projectilesPerShot
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.29739898
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.042989496
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.17219836
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38885778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5875614
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.64042723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3056372
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 3.754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -120.787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -82.936
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+--- !u!4 &8309290330586080818 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8558041486697331659, guid: 39cc76409a01ef944a098145cea9d675, type: 3}
+  m_PrefabInstance: {fileID: 402160552216731129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4169949699230763657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +234,10 @@ PrefabInstance:
     - target: {fileID: 1253013051146282, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
       propertyPath: m_Name
       value: KepalaKeroco
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450112240837540, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4807772044541664, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
       propertyPath: m_LocalScale.x
@@ -217,7 +305,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4364152869356484, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 8309290330586080818}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
 --- !u!95 &4075058093763895821 stripped
@@ -228,5 +319,10 @@ Animator:
 --- !u!4 &4165749995771114601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4807772044541664, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
+  m_PrefabInstance: {fileID: 4169949699230763657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4166148535104014669 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4364152869356484, guid: 6089f4e79d91144429862e8016ec6207, type: 3}
   m_PrefabInstance: {fileID: 4169949699230763657}
   m_PrefabAsset: {fileID: 0}
