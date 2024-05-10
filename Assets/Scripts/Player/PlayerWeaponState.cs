@@ -228,7 +228,7 @@ public class PlayerWeaponState : MonoBehaviour
                 if (weapon.name == "MachinePistol")
                 {
                     MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
-                    int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+                    int damageBoost = Mathf.RoundToInt(machinePistolAttack.defaultDamage * percentage / 100f);
 
                     machinePistolAttack.damage = machinePistolAttack.damage + damageBoost;
                     machinePistolAttack.defaultDamage = machinePistolAttack.defaultDamage + damageBoost;
@@ -236,7 +236,7 @@ public class PlayerWeaponState : MonoBehaviour
                 else if (weapon.name == "Shotgun")
                 {
                     ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
-                    int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+                    int damageBoost = Mathf.RoundToInt(shotgunAttack.defaultDamage * percentage / 100f);
 
                     shotgunAttack.damage = shotgunAttack.damage + damageBoost;
                     shotgunAttack.defaultDamage = shotgunAttack.defaultDamage + damageBoost;
@@ -244,7 +244,7 @@ public class PlayerWeaponState : MonoBehaviour
                 else if (weapon.name == "Sword")
                 {
                     SwordScript swordAttack = weapon.GetComponent<SwordScript>();
-                    int damageBoost = swordAttack.defaultDamage * percentage / 100;
+                    int damageBoost = Mathf.RoundToInt(swordAttack.defaultDamage * percentage / 100f);
 
                     swordAttack.damage = swordAttack.damage + damageBoost;
                     swordAttack.defaultDamage = swordAttack.defaultDamage + damageBoost;
@@ -282,21 +282,21 @@ public class PlayerWeaponState : MonoBehaviour
             if (weapon.name == "MachinePistol")
             {
                 MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
-                int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(machinePistolAttack.defaultDamage * percentage / 100f);
 
                 machinePistolAttack.damage = machinePistolAttack.damage + (damageBoost * multiplier);
             }
             else if (weapon.name == "Shotgun")
             {
                 ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
-                int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(shotgunAttack.defaultDamage * percentage / 100f);
 
                 shotgunAttack.damage = shotgunAttack.damage + damageBoost + (damageBoost * multiplier);
             }
             else if (weapon.name == "Sword")
             {
                 SwordScript swordAttack = weapon.GetComponent<SwordScript>();
-                int damageBoost = swordAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(swordAttack.defaultDamage * percentage / 100f);
 
                 swordAttack.damage = swordAttack.damage + damageBoost + (damageBoost * multiplier);
             }
@@ -310,21 +310,21 @@ public class PlayerWeaponState : MonoBehaviour
             if (weapon.name == "MachinePistol")
             {
                 MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
-                int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(machinePistolAttack.defaultDamage * percentage / 100f);
 
                 machinePistolAttack.damage = machinePistolAttack.damage - (damageBoost * multiplier);
             }
             else if (weapon.name == "Shotgun")
             {
                 ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
-                int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(shotgunAttack.defaultDamage * percentage / 100f);
 
                 shotgunAttack.damage = shotgunAttack.damage - damageBoost + (damageBoost * multiplier);
             }
             else if (weapon.name == "Sword")
             {
                 SwordScript swordAttack = weapon.GetComponent<SwordScript>();
-                int damageBoost = swordAttack.defaultDamage * percentage / 100;
+                int damageBoost = Mathf.RoundToInt(swordAttack.defaultDamage * percentage / 100f);
 
                 swordAttack.damage = swordAttack.damage - damageBoost + (damageBoost * multiplier);
             }

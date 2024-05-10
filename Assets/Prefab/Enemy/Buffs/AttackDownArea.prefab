@@ -66,4 +66,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a0f74adaa0eab46b3441124ef3be7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDownMultiplier: 1.5
+  attackDownPercentage: 25
