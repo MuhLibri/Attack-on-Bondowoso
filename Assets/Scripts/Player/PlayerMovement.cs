@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     static float speed;
     bool onGround;
     bool jumpAllowed;
+    bool arrowPointerActive;
     public bool moveAllowed;
     Vector3 direction;
     Rigidbody rb;
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         jumpAllowed = true;
         playerCollider = GetComponent<CapsuleCollider>();
         speed = defaultSpeed;
-
+        arrowPointerActive = true;
         rb.freezeRotation = true; // so that the player dont topple over
     }
 
@@ -75,6 +76,22 @@ public class PlayerMovement : MonoBehaviour
         // set the direction
         direction = transform.right * horizontal + transform.forward * vertical;
 
+        // Toggle arrow pointer
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ArrowPointer arrowPointer = GetComponentInChildren<ArrowPointer>();
+            if (arrowPointerActive)
+            {
+                arrowPointer.ToggleArrow(false);
+                arrowPointerActive = false;
+            }
+            else
+            {
+                arrowPointer.ToggleArrow(true);
+                arrowPointerActive = true;
+            }
+        }
+
         // sprint multiplier
         if (Input.GetKey(KeyCode.LeftShift) && (vertical > 0))
         {
@@ -85,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("Sprint", false);
         }
-
 
         // set animation parameters
         playerAnimator.SetBool("Forward", false);
