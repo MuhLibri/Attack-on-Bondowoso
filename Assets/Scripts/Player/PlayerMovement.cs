@@ -162,10 +162,10 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("onGround: " + onGround);
     }
 
-    IEnumerator speedIncrease(float duration, int boostPercentage)
+    IEnumerator SpeedIncrease(float duration, int boostPercentage)
     {
 
-        speed = speed + (speed * (boostPercentage / 100));
+        speed += (speed * (boostPercentage / 100f));
         Debug.Log("Speed Increased to: " + speed);
         Debug.Log("Speed Increase Percentage: " + boostPercentage);
         yield return new WaitForSeconds(duration);
@@ -180,19 +180,32 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCoroutine(speedIncreaseCoroutine);
         }
-        speedIncreaseCoroutine = StartCoroutine(speedIncrease(duration, boostPercentage));
+        speedIncreaseCoroutine = StartCoroutine(SpeedIncrease(duration, boostPercentage));
     }
 
-    public static bool IsTwiceSpeed() {
+    public void SpeedDecrease(int percentage)
+    {
+        speed -= (speed * (percentage / 100f));
+    }
+
+    public void ResetSpeed()
+    {
+        speed = defaultSpeed;
+    }
+
+    public static bool IsTwiceSpeed()
+    {
         return twiceSpeed;
     }
 
-    public static void ActivateTwiceSpeed() {
+    public static void ActivateTwiceSpeed()
+    {
         twiceSpeed = true;
         speed *= 2;
     }
 
-    public static void DeactivateTwiceSpeed() {
+    public static void DeactivateTwiceSpeed()
+    {
         twiceSpeed = false;
         speed /= 2;
     }
