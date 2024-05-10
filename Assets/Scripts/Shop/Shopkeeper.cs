@@ -14,14 +14,14 @@ public class Shopkeeper : MonoBehaviour
         {
             if (!isActiveShop)
             {
-                uiShop.SetActive(true);
+                uiShop.GetComponent<UI_Shop>().Show();
                 uiShop.GetComponent<UI_Shop>().player = player;
                 isActiveShop = true;
 
             }
             else
             {
-                uiShop.SetActive(false);
+                uiShop.GetComponent<UI_Shop>().Hide();
                 uiShop.GetComponent<UI_Shop>().player = null;
                 isActiveShop = false;
 

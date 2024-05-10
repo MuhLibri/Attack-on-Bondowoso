@@ -7,12 +7,16 @@ using UnityEngine.UI;
 public class UI_Shop : MonoBehaviour
 {
     public GameObject player;
+    public AudioClip buyAudioClip;
+    public AudioClip notEnoughMoneyAudioClip;
+    public AudioClip shopOpenAudioClip;
 
     private Transform container;
     private Transform shopItemTemplate;
     private TextMeshProUGUI goldText;
     private Color originalGoldTextColor;
     private Coroutine blinkCoroutine;
+    private AudioSource audioSource;
 
 
     private void Awake()
@@ -22,6 +26,7 @@ public class UI_Shop : MonoBehaviour
         shopItemTemplate.gameObject.SetActive(false);
         goldText = transform.Find("goldText").gameObject.GetComponent<TextMeshProUGUI>();
         originalGoldTextColor = goldText.color;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -31,7 +36,7 @@ public class UI_Shop : MonoBehaviour
         PlayerGold.GiveGold(100);
         goldText.SetText(PlayerGold.GetGoldAmount().ToString());
 
-        gameObject.SetActive(false);
+        Hide();
     }
 
     private void CreateShopItem(ShopList.ShopItem shopItem)
@@ -56,6 +61,17 @@ public class UI_Shop : MonoBehaviour
         shopItemTransform.gameObject.SetActive(true);
     }
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        audioSource.PlayOneShot(shopOpenAudioClip);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void BuyItem(ShopList.ShopItem shopItem)
     {
         int cost = ShopList.GetCost(shopItem);
@@ -73,6 +89,7 @@ public class UI_Shop : MonoBehaviour
                 pet.GetComponent<PetAttackMovement>().owner = player;
             }
             pet.transform.position = player.transform.position + Vector3.forward * 5f;
+            audioSource.PlayOneShot(buyAudioClip);
             Debug.Log("Bought " + ShopList.GetName(shopItem));
         }
         else
@@ -82,6 +99,7 @@ public class UI_Shop : MonoBehaviour
             {
                 StopCoroutine(blinkCoroutine);
             }
+            audioSource.PlayOneShot(notEnoughMoneyAudioClip);
             blinkCoroutine = StartCoroutine(BlinkCoroutine());
         }
     }
