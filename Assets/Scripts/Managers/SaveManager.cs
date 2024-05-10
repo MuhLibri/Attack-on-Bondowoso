@@ -11,9 +11,11 @@ public class SaveManager : MonoBehaviour
     public static string fileFormat = "json";
     private static string folderPath;
     public GameObject questBox;
+    public GameObject healthBar;
     private QuestManager questManager;
     private static bool isLoaded = false;
     private bool insideSaveZone = false;
+    public GameObject savePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -31,19 +33,27 @@ public class SaveManager : MonoBehaviour
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
             LoadGame(filePath);
         }
-        // TO DO make new way to save game
-        if (Input.GetKeyDown(KeyCode.P) && insideSaveZone) {
-            Debug.Log("Saving in save zone");
-            string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
-            string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-            SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
-            SaveData(saveData);
-        }
+        // // TO DO make new way to save game
+        // if (Input.GetKeyDown(KeyCode.P) && insideSaveZone) {
+        //     Debug.Log("Saving in save zone");
+        //     string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
+        //     string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
+        //     SaveData saveData = new SaveData(playerName, difficulty, fileName, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        //     SaveData(saveData);
+        // }
         
         if (Input.GetKeyDown(KeyCode.L) && insideSaveZone) {
             Debug.Log("Loading in save zone");
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
             LoadGame(filePath);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && insideSaveZone) {
+            Debug.Log("Accessing save panel");
+            questBox.SetActive(savePanel.activeSelf);
+            healthBar.SetActive(savePanel.activeSelf);
+            savePanel.SetActive(!savePanel.activeSelf);
+            Cursor.lockState = savePanel.activeSelf? CursorLockMode.None : CursorLockMode.Locked;
         }
 
         if (Input.GetKeyDown(KeyCode.N)) {
@@ -55,7 +65,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SaveData(SaveData data) {
+    public static void SaveData(SaveData data) {
         // Convert game data to JSON
         string json = JsonUtility.ToJson(data);
 
@@ -93,7 +103,7 @@ public class SaveManager : MonoBehaviour
         {
             folderPath = Application.persistentDataPath;
             // Get all the save.json file path
-            string[] filePathList = Directory.GetFiles(folderPath, $"*.{fileFormat}");
+            string[] filePathList = Directory.GetFiles(folderPath, $"Save*.{fileFormat}");
             SaveData[] saveDatas = new SaveData[filePathList.Length];
 
             // Assign each saveData to saveDatas
@@ -138,7 +148,7 @@ public class SaveManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (insideSaveZone)
+        if (insideSaveZone && !savePanel.activeSelf)
         {
             float y = 60;
             GUI.Box(new Rect(0, y, Screen.width/2 - 40, 30), "Tekan P untuk save, Tekan L untuk load");
