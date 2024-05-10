@@ -12,6 +12,8 @@ public class SaveManager : MonoBehaviour
     private static string fileName = "Save1";
     public static string fileFormat = "json";
     private static string folderPath;
+    public GameObject petLoaderObject;
+    private PetLoader petLoader;
     public GameObject questBox;
     public GameObject healthBar;
     private QuestManager questManager;
@@ -24,6 +26,7 @@ public class SaveManager : MonoBehaviour
     {
         folderPath = Application.persistentDataPath;
         questManager = questBox.GetComponent<QuestManager>();
+        petLoader = petLoaderObject.GetComponent<PetLoader>();
     }
 
     // Update is called once per frame
@@ -103,13 +106,19 @@ public class SaveManager : MonoBehaviour
     public void LoadGame(string filePath) {
         // Set player position to save zone
         Transform playerTransform = GameObject.Find("Player").transform;
-        playerTransform.position = new Vector3(300f, 20f, 200f);
+        playerTransform.position = new Vector3(295f, 15f, 200f);
 
         SaveData gameData = LoadData(filePath);
         PlayerPrefs.SetString("PlayerName", gameData.playerName);
         PlayerPrefs.SetString("Difficulty", gameData.difficulty);
         questManager.SetCurrentQuest(gameData.questIndex);
         PlayerGold.SetGoldAmount(gameData.playerGold);
+        
+        PetLoader.petHealCount = gameData.petHealCount;
+        PetLoader.petAttackCount = gameData.petAttackCount;
+
+        petLoader.SpawnPetAttack();
+        petLoader.SpawnPetHeal();
     }
 
     public static void SetLoaded(string fileName) {
