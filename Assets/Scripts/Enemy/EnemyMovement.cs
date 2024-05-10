@@ -146,7 +146,7 @@ public class EnemyMovement : MonoBehaviour
 
     public bool IsRunningAway()
     {
-        return (enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Walk") || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Male_Sword_Walk"));
+        return (enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Walk") || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Male_Sword_Walk") || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Female Sword Sprint") || enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Male Sword Sprint"));
     }
 
     void RunAway()
