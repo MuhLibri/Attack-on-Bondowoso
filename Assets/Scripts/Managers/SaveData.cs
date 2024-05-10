@@ -12,8 +12,10 @@ public class SaveData
     public string difficulty;
     public int questIndex;
     public int playerGold;
+    public int petAttackCount;
+    public int petHealCount;
     
-    public SaveData(string saveDataName, int saveSlot, string playerName, string difficulty, int questIndex, int playerGold) {
+    public SaveData(string saveDataName, int saveSlot, string playerName, string difficulty, int questIndex, int playerGold, int petAttackCount, int petHealCount) {
         this.saveDataName = saveDataName != "" ? saveDataName : "Save1";
         this.lastSaved = DateTime.Now.ToString();
         this.saveSlot = saveSlot;
@@ -21,5 +23,7 @@ public class SaveData
         this.difficulty = difficulty;
         this.questIndex = questIndex;
         this.playerGold = playerGold;
+        this.petAttackCount = petAttackCount;
+        this.petHealCount = petHealCount;
     }
 }

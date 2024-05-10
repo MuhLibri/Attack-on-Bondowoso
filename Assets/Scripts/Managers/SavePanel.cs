@@ -40,7 +40,7 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(fileName, 1, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 1, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount(), PetLoader.petAttackCount, PetLoader.petHealCount);
         SaveManager.SaveData(saveData);
         saveOneText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }
@@ -50,7 +50,7 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(fileName, 2, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 2, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount(), PetLoader.petAttackCount, PetLoader.petHealCount);
         SaveManager.SaveData(saveData);
         saveTwoText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }
@@ -60,7 +60,7 @@ public class SavePanel : MonoBehaviour
         Debug.Log("Saving in save zone");
         string playerName = PlayerPrefs.GetString("PlayerName", "Guest");
         string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
-        SaveData saveData = new SaveData(fileName, 3, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount());
+        SaveData saveData = new SaveData(fileName, 3, playerName, difficulty, QuestManager.GetQuestIndex(), PlayerGold.GetGoldAmount(), PetLoader.petAttackCount, PetLoader.petHealCount);
         SaveManager.SaveData(saveData);
         saveThreeText.text = $"{saveData.saveDataName} - {saveData.lastSaved}";
     }

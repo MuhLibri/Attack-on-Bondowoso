@@ -83,10 +83,12 @@ public class UI_Shop : MonoBehaviour
             GameObject pet = Instantiate(ShopList.GetPrefab(shopItem));
             if(shopItem.ToString() == "PetHeal")
             {
+                PetLoader.petHealCount++;
                 pet.GetComponent<PetMovement>().owner = player;
             }
             else if(shopItem.ToString() == "PetAttack")
             {
+                PetLoader.petAttackCount++;
                 pet.GetComponent<PetAttackMovement>().owner = player;
             }
             pet.transform.position = player.transform.position + player.transform.forward * 3;
