@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6396230942127794008}
   - component: {fileID: 91451256756503922}
   - component: {fileID: 564447032121888902}
+  - component: {fileID: 5806088057416179369}
   - component: {fileID: 6356734961613669032}
   - component: {fileID: 2471389341617482988}
   m_Layer: 0
@@ -108,6 +109,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5806088057416179369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811995390952167430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982d548d4686d044a9f4b746ab8707bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  currentHealth: 30
+  petAnimator: {fileID: 1548869312892674766}
 --- !u!114 &6356734961613669032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +215,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77f122f451a2394898a24191c26107c, type: 3}
+--- !u!95 &1548869312892674766 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: b77f122f451a2394898a24191c26107c, type: 3}
+  m_PrefabInstance: {fileID: 1548869312899995566}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1548869312900386090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: b77f122f451a2394898a24191c26107c, type: 3}
