@@ -34,9 +34,6 @@ public class UI_Shop : MonoBehaviour
     {
         CreateShopItem(ShopList.ShopItem.PetHeal);
         CreateShopItem(ShopList.ShopItem.PetAttack);
-        PlayerGold.GiveGold(100);
-        goldText.SetText(PlayerGold.GetGoldAmount().ToString());
-
         Hide();
     }
 
@@ -64,6 +61,7 @@ public class UI_Shop : MonoBehaviour
 
     public void Show()
     {
+        goldText.SetText(PlayerGold.GetGoldAmount().ToString());
         gameObject.SetActive(true);
         audioSource.PlayOneShot(shopOpenAudioClip);
     }
