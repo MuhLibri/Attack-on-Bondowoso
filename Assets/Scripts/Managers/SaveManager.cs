@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 
 public class SaveManager : MonoBehaviour
 {
+    public string mainScene = "Main";
     private static string fileName = "Save1";
     public static string fileFormat = "json";
     private static string folderPath;
@@ -100,9 +101,8 @@ public class SaveManager : MonoBehaviour
     }
 
     public void LoadGame(string filePath) {
-        // TO DO load Main
         SaveData gameData = LoadData(filePath);
-        SceneManager.LoadScene("CobaLibri");
+        // SceneManager.LoadScene(mainScene);
         PlayerPrefs.SetString("PlayerName", gameData.playerName);
         PlayerPrefs.SetString("Difficulty", gameData.difficulty);
         questManager.SetCurrentQuest(gameData.questIndex);

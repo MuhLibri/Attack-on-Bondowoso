@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public static string mainScene = "Main";
     public GameObject gameOverPanel;
     public TextMeshProUGUI sessionAccuracy;
     public TextMeshProUGUI sessionDistance;
@@ -72,7 +73,8 @@ public class GameOver : MonoBehaviour
     public void RestartGame()
     {
         StatisticsManager.Instance.SaveStatistics();
-        SceneManager.LoadScene("CobaLibri");
+        QuestManager.ResetQuestManager();
+        SceneManager.LoadScene(mainScene);
     }
 
     public void ShowMenu()

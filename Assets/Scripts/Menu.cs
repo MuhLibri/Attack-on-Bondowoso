@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     [SerializeField]
-    private string mainScene = "CobaLibri";
+    private string mainScene = "Main";
     // Objects in Main Menu
     public GameObject mainMenu;
     public GameObject loadSaveMenu;
@@ -59,8 +59,10 @@ public class Menu : MonoBehaviour
         string difficulty = difficultyText.text.Replace("Difficulty: ", "");
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.SetString("Difficulty", difficulty);
+        QuestManager.ResetQuestManager();
         SceneManager.LoadScene(mainScene);
     }
+
     public void ShowSaveStates()
     {
         loadSaveMenu.SetActive(true);
