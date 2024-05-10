@@ -187,22 +187,21 @@ public class PlayerWeaponState : MonoBehaviour
 
     void AimingCheck()
     {
-
         bool aimingInput = Input.GetButton("Fire2");
-        playerAnimator.SetBool("Aim", aiming);
 
         if (aimingInput && (currentWeapon == WeaponType.Shotgun || currentWeapon == WeaponType.MachinePistol))
         {
-            aiming = aimingInput;
+            aiming = true;
             playerAnimator.SetLayerWeight(2, 1f);
         }
         else
         {
-            aiming = aimingInput;
+            aiming = false;
             playerMovement.moveAllowed = true;
             playerAnimator.SetLayerWeight(2, 0f);
         }
 
+        playerAnimator.SetBool("Aim", aiming);
     }
 
     void ResrictMovement()

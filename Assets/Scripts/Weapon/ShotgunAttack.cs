@@ -7,7 +7,7 @@ public class ShotgunAttack : MonoBehaviour
     public GameObject owner;
     public int defaultDamage = 10;
     public int damage;
-    
+
     public int ammo;
     public int projectilesPerShot = 5;
     [Range(0.01f, 1.0f)]
@@ -36,7 +36,7 @@ public class ShotgunAttack : MonoBehaviour
     float maxShootingAngleY = 40f;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         damage = defaultDamage;
         lastShotTime = -cooldownTime;
 
@@ -54,7 +54,7 @@ public class ShotgunAttack : MonoBehaviour
     {
         if (Time.time - lastShotTime >= cooldownTime)
         {
-            if (Input.GetButtonDown("Fire1") && owner.CompareTag("Player"))
+            if (Input.GetButton("Fire1") && owner.CompareTag("Player") && playerAnimator.GetBool("Aim"))
             {
                 Shoot();
             }

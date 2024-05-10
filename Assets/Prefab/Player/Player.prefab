@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbCountMax: 15
+  petDamageCount: 0
+  petDamageBoostPercentage: 0
 --- !u!114 &-7616656585528540702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +514,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 826441887922674357}
+    - target: {fileID: 8889385142521254453, guid: 2de4fd37ebb575841ba6c4fba372581a, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 6273912723563855614}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
