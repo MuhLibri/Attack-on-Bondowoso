@@ -19,6 +19,11 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        string difficulty = PlayerPrefs.GetString("Difficulty", "Easy");
+        AdjustHealth(difficulty);
+        Debug.Log("Difficulty: " + difficulty + " - Max Health: " + maxHealth.ToString());
+        currentHealth = maxHealth;
+
         playerAnimator = GetComponentInChildren<Animator>();
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
@@ -91,5 +96,24 @@ public class PlayerHealth : MonoBehaviour
     public static void DeactivateNoDamage()
     {
         noDamage = false;
+    }
+
+    void AdjustHealth(string difficulty)
+    {
+        switch (difficulty)
+        {
+            case "Easy":
+                maxHealth = 1000;
+                break;
+            case "Medium":
+                maxHealth = 500;
+                break;
+            case "Hard":
+                maxHealth = 250;
+                break;
+            default:
+                maxHealth = 1000;
+                break;
+        }
     }
 }

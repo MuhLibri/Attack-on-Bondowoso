@@ -9,8 +9,6 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField]
-    private string mainScene = "Main";
     // Objects in Main Menu
     public GameObject mainMenu;
     public GameObject loadSaveMenu;
@@ -40,12 +38,14 @@ public class Menu : MonoBehaviour
 
     [SerializeField]
     private string fileFormat = "json";
+    private string mainScene;
     private string folderPath;
     private SaveData[] saveDatas;
 
     // Methods on scene initialization
     public void Start()
     {
+        mainScene = "Main";
         folderPath = Application.persistentDataPath;
         UpdateLoadSave();
         UpdateStatistics();
