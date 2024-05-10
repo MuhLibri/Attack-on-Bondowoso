@@ -5,6 +5,8 @@ using UnityEngine;
 public class ShotgunAttack : MonoBehaviour
 {
     public GameObject owner;
+    public int defaultDamage = 10;
+    public int damage;
     
     public int ammo;
     public int projectilesPerShot = 5;
@@ -34,7 +36,8 @@ public class ShotgunAttack : MonoBehaviour
     float maxShootingAngleY = 40f;
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        damage = defaultDamage;
         lastShotTime = -cooldownTime;
 
         originalShotgunPosition = transform.localPosition;
@@ -85,7 +88,8 @@ public class ShotgunAttack : MonoBehaviour
         for (int i = 0; i < projectilesPerShot; i++)
         {
             Quaternion newRotation = Quaternion.Euler(Random.Range(-maxShootingAngleX, maxShootingAngleX), Random.Range(-maxShootingAngleY, maxShootingAngleY), 0f);
-            Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
+            GameObject projectile = Instantiate(projetilePrefab, projectilePoint.position, projectilePoint.rotation * newRotation);
+            projectile.GetComponent<ProjectileController>().damage = damage;
         }
 
         GameObject ammo;

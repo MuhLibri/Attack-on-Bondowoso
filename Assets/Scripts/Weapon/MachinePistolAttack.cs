@@ -5,6 +5,8 @@ using UnityEngine;
 public class MachinePistolAttack : MonoBehaviour
 {
     public float accuracy;
+    public int defaultDamage = 10;
+    public int damage = 10;
     public GameObject projectilePrefab;
     public Transform projectilePoint;
     public float shotForce;
@@ -45,6 +47,7 @@ public class MachinePistolAttack : MonoBehaviour
     void Shoot()
     {
         GameObject projectile = Instantiate(projectilePrefab, projectilePoint.position, projectilePoint.rotation);
+        projectile.GetComponent<ProjectileController>().damage = damage;
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();

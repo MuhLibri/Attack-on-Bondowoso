@@ -29,12 +29,16 @@ public class PlayerWeaponState : MonoBehaviour
     OnAttack onAttack;
     int damageOrbCount;
     public int orbCountMax = 15;
+    public int petDamageCount;
+    public int petDamageBoostPercentage;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        petDamageCount = 0;
+        petDamageBoostPercentage = 0;
         damageOrbCount = 0;
         roroModel = GameObject.FindGameObjectWithTag("RoroModel");
         onAttack = roroModel.GetComponent<OnAttack>();
@@ -64,6 +68,8 @@ public class PlayerWeaponState : MonoBehaviour
         WeaponStateUpdate();
 
         ResrictMovement();
+
+        petDamageBoost();
     }
 
     GameObject GetWeaponWithName(string weaponName){
@@ -184,11 +190,103 @@ public class PlayerWeaponState : MonoBehaviour
     public void DamageBoost(int percentage) {
         if(damageOrbCount <= orbCountMax) {
             damageOrbCount += 1;
-            if(currentWeapon == WeaponType.Sword) {
-                SwordScript swordScript = currentWeaponObject.GetComponent<SwordScript>();
-                swordScript.damage += swordScript.damage * percentage / 100;
-                Debug.Log("Damage Boosted to: " + swordScript.damage.ToString("F2"));
+
+            foreach(GameObject weapon in weapons){
+                if(weapon.name == "MachinePistol"){
+                    MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
+                    int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+
+                    machinePistolAttack.damage = machinePistolAttack.damage + damageBoost; 
+                    machinePistolAttack.defaultDamage = machinePistolAttack.defaultDamage + damageBoost;
+                }
+                else if(weapon.name == "Shotgun"){
+                    ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
+                    int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+
+                    shotgunAttack.damage = shotgunAttack.damage + damageBoost; 
+                    shotgunAttack.defaultDamage = shotgunAttack.defaultDamage + damageBoost;
+                }
+                else if(weapon.name == "Sword"){
+                    SwordScript swordAttack = weapon.GetComponent<SwordScript>();
+                    int damageBoost = swordAttack.defaultDamage * percentage / 100;
+
+                    swordAttack.damage = swordAttack.damage + damageBoost; 
+                    swordAttack.defaultDamage = swordAttack.defaultDamage + damageBoost;
+                }
             }
+        }
+    }
+
+    void setDefaultDamage(){
+        foreach(GameObject weapon in weapons){
+            if(weapon.name == "MachinePistol"){
+                MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
+                machinePistolAttack.damage = machinePistolAttack.defaultDamage;
+            }
+            else if(weapon.name == "Shotgun"){
+                ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
+                shotgunAttack.damage = shotgunAttack.defaultDamage;
+            }
+            else if(weapon.name == "Sword"){
+                SwordScript swordAttack = weapon.GetComponent<SwordScript>();
+                swordAttack.damage = swordAttack.defaultDamage;
+            }
+        }
+    }
+
+    void addDamage(int percentage, int multiplier){
+        foreach(GameObject weapon in weapons){
+            if(weapon.name == "MachinePistol"){
+                MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
+                int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+
+                machinePistolAttack.damage = machinePistolAttack.damage + (damageBoost * multiplier); 
+            }
+            else if(weapon.name == "Shotgun"){
+                ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
+                int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+
+                shotgunAttack.damage = shotgunAttack.damage + damageBoost+ (damageBoost * multiplier); 
+            }
+            else if(weapon.name == "Sword"){
+                SwordScript swordAttack = weapon.GetComponent<SwordScript>();
+                int damageBoost = swordAttack.defaultDamage * percentage / 100;
+
+                swordAttack.damage = swordAttack.damage + damageBoost+ (damageBoost * multiplier); 
+            }
+        }
+    }
+
+    void decreaseDamage(int percentage, int multiplier){
+        foreach(GameObject weapon in weapons){
+            if(weapon.name == "MachinePistol"){
+                MachinePistolAttack machinePistolAttack = weapon.GetComponent<MachinePistolAttack>();
+                int damageBoost = machinePistolAttack.defaultDamage * percentage / 100;
+
+                machinePistolAttack.damage = machinePistolAttack.damage - (damageBoost * multiplier); 
+            }
+            else if(weapon.name == "Shotgun"){
+                ShotgunAttack shotgunAttack = weapon.GetComponent<ShotgunAttack>();
+                int damageBoost = shotgunAttack.defaultDamage * percentage / 100;
+
+                shotgunAttack.damage = shotgunAttack.damage - damageBoost+ (damageBoost * multiplier); 
+            }
+            else if(weapon.name == "Sword"){
+                SwordScript swordAttack = weapon.GetComponent<SwordScript>();
+                int damageBoost = swordAttack.defaultDamage * percentage / 100;
+
+                swordAttack.damage = swordAttack.damage - damageBoost+ (damageBoost * multiplier); 
+            }
+        }
+    }
+
+
+    public void petDamageBoost(){
+        if (petDamageCount == 0) {
+            setDefaultDamage();
+        }
+        else {
+            addDamage(petDamageBoostPercentage, petDamageCount);
         }
     }
 }

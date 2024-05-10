@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
+    public int defaultDamage = 25;
     public int damage = 25;
     public string exceptionTag;
     public Animator animator;
