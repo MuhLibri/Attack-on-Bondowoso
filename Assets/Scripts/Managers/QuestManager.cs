@@ -49,6 +49,11 @@ public class QuestManager : MonoBehaviour
             questTitleText.text = currentQuest.questTitle;
             questObjectiveText.text = currentQuest.questObjective;
         }
+
+        if (questIndex == quests.Length - 1)
+        {
+            GameOver.Instance.ShowGameOver();
+        }
     }
 
     public static void AddKilled() {

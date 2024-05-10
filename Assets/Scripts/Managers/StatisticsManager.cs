@@ -34,7 +34,7 @@ public class StatisticsManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Start()
     {
         folderPath = Application.persistentDataPath;
         shotsFired = 0;
@@ -46,7 +46,7 @@ public class StatisticsManager : MonoBehaviour
         startTime = Time.time;
     }
 
-    void OnApplicationQuit()
+    public void OnApplicationQuit()
     {
         SaveStatistics();
     }
@@ -87,7 +87,7 @@ public class StatisticsManager : MonoBehaviour
         Debug.Log("Save Count this session: " +  saveCount);
     }
 
-    void SaveStatistics()
+    public void SaveStatistics()
     {
         string filePath = $"{folderPath}/Statistics.{fileFormat}";
         if (File.Exists(filePath))
@@ -121,5 +121,11 @@ public class StatisticsManager : MonoBehaviour
             string json = JsonUtility.ToJson(statisticsData);
             File.WriteAllText(filePath, json);
         }
+    }
+
+    public StatisticsData GetStatistics()
+    {
+        StatisticsData statisticsData = new StatisticsData(shotsFired, shotsHit, distanceTraveled, Time.time - startTime, goldEarned, killCount, saveCount);
+        return statisticsData;
     }
 }
