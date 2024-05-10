@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40510f881aba964d85913c6e5525f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  orbDamage: {fileID: 2351117438306767086, guid: abdfafbb413b7274d980e1437c54d558, type: 3}
+  orbHealth: {fileID: 5928907673800009345, guid: 58b00cd88c2a98644a06ad41d50d512b, type: 3}
+  orbSpeed: {fileID: 6926906167359508983, guid: 33e827f996528df4fb957939b9997098, type: 3}
