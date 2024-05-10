@@ -3,7 +3,11 @@ guid: 5a82825743646fe468ada5e8111f59a8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - orbDamage: {fileID: 2351117438306767086, guid: abdfafbb413b7274d980e1437c54d558, type: 3}
+  - orbHealth: {fileID: 5928907673800009345, guid: 58b00cd88c2a98644a06ad41d50d512b, type: 3}
+  - orbSpeed: {fileID: 6926906167359508983, guid: 33e827f996528df4fb957939b9997098, type: 3}
+  - enemyAnimator: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
