@@ -182,7 +182,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SpeedIncrease(float duration, int boostPercentage)
     {
-        speed = defaultSpeed + defaultSpeed * (boostPercentage / 100f);
+        float speedIncrease = speed * (boostPercentage / 100f);
+        speed += speedIncrease;
         Debug.Log("Speed Increased to: " + speed);
         Debug.Log("Speed Increase Percentage: " + boostPercentage);
         yield return new WaitForSeconds(duration);
@@ -196,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
         if (speedIncreaseCoroutine != null)
         {
             StopCoroutine(speedIncreaseCoroutine);
+            speed = defaultSpeed;
         }
         speedIncreaseCoroutine = StartCoroutine(SpeedIncrease(duration, boostPercentage));
     }
