@@ -58,7 +58,7 @@ public class ShotgunAttack : MonoBehaviour
             {
                 Shoot();
             }
-            else if (owner.CompareTag("Enemy") && owner.GetComponent<EnemyMovement>().IsAttacking() && !owner.GetComponent<EnemyHealth>().IsDead())
+            else if (owner.CompareTag("Enemy") && owner.GetComponent<EnemyMovement>().IsAttacking() && !owner.GetComponent<EnemyMovement>().IsRunningAway() && !owner.GetComponent<EnemyHealth>().IsDead())
             {
                 Shoot();
             }
