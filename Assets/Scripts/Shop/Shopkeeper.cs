@@ -37,7 +37,7 @@ public class Shopkeeper : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             shopAlert.gameObject.SetActive(false);
         }
-        else
+        else if (isActiveShop == false && player != null)
         {
             player.GetComponent<PlayerCamera>().enabled = true;
             player.GetComponent<PlayerMovement>().enabled = true;

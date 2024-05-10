@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class UI_Shop : MonoBehaviour
@@ -88,7 +89,8 @@ public class UI_Shop : MonoBehaviour
             {
                 pet.GetComponent<PetAttackMovement>().owner = player;
             }
-            pet.transform.position = player.transform.position + Vector3.forward * 5f;
+            pet.transform.position = player.transform.position + player.transform.forward * 3;
+            pet.GetComponent<NavMeshAgent>().Warp(pet.transform.position);
             audioSource.PlayOneShot(buyAudioClip);
             Debug.Log("Bought " + ShopList.GetName(shopItem));
         }
