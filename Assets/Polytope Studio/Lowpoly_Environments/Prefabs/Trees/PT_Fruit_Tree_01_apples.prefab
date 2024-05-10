@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 6419187236850804161}
   - component: {fileID: 2256188382494855856}
   - component: {fileID: 3280856878848016329}
+  - component: {fileID: 6669348714462159470}
   m_Layer: 0
   m_Name: PT_Fruit_Tree_01_apples
   m_TagString: Untagged
@@ -254,6 +255,22 @@ CapsuleCollider:
   m_Height: 4.57
   m_Direction: 1
   m_Center: {x: 0, y: 2.08, z: 0}
+--- !u!208 &6669348714462159470
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5935278547815300987}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7513603357302551873
 GameObject:
   m_ObjectHideFlags: 0

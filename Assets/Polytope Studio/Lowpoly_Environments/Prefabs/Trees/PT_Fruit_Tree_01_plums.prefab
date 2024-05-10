@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7929462325123785727}
   - component: {fileID: 2905107983372784782}
   - component: {fileID: -6140405989736440116}
+  - component: {fileID: -594699507031109874}
   m_Layer: 0
   m_Name: PT_Fruit_Tree_01_plums
   m_TagString: Untagged
@@ -170,6 +171,22 @@ CapsuleCollider:
   m_Height: 4.57
   m_Direction: 1
   m_Center: {x: 0, y: 2.08, z: 0}
+--- !u!208 &-594699507031109874
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296054959696050501}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7389196695646074697
 GameObject:
   m_ObjectHideFlags: 0

@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 4696216175943693753}
   - component: {fileID: 537705250742567624}
   - component: {fileID: 4123332111401586445}
+  - component: {fileID: 6589493442364328361}
   m_Layer: 0
   m_Name: PT_Fruit_Tree_01_green
   m_TagString: Untagged
@@ -254,6 +255,22 @@ CapsuleCollider:
   m_Height: 4.57
   m_Direction: 1
   m_Center: {x: 0, y: 2.08, z: 0}
+--- !u!208 &6589493442364328361
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361428799875542787}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6567692543045439752
 GameObject:
   m_ObjectHideFlags: 0
