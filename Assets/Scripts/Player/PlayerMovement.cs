@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         direction = transform.right * horizontal + transform.forward * vertical;
 
         // sprint multiplier
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && (vertical > 0))
         {
             moveSpeed *= sprintMultiplier;
             playerAnimator.SetBool("Sprint", true);
