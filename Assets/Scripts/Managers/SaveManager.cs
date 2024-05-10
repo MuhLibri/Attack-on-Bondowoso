@@ -101,8 +101,11 @@ public class SaveManager : MonoBehaviour
     }
 
     public void LoadGame(string filePath) {
+        // Set player position to save zone
+        Transform playerTransform = GameObject.Find("Player").transform;
+        playerTransform.position = new Vector3(300f, 20f, 200f);
+
         SaveData gameData = LoadData(filePath);
-        // SceneManager.LoadScene(mainScene);
         PlayerPrefs.SetString("PlayerName", gameData.playerName);
         PlayerPrefs.SetString("Difficulty", gameData.difficulty);
         questManager.SetCurrentQuest(gameData.questIndex);
