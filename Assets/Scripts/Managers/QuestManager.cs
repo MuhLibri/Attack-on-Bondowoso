@@ -23,6 +23,7 @@ public class QuestManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        questIndex = 0;
         currentQuest = quests[questIndex];
         currentQuest.StartQuest();
 
