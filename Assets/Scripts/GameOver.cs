@@ -19,6 +19,8 @@ public class GameOver : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public const float countdownDuration = 15f;
 
+    private AudioSource audioSource;
+
     private static GameOver instance;
     public static GameOver Instance
     {
@@ -40,6 +42,8 @@ public class GameOver : MonoBehaviour
     {
         questBox.SetActive(false);
         healthBar.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
         gameOverPanel.SetActive(true);
         Cursor.lockState = gameOverPanel.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
         StatisticsData statisticsData = StatisticsManager.Instance.GetStatistics();

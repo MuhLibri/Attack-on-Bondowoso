@@ -128,7 +128,7 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   audioClips:
   - {fileID: 8300000, guid: 6a0c0ac2d86dc81479b6da4d80e0df52, type: 3}
-  - {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
+  - {fileID: 0}
   deathCam: {fileID: 0}
 --- !u!114 &4487868277187646929
 MonoBehaviour:
@@ -304,6 +304,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad3bee586a07e64da932edfb11b5ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotsFired: 0
+  shotsHit: 0
+  distanceTraveled: 0
+  startTime: 0
+  goldEarned: 0
+  killCount: 0
+  saveCount: 0
+  fileFormat: json
+  folderPath: 
 --- !u!1 &1128405184844876854
 GameObject:
   m_ObjectHideFlags: 0
