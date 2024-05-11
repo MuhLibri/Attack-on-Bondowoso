@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,12 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     public List<AudioClip> audioClips;
     public CinemachineVirtualCamera deathCam;
+    public GameObject healingEffect;
+    private Coroutine healingEffectCoroutine;
 
     private Animator playerAnimator;
     private AudioSource audioSource;
+    
 
     // For Cheat No Damage
     private static bool noDamage = false;
@@ -28,6 +32,10 @@ public class PlayerHealth : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
         audioSource = GetComponent<AudioSource>();
+        
+
+        // stop particle effect
+        healingEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -57,7 +65,10 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int healAmount)
     {
         if (!IsDead())
-        {
+        {   
+            if(currentHealth < maxHealth){
+                startHealingEffect();
+            }
             currentHealth += healAmount;
             if (currentHealth > maxHealth)
             {
@@ -65,6 +76,21 @@ public class PlayerHealth : MonoBehaviour
             }
             healthSlider.value = currentHealth;
         }
+    }
+
+    void startHealingEffect()
+    {
+        // if(healingEffectCoroutine != null)
+        // {
+        //     StopCoroutine(healingEffectCoroutine);
+        // }
+        healingEffectCoroutine = StartCoroutine(HealingEffect(2));
+    }
+
+    IEnumerator HealingEffect(int duration){
+        healingEffect.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        healingEffect.SetActive(false);
     }
 
     public bool IsDead()

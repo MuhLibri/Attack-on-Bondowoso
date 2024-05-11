@@ -63,6 +63,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 GravityScale();
             }
+            Flairing();
+        }
+    }
+
+    void Flairing(){
+        if(Input.GetKey(KeyCode.F)){
+            playerAnimator.SetBool("Flair", true);
+            moveAllowed = false;
+            jumpAllowed = false;
+            PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+            playerHealth.Heal(1);
+        }
+        else {
+            playerAnimator.SetBool("Flair", false);
+            moveAllowed = true;
+            jumpAllowed = true;
         }
     }
 
