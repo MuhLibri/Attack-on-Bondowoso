@@ -46,7 +46,7 @@ public class PetDamageMovement : MonoBehaviour
     }
 
     void Run() {
-        if(owner.tag != "Player") {
+        if(owner.tag != "Player" && player != null) {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             if(distanceToPlayer <= runRadius) {
                 // Debug.Log("Pet Damage Running");

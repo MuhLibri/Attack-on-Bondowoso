@@ -39,10 +39,14 @@ public class ProjectileController : MonoBehaviour
             if(isShotgunBullet) damage = damage * (2 - 0.005f*(traveledDistance * traveledDistance)); // 2-0.005x^2
             if (damage < 0) damage = 0;
             Debug.Log("Damage dealt: " + damage);
-            other.GetComponent<EnemyHealth>().TakeDamage((int)damage);
-            // audioSource.Stop();
-            // audioSource.PlayOneShot(bulletHit);
-            // audioSource.loop = false;
+
+            if (other.TryGetComponent<EnemyHealth>(out var enemyHealth))
+            {
+                enemyHealth.TakeDamage((int)damage);
+            }
+            else if (other.TryGetComponent<PetHealth>(out var petHealth)){
+                petHealth.TakeDamage((int)damage);
+            }
 
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

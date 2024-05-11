@@ -64,6 +64,5 @@ public class ShopList: MonoBehaviour
             default:
                 return null;
         }
-        return null;
     }
 }
