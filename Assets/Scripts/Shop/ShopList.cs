@@ -3,8 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ShopList
+public class ShopList: MonoBehaviour
 {
+    public GameObject[] petPrefabs;
+    public static ShopList Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public enum ShopItem
     {
         PetHeal,
@@ -42,9 +58,9 @@ public class ShopList
         switch (item)
         {
             case ShopItem.PetHeal:
-                return AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Pet/PetHeal.prefab");
+                return ShopList.Instance.petPrefabs[0];
             case ShopItem.PetAttack:
-                return AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Pet/PetAttack.prefab");
+                return ShopList.Instance.petPrefabs[1];
             default:
                 return null;
         }
