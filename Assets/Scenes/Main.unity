@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.026700953, g: 0.29866886, b: 0.49627915, a: 1}
+  m_IndirectSpecularColor: {r: 0.02670933, g: 0.2986151, b: 0.49627835, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,14 +334,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 505937645}
     m_Modifications:
-    - target: {fileID: 1331621494776214613, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 70.80799
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409760728203251230, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 3.142685
-      objectReference: {fileID: 0}
     - target: {fileID: 2366736185175236932, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
       propertyPath: quests.Array.size
       value: 5
@@ -366,10 +358,6 @@ PrefabInstance:
       propertyPath: quests.Array.data[4]
       value: 
       objectReference: {fileID: 1351431676}
-    - target: {fileID: 3884207335912265496, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 162.908
-      objectReference: {fileID: 0}
     - target: {fileID: 4522613962177512958, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -450,17 +438,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7299243111172982669, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 128.408
-      objectReference: {fileID: 0}
     - target: {fileID: 9106898269069510293, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
       propertyPath: m_Name
       value: QuestBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 9106898269069510293, guid: 078f6d98bcbaae045b231065743c0388, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -645,7 +625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &74940504
 MonoBehaviour:
   m_ObjectHideFlags: 0
