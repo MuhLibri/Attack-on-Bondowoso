@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbSpeed : MonoBehaviour
 {
-    public int speedPercentage = 100;
+    public int speedPercentage = 20;
     public float duration = 15f;
 
     // Start is called before the first frame update

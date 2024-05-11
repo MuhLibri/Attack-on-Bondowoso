@@ -16,9 +16,9 @@ public class ShopList
         switch (item)
         {
             case ShopItem.PetHeal:
-                return 50;
+                return 2000;
             case ShopItem.PetAttack:
-                return 40;
+                return 2000;
             default:
                 return 0;
         }
