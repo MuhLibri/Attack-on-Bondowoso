@@ -34,7 +34,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    public void ShowGameOver()
+    public void ShowGameOver(bool isPlayerDead)
     {
         gameOverPanel.SetActive(true);
         Cursor.lockState = gameOverPanel.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
@@ -55,6 +55,21 @@ public class GameOver : MonoBehaviour
         sessionGold.text = "Gold: " + gold.ToString();
         sessionKill.text = "Kill: " + kill.ToString();
         sessionSave.text = "Save: " + save.ToString();
+
+        GameObject continueButton = gameOverPanel.transform.Find("ContinueButton").gameObject;
+        GameObject menuButton = gameOverPanel.transform.Find("MenuButton").gameObject;
+
+        if (isPlayerDead)
+        {
+            continueButton.SetActive(false);
+            menuButton.SetActive(true);
+        }
+        else
+        {
+            continueButton.SetActive(true);
+            menuButton.SetActive(false);
+        }
+
         StartCoroutine(StartCountdown());
     }
 
@@ -81,6 +96,12 @@ public class GameOver : MonoBehaviour
     {
         StatisticsManager.Instance.SaveStatistics();
         SceneManager.LoadScene("Ending");
+    }
+
+    public void ShowMenu()
+    {
+        StatisticsManager.Instance.SaveStatistics();
+        SceneManager.LoadScene("Menu");
     }
 
     public string FormatTime(float timeInSeconds)

@@ -34,7 +34,7 @@ public class QuestManager : MonoBehaviour
 
         questTitleText.text = currentQuest.questTitle;
         questObjectiveText.text = currentQuest.questObjective;
-        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
+        questProgressText.text = currentQuest.GetTargetKill() != 0 ? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
     }
 
     // Update is called once per frame
@@ -61,20 +61,23 @@ public class QuestManager : MonoBehaviour
 
         if (questIndex == quests.Length - 1 && !gameOverShown)
         {
-            GameOver.Instance.ShowGameOver();
+            GameOver.Instance.ShowGameOver(false);
             gameOverShown = true;
         }
     }
 
-    public static void AddKilled() {
+    public static void AddKilled()
+    {
         currentQuest.AddKilled();
     }
 
-    public static int GetQuestIndex() {
+    public static int GetQuestIndex()
+    {
         return questIndex;
     }
 
-    public void SetCurrentQuest(int loadedQuestIndex) {
+    public void SetCurrentQuest(int loadedQuestIndex)
+    {
         currentQuest.ResetQuest();
         questIndex = loadedQuestIndex;
         currentQuest = quests[questIndex];
@@ -83,14 +86,16 @@ public class QuestManager : MonoBehaviour
 
         questTitleText.text = currentQuest.questTitle;
         questObjectiveText.text = currentQuest.questObjective;
-        questProgressText.text = currentQuest.GetTargetKill() != 0? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
+        questProgressText.text = currentQuest.GetTargetKill() != 0 ? (currentQuest.GetKilled().ToString() + "/" + currentQuest.GetTargetKill().ToString()) : ("");
     }
 
-    public static void SkipCurrentQuest() {
+    public static void SkipCurrentQuest()
+    {
         currentQuest.SkipQuest();
     }
 
-    public static void ResetQuestManager() {
+    public static void ResetQuestManager()
+    {
         questIndex = 0;
     }
 }
