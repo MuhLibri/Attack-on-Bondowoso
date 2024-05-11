@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class SaveManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class SaveManager : MonoBehaviour
     private static bool isLoaded = false;
     private bool insideSaveZone = false;
     public GameObject savePanel;
+    public GameObject SaveAlert;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,13 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (insideSaveZone && !savePanel.activeSelf) {
+            SaveAlert.SetActive(true);
+        } 
+        else {
+            SaveAlert.SetActive(false);
+        }
+
         if (isLoaded) {
             isLoaded = false;
             string filePath = $"{folderPath}/{fileName}.{fileFormat}";
@@ -141,15 +150,5 @@ public class SaveManager : MonoBehaviour
         if (other.CompareTag("Player")) {
             insideSaveZone = false;
         }        
-    }
-
-    private void OnGUI()
-    {
-        if (insideSaveZone && !savePanel.activeSelf)
-        {
-            float y = 60;
-            GUI.Box(new Rect(0, y, Screen.width/2 - 40, 30), "Press Tab button to save you progress");
-            GUI.backgroundColor = new Color(0, 0, 0, 1);
-        }
     }
 }

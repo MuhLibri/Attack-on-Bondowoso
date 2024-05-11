@@ -4,7 +4,7 @@ using UnityEngine;
 public class DebugController : MonoBehaviour
 {
     bool showConsole;
-    string input = "";
+    string consoleInput = "";
     public GameObject player;
     public GameObject orbDamage;
     public GameObject orbHealth;
@@ -134,7 +134,7 @@ public class DebugController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             showConsole = !showConsole;
-            input = showConsole? "" : input;
+            consoleInput = showConsole? "" : consoleInput;
         }
 
         // Handdle keyboard input
@@ -146,9 +146,11 @@ public class DebugController : MonoBehaviour
         if (showConsole)
         {
             float y = Screen.height - 30;
-            GUI.Box(new Rect(0, y, Screen.width, 30), "");
+            float boxWidth = Screen.width;
+            float boxHeight = Screen.height/10;
+            GUI.Box(new Rect(0, y, boxWidth, boxHeight), "");
             GUI.backgroundColor = new Color(0, 0, 0, 0);
-            input = GUI.TextField(new Rect(10f, y + 5f, Screen.width - 20f, 20f), input);
+            consoleInput = GUI.TextField(new Rect(10f, y + 5f, boxWidth - 20f, boxHeight - 20f), consoleInput);
         }
     }
 
@@ -159,26 +161,25 @@ public class DebugController : MonoBehaviour
             {
                 if (c == '\b')
                 {
-                    if (input.Length > 0)
+                    if (consoleInput.Length > 0)
                     {
-                        input = input.Substring(0, input.Length - 1);
+                        consoleInput = consoleInput.Substring(0, consoleInput.Length - 1);
                     }
                 }
                 else if (c == '\n' || c == '\r')
                 {
-                    // TO DO Implement cheat
-                    Debug.Log("Input: " + input);
+                    Debug.Log("Input: " + consoleInput);
                     foreach (DebugCommand debugCommand in commandList) {
-                        if (input == debugCommand.GetCommandName()) {
+                        if (consoleInput == debugCommand.GetCommandName()) {
                             debugCommand.Invoke();
                         }
                     }
 
-                    input = "";
+                    consoleInput = "";
                 }
                 else
                 {
-                    input += (c == '`' ? "" : c);
+                    consoleInput += (c == '`' ? "" : c);
                 }
             }
         }

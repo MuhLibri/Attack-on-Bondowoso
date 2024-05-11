@@ -46,9 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f45c1ae85e2c142b11f1ac2a430a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainScene: Main
+  petLoaderObject: {fileID: 0}
+  player: {fileID: 0}
   questBox: {fileID: 0}
   healthBar: {fileID: 0}
   savePanel: {fileID: 0}
+  SaveAlert: {fileID: 0}
 --- !u!114 &1116136342344891108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +65,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad3bee586a07e64da932edfb11b5ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotsFired: 0
+  shotsHit: 0
+  distanceTraveled: 0
+  startTime: 0
+  goldEarned: 0
+  killCount: 0
+  saveCount: 0
+  fileFormat: json
+  folderPath: 
 --- !u!65 &4854407669297616322
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80,5 +93,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 25, y: 25, z: 25}
+  m_Size: {x: 50, y: 50, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
