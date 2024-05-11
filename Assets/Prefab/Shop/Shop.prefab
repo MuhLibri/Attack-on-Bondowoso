@@ -1146,7 +1146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1076336731131441806
 Transform:
   m_ObjectHideFlags: 0
@@ -2273,6 +2273,7 @@ MonoBehaviour:
   uiShop: {fileID: 2894649308036582996}
   shopAlertUI: {fileID: 5972690824423832835}
   shopAlertFollow: {fileID: 7017381858224549934}
+  timerAlert: {fileID: 1838556968299405519}
 --- !u!1001 &7990290028326398621
 PrefabInstance:
   m_ObjectHideFlags: 0
