@@ -27,12 +27,17 @@ public class PetMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(owner == null) {
+            PetHealth petHealth = GetComponent<PetHealth>();
+            petHealth.TakeDamage(petHealth.currentHealth);
+        }
+
         Chase();
         agent.destination = destinationVar;
         if (Input.GetKey(KeyCode.LeftShift)) {
             agent.speed = sprintSpeed;
         }
-    }
+      }
 
     void Chase() {
         float distanceToPlayer = Vector3.Distance(transform.position, owner.transform.position);

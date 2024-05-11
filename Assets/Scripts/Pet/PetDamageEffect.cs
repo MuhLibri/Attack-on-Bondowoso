@@ -9,15 +9,24 @@ public class PetDamageEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PetDamageMovement petDamageMovement = GetComponent<PetDamageMovement>();
-        owner = petDamageMovement.owner;
     }
 
     void Awake()
     {
-        PlayerWeaponState playerWeaponState = owner.GetComponent<PlayerWeaponState>();
-        playerWeaponState.petDamageCount++;
-        playerWeaponState.petDamageBoostPercentage = boostPercentage;
+        PetDamageMovement petDamageMovement = GetComponent<PetDamageMovement>();
+        owner = petDamageMovement.owner;
+
+        if(owner.tag == "Player"){
+            PlayerWeaponState playerWeaponState = owner.GetComponent<PlayerWeaponState>();
+            playerWeaponState.petDamageCount++;
+            playerWeaponState.petDamageBoostPercentage = boostPercentage;
+        }
+        else if (owner.tag == "Enemy"){
+            PetDamageManager petDamageManager = owner.GetComponent<PetDamageManager>();
+            petDamageManager.petDamageCount++;
+            petDamageManager.petDamageBoostPercentage = boostPercentage;
+        }
+    
     }
 
     // Update is called once per frame
@@ -27,10 +36,20 @@ public class PetDamageEffect : MonoBehaviour
     }
 
     void OnDestroy(){
-        PlayerWeaponState playerWeaponState = owner.GetComponent<PlayerWeaponState>();
-        playerWeaponState.petDamageCount--;
-        if(playerWeaponState.petDamageCount == 0){
-            playerWeaponState.petDamageBoostPercentage = 0;
+        if(owner.tag == "Player"){
+            PlayerWeaponState playerWeaponState = owner.GetComponent<PlayerWeaponState>();
+            playerWeaponState.petDamageCount--;
+            if(playerWeaponState.petDamageCount == 0){
+                playerWeaponState.petDamageBoostPercentage = 0;
+            }
         }
+        else if (owner.tag == "Enemy"){
+            PetDamageManager petDamageManager = owner.GetComponent<PetDamageManager>();
+            petDamageManager.petDamageCount--;
+            if(petDamageManager.petDamageCount == 0){
+                petDamageManager.petDamageBoostPercentage = 0;
+            }
+        }
+       
     }
 }

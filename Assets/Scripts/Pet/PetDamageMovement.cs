@@ -25,11 +25,15 @@ public class PetDamageMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(owner == null) {
+            PetHealth petHealth = GetComponent<PetHealth>();
+            petHealth.TakeDamage(petHealth.currentHealth);
+        }
+
         Chase();
         Run();
 
         agent.destination = destinationVar;
-        
     }
 
     void Chase() {

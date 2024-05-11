@@ -32,6 +32,11 @@ public class PetAttackMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        if(owner == null) {
+            PetHealth petHealth = GetComponent<PetHealth>();
+            petHealth.TakeDamage(petHealth.currentHealth);
+        }
+
         targetEnemy = attackPetAttack.target;
         if(targetEnemy != null) {
             Attacking();
