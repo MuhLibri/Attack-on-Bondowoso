@@ -8,6 +8,7 @@ public class ShopAlertFollow : MonoBehaviour
 
     void Update()
     {
+        if (player == null) return;
         Vector3 directionToPlayer = transform.position - player.transform.position;
         directionToPlayer.y = 0;
 
