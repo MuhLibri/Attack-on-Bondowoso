@@ -42,8 +42,6 @@ public class GameOver : MonoBehaviour
     {
         questBox.SetActive(false);
         healthBar.SetActive(false);
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
         gameOverPanel.SetActive(true);
         Cursor.lockState = gameOverPanel.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
         StatisticsData statisticsData = StatisticsManager.Instance.GetStatistics();
@@ -69,6 +67,8 @@ public class GameOver : MonoBehaviour
 
         if (isPlayerDead)
         {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
             continueButton.SetActive(false);
             menuButton.SetActive(true);
         }
