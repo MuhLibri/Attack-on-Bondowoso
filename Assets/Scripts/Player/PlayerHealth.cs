@@ -80,7 +80,7 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<PlayerGold>().enabled = false;
         GetComponent<PlayerCamera>().enabled = false;
         Destroy(this.gameObject, 3f);
-        GameOver.Instance.ShowGameOver();
+        GameOver.Instance.ShowGameOver(true);
     }
 
     public static bool IsNoDamage()
