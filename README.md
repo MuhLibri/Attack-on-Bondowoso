@@ -19,7 +19,54 @@ AOB adalah sebuah game hasil karya kelompok AOB mata kuliah PBD sebagai bentuk p
 Download hasil release dari repository lalu pada unity hub tambahkan project dengan folder hasil Download yang sudah di unzip.
 
 ## Screenshots
+<table style="padding:10px">
+    <tr>
+        <td><img src="./Screenshots/image.png" ></td>
+        <td><img src="./Screenshots/image1.png" ></td>
+        <td><img src="./Screenshots/image2.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image3.png" ></td>
+        <td><img src="./Screenshots/image4.png" ></td>
+        <td><img src="./Screenshots/image5.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image6.png" ></td>
+        <td><img src="./Screenshots/image7.png" ></td>
+        <td><img src="./Screenshots/image8.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image9.png" ></td>
+        <td><img src="./Screenshots/image10.png" ></td>
+        <td><img src="./Screenshots/image11.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image12.png" ></td>
+        <td><img src="./Screenshots/image13.png" ></td>
+        <td><img src="./Screenshots/image14.png" ></td>
+    </tr>
 
+    <tr>
+        <td><img src="./Screenshots/image15.png" ></td>
+        <td><img src="./Screenshots/image16.png" ></td>
+        <td><img src="./Screenshots/image17.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image18.png" ></td>
+        <td><img src="./Screenshots/image19.png" ></td>
+        <td><img src="./Screenshots/image20.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image21.png" ></td>
+        <td><img src="./Screenshots/image22.png" ></td>
+        <td><img src="./Screenshots/image23.png" ></td>
+    </tr>
+    <tr>
+        <td><img src="./Screenshots/image24.png" ></td>
+        <td><img src="./Screenshots/image25.png" ></td>
+        <td><img src="./Screenshots/image26.png" ></td>
+    </tr>
+</table>
 
 
 ## Pembagian Kerja
