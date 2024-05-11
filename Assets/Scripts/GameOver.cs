@@ -70,10 +70,10 @@ public class GameOver : MonoBehaviour
             menuButton.SetActive(false);
         }
 
-        StartCoroutine(StartCountdown());
+        StartCoroutine(StartCountdown(isPlayerDead));
     }
 
-    public IEnumerator StartCountdown()
+    public IEnumerator StartCountdown(bool isPlayerDead)
     {
         float timer = countdownDuration;
         while (timer > 0f)
@@ -82,7 +82,14 @@ public class GameOver : MonoBehaviour
             countdownText.text = Mathf.CeilToInt(timer).ToString();
             yield return null;
         }
-        ShowEnding();
+        if (isPlayerDead)
+        {
+            ShowMenu();
+        }
+        else
+        {
+            ShowEnding();
+        }
     }
 
     public void RestartGame()
