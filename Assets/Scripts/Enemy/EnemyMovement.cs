@@ -16,14 +16,12 @@ public class EnemyMovement : MonoBehaviour
     private float lastAttackTime;
     private Transform player;
     private NavMeshAgent agent;
-    private Vector3 lastPatrolPosition;
     private AudioSource audioSource;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         agent = GetComponent<NavMeshAgent>();
-        lastPatrolPosition = transform.position;
         agent.updateRotation = false;
         lastAttackTime = Time.time;
         audioSource = GetComponent<AudioSource>();
@@ -109,15 +107,19 @@ public class EnemyMovement : MonoBehaviour
         enemyAnimator.SetBool("isAttacking", false);
         enemyAnimator.SetBool("isChasing", false);
         enemyAnimator.SetBool("isPatrolling", true);
-        if (Vector3.Distance(transform.position, lastPatrolPosition) >= patrolDistanceLimit)
+
+        // Check if the enemy has reached the current patrol destination
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
-            Vector2 randomDirection = Random.insideUnitCircle.normalized * patrolRadius;
-            Vector3 randomPos = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPos, out hit, patrolRadius, 1))
+            // Generate a new random patrol destination
+            Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
+            randomDirection += transform.position;
+
+            // Ensure the new destination is on the NavMesh
+            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, patrolRadius, 1))
             {
-                lastPatrolPosition = hit.position;
-                agent.SetDestination(lastPatrolPosition);
+                RotateTowards(hit.position);
+                agent.SetDestination(hit.position);
             }
         }
     }
