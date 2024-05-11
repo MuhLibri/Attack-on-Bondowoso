@@ -8,6 +8,8 @@ public class GameOver : MonoBehaviour
 {
     public static string mainScene = "Main";
     public GameObject gameOverPanel;
+    public GameObject questBox;
+    public GameObject healthBar;
     public TextMeshProUGUI sessionAccuracy;
     public TextMeshProUGUI sessionDistance;
     public TextMeshProUGUI sessionPlaytime;
@@ -36,6 +38,8 @@ public class GameOver : MonoBehaviour
 
     public void ShowGameOver(bool isPlayerDead)
     {
+        questBox.SetActive(false);
+        healthBar.SetActive(false);
         gameOverPanel.SetActive(true);
         Cursor.lockState = gameOverPanel.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
         StatisticsData statisticsData = StatisticsManager.Instance.GetStatistics();
