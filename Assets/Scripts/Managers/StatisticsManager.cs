@@ -23,10 +23,6 @@ public class StatisticsManager : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<StatisticsManager>();
-                if (instance == null)
-                {
-                    Debug.LogError("StatisticsManager instance not found in the scene.");
-                }
             }
             return instance;
         }

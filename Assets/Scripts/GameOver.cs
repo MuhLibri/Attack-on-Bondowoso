@@ -29,10 +29,6 @@ public class GameOver : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<GameOver>();
-                if (instance == null)
-                {
-                    Debug.LogError("GameOver instance not found in the scene.");
-                }
             }
             return instance;
         }

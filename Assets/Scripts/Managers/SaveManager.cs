@@ -67,13 +67,11 @@ public class SaveManager : MonoBehaviour
 
         // Path to the save.json
         string filePath = $"{folderPath}/{data.saveDataName}.{fileFormat}";
-        Debug.Log("Path: " + filePath);
 
         // Write JSON to file
         File.WriteAllText(filePath, json);
 
         Debug.Log("Game saved to: " + filePath);
-        Debug.Log("Gold: " + PlayerGold.GetGoldAmount() + ", Quest ke " + (QuestManager.GetQuestIndex() + 1));
 
         StatisticsManager.Instance.SaveCount();
     }

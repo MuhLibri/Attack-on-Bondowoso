@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float moveSpeed = speed;
 
-        //Debug.Log("horizontal: " + horizontal + " vertical: " + vertical);
+        // Debug.Log("horizontal: " + horizontal + " vertical: " + vertical);
 
         // set the direction
         direction = transform.right * horizontal + transform.forward * vertical;
@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && jumpAllowed)
         {
             // add force to the player
-            Debug.Log("Jump");
+            // Debug.Log("Jump");
             playerAnimator.SetTrigger("JumpUp");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }

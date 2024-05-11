@@ -19,12 +19,10 @@ public class OnAttack : MonoBehaviour
     }
 
     void AttackBegin() {
-        Debug.Log("Attack Begin");
         attacking = true;
     }
 
     void AttackEnd() {
-        Debug.Log("Attack End");
         attacking = false;
     }
 }

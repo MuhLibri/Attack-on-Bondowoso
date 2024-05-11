@@ -19,10 +19,6 @@ public class CutsceneManager : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<CutsceneManager>();
-                if (instance == null)
-                {
-                    Debug.LogError("CutsceneManager instance not found in the scene.");
-                }
             }
             return instance;
         }

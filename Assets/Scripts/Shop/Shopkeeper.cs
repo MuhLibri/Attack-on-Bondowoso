@@ -107,7 +107,7 @@ public class Shopkeeper : MonoBehaviour
     {
         timerAlert.text = time.ToString();
         isShopOpen = true;
-        Debug.Log("opening shop");
+        Debug.Log("Opening Shop");
         while(time > 0)
         {
             yield return new WaitForSeconds(1f);

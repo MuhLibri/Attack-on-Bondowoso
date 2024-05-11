@@ -87,7 +87,7 @@ public class AttackPetAttack : MonoBehaviour
         if (other.gameObject.tag == targetTag && CheckTargetInList(other.gameObject))
         {
             enemies.Remove(other.gameObject);
-            Debug.Log("Enemy removed");
+            // Debug.Log("Enemy removed");
             if (enemies.Count == 0)
             {
                 isAttacking = false;
