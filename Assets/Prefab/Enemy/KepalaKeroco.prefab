@@ -127,7 +127,7 @@ MonoBehaviour:
   visionRadius: 50
   attackRadius: 15
   patrolRadius: 20
-  patrolDistanceLimit: 10
+  patrolDistanceLimit: 15
   rotationSpeed: 5
   attackCooldownTime: 3
   enemyAnimator: {fileID: 4075058093763895821}
@@ -152,7 +152,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 3.68
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!82 &-6884356819932166858
 AudioSource:

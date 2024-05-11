@@ -111,7 +111,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 5
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4709834490000420793
 MonoBehaviour:
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRadius: 75
   attackRadius: 5
-  patrolRadius: 15
-  patrolDistanceLimit: 8
+  patrolRadius: 25
+  patrolDistanceLimit: 20
   rotationSpeed: 5
   attackCooldownTime: 2
   enemyAnimator: {fileID: 7283786664019546727}
