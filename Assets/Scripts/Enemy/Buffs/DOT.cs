@@ -48,9 +48,11 @@ public class DOT : MonoBehaviour
 
         // Assuming you've set damage on your projectiles
         PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
+        PetHealth petHealth = playerCollider.GetComponent<PetHealth>();
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damagePerSecond);
+            petHealth.TakeDamage(damagePerSecond);
         }
     }
 }
