@@ -51,12 +51,12 @@ public class GameOver : MonoBehaviour
         int save = statisticsData.save;
 
         float accuracy = (shotsFired > 0) ? Mathf.Min(((float)shotsHit / shotsFired) * 100, 100) : 0f;
-        sessionAccuracy.text = "Accuracy: " + accuracy.ToString("F1") + "%";
-        sessionDistance.text = "Distance: " + distance.ToString("F1") + " kilometer";
+        sessionAccuracy.text = "Accuracy: " + accuracy.ToString("F2") + "%";
+        sessionDistance.text = "Distance: " + distance.ToString("F3") + " km";
         sessionPlaytime.text = "Playtime: " + FormatTime(playtime);
-        sessionGold.text = "Gold: " + gold.ToString();
-        sessionKill.text = "Kill: " + kill.ToString();
-        sessionSave.text = "Save: " + save.ToString();
+        sessionGold.text = "Gold Earned: " + gold.ToString();
+        sessionKill.text = "Kill Count: " + kill.ToString();
+        sessionSave.text = "Save Count: " + save.ToString();
 
         GameObject continueButton = gameOverPanel.transform.Find("ContinueButton").gameObject;
         GameObject menuButton = gameOverPanel.transform.Find("MenuButton").gameObject;

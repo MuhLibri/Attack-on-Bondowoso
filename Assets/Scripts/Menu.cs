@@ -159,12 +159,12 @@ public class Menu : MonoBehaviour
             int save = statisticsData.save;
 
             float accuracy = (shotsFired > 0) ? Mathf.Min(((float)shotsHit / shotsFired) * 100, 100) : 0f;
-            accuracyText.text = "Accuracy: " + accuracy.ToString("F1") + "%";
-            distanceText.text = "Distance: " + distance.ToString("F1") + " kilometer";
+            accuracyText.text = "Accuracy: " + accuracy.ToString("F2") + "%";
+            distanceText.text = "Distance: " + distance.ToString("F3") + " km";
             playtimeText.text = "Playtime: " + FormatTime(playtime);
-            goldText.text = "Gold: " + gold.ToString();
-            killText.text = "Kill: " + kill.ToString();
-            saveText.text = "Save: " + save.ToString();
+            goldText.text = "Gold Earned: " + gold.ToString();
+            killText.text = "Kill Count: " + kill.ToString();
+            saveText.text = "Save Count: " + save.ToString();
         }
     }
     public string FormatTime(float timeInSeconds)

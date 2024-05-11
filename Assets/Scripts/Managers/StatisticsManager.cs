@@ -59,8 +59,8 @@ public class StatisticsManager : MonoBehaviour
 
     public void UpdateDistanceTraveled(float distance)
     {
-        distanceTraveled += distance;
-        // Debug.Log("Distance Traveled this session: " +  distanceTraveled);
+        distanceTraveled += distance / 1000;
+        Debug.Log("Distance Traveled this session: " +  distanceTraveled);
     }
 
     public void UpdateGold(int amount)
