@@ -5,7 +5,8 @@ using UnityEngine;
 public class Shopkeeper : MonoBehaviour
 {
     public GameObject uiShop;
-    public GameObject shopAlert;
+    public GameObject shopAlertUI;
+    public GameObject shopAlertFollow;
     private bool isActiveShop = false;
     private GameObject player;
     private void Update()
@@ -35,7 +36,7 @@ public class Shopkeeper : MonoBehaviour
             player.GetComponent<PlayerWeaponState>().enabled = false;
             player.GetComponent<StatisticsManager>().enabled = false;
             Cursor.lockState = CursorLockMode.None;
-            shopAlert.gameObject.SetActive(false);
+            deactivateAlert();
         }
         else if (isActiveShop == false && player != null)
         {
@@ -45,14 +46,14 @@ public class Shopkeeper : MonoBehaviour
             player.GetComponent<PlayerWeaponState>().enabled = true;
             player.GetComponent<StatisticsManager>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
-            shopAlert.gameObject.SetActive(true);
+            activateAlert();
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            shopAlert.gameObject.SetActive(true);
+            activateAlert();
             player = other.gameObject;
         }
     }
@@ -61,8 +62,21 @@ public class Shopkeeper : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            shopAlert.gameObject.SetActive(false);
+            deactivateAlert();
             player = null;
         }
+    }
+    private void activateAlert()
+    {
+        shopAlertUI.SetActive(true);
+        shopAlertFollow.SetActive(true);
+        shopAlertFollow.GetComponent<ShopAlertFollow>().player = player;
+    }
+
+    private void deactivateAlert()
+    {
+        shopAlertUI.SetActive(false);
+        shopAlertFollow.GetComponent<ShopAlertFollow>().player = null;
+        shopAlertFollow.SetActive(false);
     }
 }
