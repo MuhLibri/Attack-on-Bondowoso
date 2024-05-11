@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.026566118, g: 0.29867774, b: 0.49624193, a: 1}
+  m_IndirectSpecularColor: {r: 0.026700953, g: 0.29866886, b: 0.49627915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8869,6 +8869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6dfba1fdd2faa408369f815fd33d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 1681192217}
   cutsceneCanvas: {fileID: 74940502}
   cutsceneName: {fileID: 551725695}
   cutsceneDialogue: {fileID: 777936430}

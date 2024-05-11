@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CutsceneManager : MonoBehaviour
 {
+    public GameObject healthBar;
     public GameObject cutsceneCanvas;
     public TextMeshProUGUI cutsceneName;
     public TextMeshProUGUI cutsceneDialogue;
@@ -42,6 +43,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayClimax()
     {
+        healthBar.SetActive(false);
         cutsceneCanvas.SetActive(true);
         StartCoroutine(DisplayDialogues(climax, 5.0f));
     }
@@ -55,5 +57,6 @@ public class CutsceneManager : MonoBehaviour
             yield return new WaitForSeconds(autoProceedDelay);
         }
         cutsceneCanvas.SetActive(false);
+        healthBar.SetActive(true);
     }
 }
