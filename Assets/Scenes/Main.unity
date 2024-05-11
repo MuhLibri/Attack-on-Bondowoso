@@ -3506,6 +3506,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2028320541}
     m_Modifications:
     - target: {fileID: 3658998759650241908, guid: ce5c0dce7147b394cb2188400098cb9d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 758483030}
+    - target: {fileID: 3658998759650241908, guid: ce5c0dce7147b394cb2188400098cb9d, type: 3}
       propertyPath: questBox
       value: 
       objectReference: {fileID: 18841642}

@@ -14,6 +14,7 @@ public class SaveManager : MonoBehaviour
     private static string folderPath;
     public GameObject petLoaderObject;
     private PetLoader petLoader;
+    public GameObject player;
     public GameObject questBox;
     public GameObject healthBar;
     private QuestManager questManager;
@@ -40,6 +41,10 @@ public class SaveManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) && insideSaveZone) {
             Debug.Log("Accessing save panel");
+            player.GetComponent<PlayerCamera>().enabled = savePanel.activeSelf;
+            player.GetComponent<PlayerMovement>().enabled = savePanel.activeSelf;
+            player.GetComponent<PlayerAttack>().enabled = savePanel.activeSelf;
+            player.GetComponent<PlayerWeaponState>().enabled = savePanel.activeSelf;
             questBox.SetActive(savePanel.activeSelf);
             healthBar.SetActive(savePanel.activeSelf);
             savePanel.SetActive(!savePanel.activeSelf);
