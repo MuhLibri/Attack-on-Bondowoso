@@ -15,11 +15,13 @@ public class EnemyMovement : MonoBehaviour
 
     private float lastAttackTime;
     private Transform player;
+    private Transform saveZone;
     private NavMeshAgent agent;
     private AudioSource audioSource;
 
     void Awake()
     {
+        saveZone = GameObject.FindGameObjectWithTag("SaveZone")?.transform;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -29,28 +31,35 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((GetComponent<EnemyHealth>().currentHealth <= 0) || (player == null))
+        if (!IsInsideVillage())
         {
-            enemyAnimator.SetBool("isAttacking", false);
-            enemyAnimator.SetBool("isChasing", false);
-            enemyAnimator.SetBool("isPatrolling", false);
-            agent.ResetPath();
-        }
-        else if (IsUsingShotgun() && IsTooCloseToPlayer())
-        {
-            RunAway();
-        }
-        else if (IsAttacking() && !IsRunningAway())
-        {
-            Attack();
-        }
-        else if (IsChasing())
-        {
-            Chase();
+            if ((GetComponent<EnemyHealth>().currentHealth <= 0) || (player == null))
+            {
+                enemyAnimator.SetBool("isAttacking", false);
+                enemyAnimator.SetBool("isChasing", false);
+                enemyAnimator.SetBool("isPatrolling", false);
+                agent.ResetPath();
+            }
+            else if (IsUsingShotgun() && IsTooCloseToPlayer())
+            {
+                RunAway();
+            }
+            else if (IsAttacking() && !IsRunningAway())
+            {
+                Attack();
+            }
+            else if (IsChasing())
+            {
+                Chase();
+            }
+            else
+            {
+                Patrol();
+            }
         }
         else
         {
-            Patrol();
+            GetAwayFromVillage();
         }
     }
 
@@ -58,13 +67,6 @@ public class EnemyMovement : MonoBehaviour
     {
         if (player == null) return false;
         return Vector3.Distance(transform.position, player.position) <= attackRadius;
-    }
-
-    bool IsChasing()
-    {
-        if (player == null) return false;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        return distanceToPlayer <= visionRadius && distanceToPlayer > attackRadius;
     }
 
     void Attack()
@@ -87,6 +89,13 @@ public class EnemyMovement : MonoBehaviour
             }
             lastAttackTime = Time.time;
         }
+    }
+
+    bool IsChasing()
+    {
+        if (player == null) return false;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        return distanceToPlayer <= visionRadius && distanceToPlayer > attackRadius;
     }
 
     void Chase()
@@ -144,6 +153,27 @@ public class EnemyMovement : MonoBehaviour
     {
         if (player == null) return false;
         return Vector3.Distance(transform.position, player.position) <= attackRadius * 0.5f;
+    }
+
+    bool IsInsideVillage()
+    {
+        if (saveZone == null) return false;
+        return Vector3.Distance(transform.position, saveZone.position) <= 125;
+    }
+
+    void GetAwayFromVillage()
+    {
+        Vector3 runDirection = transform.position - saveZone.position;
+        runDirection.y = 0;
+        runDirection.Normalize();
+        Vector3 runDestination = transform.position + runDirection * patrolRadius;
+        if (NavMesh.SamplePosition(runDestination, out NavMeshHit hit, patrolRadius, 1))
+        {
+            agent.SetDestination(hit.position);
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetBool("isChasing", false);
+            enemyAnimator.SetBool("isPatrolling", true);
+        }
     }
 
     public bool IsRunningAway()
