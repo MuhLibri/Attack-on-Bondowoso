@@ -35,8 +35,9 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(ownerTag == "Player" && other.CompareTag("Enemy")) {
-            if(isShotgunBullet) damage = damage * (2 - 0.005f*(traveledDistance * traveledDistance)); // 2-0.005x^2
+        if (ownerTag == "Player" && other.CompareTag("Enemy"))
+        {
+            if (isShotgunBullet) damage = damage * (2 - 0.005f * (traveledDistance * traveledDistance)); // 2-0.005x^2
             if (damage < 0) damage = 0;
             Debug.Log("Damage dealt: " + damage);
 
@@ -44,19 +45,25 @@ public class ProjectileController : MonoBehaviour
             {
                 enemyHealth.TakeDamage((int)damage);
             }
-            else if (other.TryGetComponent<PetHealth>(out var petHealth)){
+            else if (other.TryGetComponent<PetHealth>(out var petHealth))
+            {
                 petHealth.TakeDamage((int)damage);
             }
 
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
             transform.localScale = Vector3.zero;
-            
+
             Destroy(this.gameObject, bulletHit.length);
             StatisticsManager.Instance.ShotHit();
         }
-        else if(ownerTag == "Enemy"){
-            if(other.CompareTag("Player")) { 
+        else if (ownerTag == "Enemy")
+        {
+            if (other.CompareTag("Player"))
+            {
 
                 other.GetComponent<PlayerHealth>().TakeDamage((int)damage);
                 // audioSource.Stop();
@@ -66,10 +73,11 @@ public class ProjectileController : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 transform.localScale = Vector3.zero;
-                
+
                 Destroy(this.gameObject, bulletHit.length);
             }
-            if(other.CompareTag("Pet")) {
+            if (other.CompareTag("Pet"))
+            {
                 other.GetComponent<PetHealth>().TakeDamage((int)damage);
                 // audioSource.Stop();
                 // audioSource.PlayOneShot(bulletHit);
@@ -78,10 +86,10 @@ public class ProjectileController : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 transform.localScale = Vector3.zero;
-                
+
                 Destroy(this.gameObject, bulletHit.length);
             }
         }
-        
+
     }
 }
