@@ -50,7 +50,7 @@ public class MachinePistolAttack : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, projectilePoint.position, projectilePoint.rotation);
         projectile.GetComponent<ProjectileController>().damage = damage;
         projectile.GetComponent<ProjectileController>().ownerTag = owner.tag;
-
+        if (owner.CompareTag("Player")) StatisticsManager.Instance.ShotFired();
 
         audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Count)]);
 
@@ -63,6 +63,5 @@ public class MachinePistolAttack : MonoBehaviour
 
         rb.AddForce(direction * shotForce, ForceMode.VelocityChange);
         lastShotTime = Time.time;
-        StatisticsManager.Instance.ShotFired(1);
     }
 }

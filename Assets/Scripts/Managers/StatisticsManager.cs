@@ -49,9 +49,9 @@ public class StatisticsManager : MonoBehaviour
         SaveStatistics();
     }
 
-    public void ShotFired(int bullets)
+    public void ShotFired()
     {
-        shotsFired += bullets;
+        shotsFired++;
         Debug.Log("Shots fired this session: " + shotsFired);
     }
 

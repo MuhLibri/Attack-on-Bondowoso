@@ -92,6 +92,7 @@ public class ShotgunAttack : MonoBehaviour
             projectile.GetComponent<ProjectileController>().damage = damage;
             projectile.GetComponent<ProjectileController>().ownerTag = owner.tag;
             if(owner.CompareTag("Player")) projectile.GetComponent<ProjectileController>().isShotgunBullet = true;
+            if (owner.CompareTag("Player")) StatisticsManager.Instance.ShotFired();
         }
 
         GameObject ammo;
@@ -118,7 +119,6 @@ public class ShotgunAttack : MonoBehaviour
         lastShotTime = Time.time;
 
         Recoil();
-        StatisticsManager.Instance.ShotFired(projectilesPerShot);
     }
 
     void Recoil()
