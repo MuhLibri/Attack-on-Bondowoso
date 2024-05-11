@@ -37,15 +37,19 @@ public class CutsceneManager : MonoBehaviour
 
     public void AddClimax()
     {
-        climax.Add(("Roro", "We've reached the heart of the jungle. The treasure must be close!"));
-        climax.Add(("Bondowoso", "Yes, let's find it quickly before someone else does!"));
+        climax.Add(("Roro", "Bondowoso, I cannot let you fulfill your promise. I will stop you before you build a thousand temples!"));
+        climax.Add(("Bondowoso", "Roro Jonggrang, why do you resist our union? I have sworn to build the temples as you requested. Why this sudden change of heart?"));
+        climax.Add(("Roro", "I have seen the suffering of my people. I cannot let you continue your reign of terror. I will not be your puppet queen!"));
+        climax.Add(("Bondowoso", "You will regret this, Roro Jonggrang. I will build the temples with or without your consent. You will be the last statue in my collection!"));
+        climax.Add(("Roro", "I will never be your statue, Bondowoso. I will fight you with all my might!"));
+        climax.Add(("Bondowoso", "Then let the battle begin!"));
     }
 
     public void PlayClimax()
     {
         healthBar.SetActive(false);
         cutsceneCanvas.SetActive(true);
-        StartCoroutine(DisplayDialogues(climax, 5.0f));
+        StartCoroutine(DisplayDialogues(climax, 3.0f));
     }
 
     public IEnumerator DisplayDialogues(List<(string name, string text)> dialogues, float autoProceedDelay)
