@@ -103,16 +103,16 @@ public class PlayerHealth : MonoBehaviour
         switch (difficulty)
         {
             case "Easy":
-                maxHealth = 500;
+                maxHealth = 400;
                 break;
             case "Medium":
-                maxHealth = 250;
+                maxHealth = 200;
                 break;
             case "Hard":
-                maxHealth = 125;
+                maxHealth = 100;
                 break;
             default:
-                maxHealth = 500;
+                maxHealth = 400;
                 break;
         }
     }
